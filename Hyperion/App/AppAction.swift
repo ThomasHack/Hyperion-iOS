@@ -8,15 +8,11 @@
 
 import Foundation
 
-// MARK: - ApiAction
+// MARK: - AppAction
 
-enum ApiAction: Equatable {
-    case alertDismissed
+enum AppAction: Equatable {
     case connectButtonTapped
     case messageToSendChanged(String)
-    case pingResponse(NSError?)
-    case receivedSocketMessage(Result<ApiClient.Message, NSError>)
+    case receivedMessage(Result<String, NSError>)
     case sendButtonTapped
-    case sendResponse(NSError?)
-    case webSocket(ApiClient.Action)
 }

@@ -1,22 +1,15 @@
 //
-//  APIResponse.swift
+//  ApiResponse.swift
 //  Hyperion
 //
-//  Created by Hack, Thomas on 13.06.20.
+//  Created by Hack, Thomas on 26.06.20.
 //  Copyright © 2020 Hack, Thomas. All rights reserved.
 //
 
 import Foundation
 
-enum CommandType: String, Codable {
-    case serverInfo = "serverinfo"
-    case adjustment = "adjustment"
-    case adjustmentUpdate = "adjustment-update"
-    case instanceUpdate = "instance-update"
-}
-
 struct ServerInfo: Codable {
-    let instances: [Instance]
+    let instances: [InstanceData]
     let hostname: String
     let adjustment: [AdjustmentData]
 
@@ -27,7 +20,7 @@ struct ServerInfo: Codable {
     }
 }
 
-struct Instance: Codable, Identifiable, Equatable {
+struct InstanceData: Codable, Identifiable, Equatable {
     let id: Int
     let friendlyName: String
     let running: Bool
@@ -40,15 +33,15 @@ struct Instance: Codable, Identifiable, Equatable {
 }
 
 struct AdjustmentData: Codable {
-    let brightness: Int
+    let brightness: Double
 
     enum CodingKeys: String, CodingKey {
         case brightness = "brightness"
     }
 }
 
-struct APIResponse: Codable {
-    let command: CommandType
+struct ApiResponse: Codable {
+    let command: ApiTopic
     let data: [AdjustmentData]?
     let success: Bool?
     let info: ServerInfo?

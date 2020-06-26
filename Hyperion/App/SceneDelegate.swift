@@ -21,29 +21,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        /* let appView = AppView(
-          store: Store(
-            initialState: ApiState(),
-            reducer: apiReducer,
-            environment: ApiEnvironment()
-          )
-        ) */
-
-        let socketView = WebSocketView(
+        let appView = AppView(
             store: Store(
-              initialState: .init(receivedMessages: ["Echo"]),
-              reducer: apiReducer,
-              environment: ApiEnvironment(
-                mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-                webSocket: .live
-              )
+                initialState: AppState(),
+                reducer: appReducer,
+                environment: AppEnvironment(
+                    mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+                    apiClient: .live
+                )
             )
-          )
+        )
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: socketView)
+            window.rootViewController = UIHostingController(rootView: appView)
             self.window = window
             window.makeKeyAndVisible()
         }

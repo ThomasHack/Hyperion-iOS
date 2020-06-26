@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BrightnessSlider: View {
 
-    @Binding var percentage: Int
+    @Binding var percentage: Double
 
     var callback: (() -> Void)?
 
@@ -42,8 +42,8 @@ struct BrightnessSlider: View {
             .cornerRadius(12)
             .gesture(DragGesture(minimumDistance: 0)
             .onChanged({ value in
-                // TODO: - maybe use other logic here
-                self.percentage = Int(min(max(0, Float(value.location.x / geometry.size.width * 100)), 100))
+                self.percentage = Double(min(max(0, Float(value.location.x / geometry.size.width * 100)), 100))
+                print("value \(Double(Int(self.percentage)))")
                 if let callback = self.callback {
                     callback()
                 }
@@ -64,7 +64,7 @@ extension BrightnessSlider {
 struct BrightnessSlider_Previews: PreviewProvider {
 
     struct BindingTestHolder: View {
-        @State var percentage: Int = 65
+        @State var percentage: Double = 65
         var body: some View {
             BrightnessSlider(percentage: $percentage)
         }
