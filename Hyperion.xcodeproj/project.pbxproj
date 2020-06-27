@@ -13,7 +13,6 @@
 		529F0C4E24A6624E00EE402B /* IntensityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871024961DCA00826DA5 /* IntensityButton.swift */; };
 		529F0C4F24A6625000EE402B /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524787072495530500826DA5 /* BrightnessSlider.swift */; };
 		52A9305D24A5CFD1003BDCDC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305C24A5CFD1003BDCDC /* HomeView.swift */; };
-		52A9305F24A5F7BE003BDCDC /* MainEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305E24A5F7BE003BDCDC /* MainEnvironment.swift */; };
 		52A9306124A5F7D9003BDCDC /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306024A5F7D9003BDCDC /* Home.swift */; };
 		52A9306324A5F801003BDCDC /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* ApiClient.swift */; };
 		52A9306924A60D8D003BDCDC /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* Models.swift */; };
@@ -25,6 +24,7 @@
 		52EBA9ED24A7E57E00BA5A45 /* IntensityControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */; };
 		52EBA9EF24A7EE4E00BA5A45 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EE24A7EE4E00BA5A45 /* Settings.swift */; };
 		52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F224A7F2C900BA5A45 /* Main.swift */; };
+		52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F424A7F88000BA5A45 /* MainView.swift */; };
 		52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BA92494E51600A69D01 /* AppDelegate.swift */; };
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
@@ -38,7 +38,6 @@
 		5247871024961DCA00826DA5 /* IntensityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityButton.swift; sourceTree = "<group>"; };
 		5247871224961FBD00826DA5 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		52A9305C24A5CFD1003BDCDC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		52A9305E24A5F7BE003BDCDC /* MainEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEnvironment.swift; sourceTree = "<group>"; };
 		52A9306024A5F7D9003BDCDC /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		52A9306224A5F801003BDCDC /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		52A9306824A60D8D003BDCDC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityControl.swift; sourceTree = "<group>"; };
 		52EBA9EE24A7EE4E00BA5A45 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		52EBA9F224A7F2C900BA5A45 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		52EBA9F424A7F88000BA5A45 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		52F16BA62494E51600A69D01 /* Hyperion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hyperion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F16BA92494E51600A69D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F16BAB2494E51600A69D01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,8 +139,8 @@
 		52EBA9F124A7F24F00BA5A45 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				52A9305E24A5F7BE003BDCDC /* MainEnvironment.swift */,
 				52EBA9F224A7F2C900BA5A45 /* Main.swift */,
+				52EBA9F424A7F88000BA5A45 /* MainView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -262,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */,
-				52A9305F24A5F7BE003BDCDC /* MainEnvironment.swift in Sources */,
 				52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */,
 				52A9305D24A5CFD1003BDCDC /* HomeView.swift in Sources */,
 				52A9306124A5F7D9003BDCDC /* Home.swift in Sources */,
@@ -275,6 +274,7 @@
 				52A9306924A60D8D003BDCDC /* Models.swift in Sources */,
 				529F0C4F24A6625000EE402B /* BrightnessSlider.swift in Sources */,
 				52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */,
+				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,
 				52EBA9EB24A7E4A800BA5A45 /* InstanceControl.swift in Sources */,
 				52EBA9E924A7E41600BA5A45 /* BrightnessControl.swift in Sources */,
 				52A9306324A5F801003BDCDC /* ApiClient.swift in Sources */,

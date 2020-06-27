@@ -9,21 +9,18 @@
 import ComposableArchitecture
 import SwiftUI
 
-extension HomeView {
+struct InstanceControl: View {
+    let store: Store<Home.State, Home.Action>
 
-    struct InstanceControl: View {
-        var store: Store<HomeState, HomeAction>
-
-        var body: some View {
-            WithViewStore(self.store) { viewStore in
-                VStack(alignment: .leading, spacing: 8) {
-                    SectionHeader(text: "Instances")
-                    HStack {
-                        ForEach(viewStore.instances, id: \.self) {instance in
-                            IntensityButton(imageName: instance.friendlyName == "LG OLED Ambilight" ? "tv" : "lightbulb", text: instance.friendlyName, running: instance.running, callback: {
-                                viewStore.send(.instanceButtonTapped(instance.instance, instance.running))
-                            })
-                        }
+    var body: some View {
+        WithViewStore(self.store) { viewStore in
+            VStack(alignment: .leading, spacing: 8) {
+                SectionHeader(text: "Instances")
+                HStack {
+                    ForEach(viewStore.instances, id: \.self) {instance in
+                        IntensityButton(imageName: instance.friendlyName == "LG OLED Ambilight" ? "tv" : "lightbulb", text: instance.friendlyName, running: instance.running, callback: {
+                            viewStore.send(.instanceButtonTapped(instance.instance, instance.running))
+                        })
                     }
                 }
             }
@@ -33,20 +30,8 @@ extension HomeView {
 
 struct InstanceControl_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView.InstanceControl(
-            store: Store(
-                initialState: HomeState(
-                    instances: [
-                        Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
-                        Instance(instance: 1, running: false, friendlyName: "Hue Sync")
-                    ]
-                ),
-                reducer: homeReducer,
-                environment: MainEnvironment(
-                    mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-                    apiClient: .live
-                )
-            )
+        InstanceControl(
+            store: Main.initialStore.homeStore
         )
         .previewLayout(.fixed(width: 375, height: 150))
     }

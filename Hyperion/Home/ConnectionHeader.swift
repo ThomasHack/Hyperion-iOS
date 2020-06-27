@@ -9,51 +9,38 @@
 import ComposableArchitecture
 import SwiftUI
 
-extension HomeView {
+struct ConnectionHeader: View {
+    let store: Store<Home.State, Home.Action>
 
-    struct ConnectionHeader: View {
-        var store: Store<HomeState, HomeAction>
-
-        var body: some View {
-            WithViewStore(self.store) { viewStore in
-                HStack(alignment: .center, spacing: 8) {
-                    Circle()
-                        .frame(width: 10, height: 10)
-                        .foregroundColor(
-                            Color(viewStore.connectivityState == .connected
-                                    ? UIColor.systemGreen
-                                    : viewStore.connectivityState == .disconnected
-                                    ? UIColor.systemRed
-                                    : UIColor.systemOrange)
-                        )
-                    Text(
-                        viewStore.connectivityState == .connected
-                            ? "Status: Connected to \(viewStore.hostname)"
-                            : viewStore.connectivityState == .disconnected
-                            ? "Status: Disconnected"
-                            : "Status: Connecting...")
-                        .font(.system(size: 13))
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
+    var body: some View {
+        WithViewStore(self.store) { viewStore in
+            HStack(alignment: .center, spacing: 8) {
+                Circle()
+                    .frame(width: 10, height: 10)
+                    .foregroundColor(
+                        Color(viewStore.connectivityState == .connected
+                                ? UIColor.systemGreen
+                                : viewStore.connectivityState == .disconnected
+                                ? UIColor.systemRed
+                                : UIColor.systemOrange)
+                    )
+                Text(
+                    viewStore.connectivityState == .connected
+                        ? "Status: Connected to \(viewStore.hostname)"
+                        : viewStore.connectivityState == .disconnected
+                        ? "Status: Disconnected"
+                        : "Status: Connecting...")
+                    .font(.system(size: 13))
             }
+            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }
 
 struct ConnectionHeader_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView.ConnectionHeader(
-            store: Store(
-                initialState: HomeState(
-                    connectivityState: .connected,
-                    hostname: "Preview"
-                ),
-                reducer: homeReducer,
-                environment: MainEnvironment(
-                    mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-                    apiClient: .live
-                )
-            )
+        ConnectionHeader(
+            store: Main.initialStore.homeStore
         )
         .previewLayout(.fixed(width: 375, height: 40))
     }

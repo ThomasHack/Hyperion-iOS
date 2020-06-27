@@ -9,18 +9,26 @@
 import ComposableArchitecture
 import Foundation
 
-struct SettingsState: Equatable {
-    var hostnameInput: String = ""
-}
-
-enum SettingsAction {
-    case hostInputTextChanged(String)
-}
-
-let settingsReducer = Reducer<SettingsState, SettingsAction, MainEnvironment> { state, action, environment in
-    switch action {
-    case .hostInputTextChanged(let text):
-        print("text: \(text)")
+enum Settings {
+    struct State: Equatable {
+        var hostnameInput: String = ""
     }
-    return .none
+
+    enum Action {
+        case hostInputTextChanged(String)
+    }
+
+    typealias Environment = Main.Environment
+
+    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
+        switch action {
+        case .hostInputTextChanged(let text):
+            print("text: \(text)")
+        }
+        return .none
+    }
+
+    static let initialState = State(
+        hostnameInput: "hostname.local"
+    )
 }

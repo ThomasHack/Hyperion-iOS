@@ -10,17 +10,17 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SettingsView: View {
-    let store: Store<SettingsState, SettingsAction>
+    let store: Store<Settings.State, Settings.Action>
 
     @Binding var showSettingsModal: Bool
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
-                VStack(alignment: .leading, spacing: 8) {
+                 VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Host")
                     TextField("https://hyperion.home:8090",
-                              text: viewStore.binding( get: { $0.hostnameInput}, send: SettingsAction.hostInputTextChanged))
+                              text: viewStore.binding( get: { $0.hostnameInput}, send: Settings.Action.hostInputTextChanged))
                     Spacer()
                 }
                 .padding()
@@ -47,14 +47,7 @@ struct SettingsView_Previews: PreviewProvider {
 
     static var previews: some View {
         SettingsView(
-            store: Store(
-                initialState: SettingsState(),
-                reducer: settingsReducer,
-                environment: MainEnvironment(
-                    mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-                    apiClient: .live
-                )
-            ),
+            store: Main.initialStore.settingsStore,
             showSettingsModal: $showSettingsModal
         )
     }
