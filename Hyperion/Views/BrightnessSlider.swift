@@ -18,7 +18,7 @@ struct BrightnessSlider: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .foregroundColor(Color(UIColor.secondarySystemBackground).opacity(1.0))
+                    .foregroundColor(Color(UIColor.tertiarySystemBackground).opacity(1.0))
                 ZStack(alignment: .trailing) {
                     HStack {
                         Rectangle()
@@ -35,7 +35,9 @@ struct BrightnessSlider: View {
                             .cornerRadius(3)
                             .shadow(color: Color.black.opacity(0.1), radius: 2, x: -1, y: 1)
                     }.padding([.trailing], 6)
-                }.frame(width: geometry.size.width * CGFloat(self.percentage / 100))
+                }
+                .frame(width: (geometry.size.width * CGFloat(self.percentage/100)) + CGFloat(16 * (100 - self.percentage)/100))
+                .animation(.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 0))
 
                 HStack(alignment: .bottom, spacing: 2) {
                     Text("\(Int(self.percentage))")
@@ -71,7 +73,7 @@ extension BrightnessSlider {
 struct BrightnessSlider_Previews: PreviewProvider {
 
     struct BindingTestHolder: View {
-        @State var percentage: Double = 65
+        @State var percentage: Double = 0
         var body: some View {
             BrightnessSlider(percentage: $percentage)
         }

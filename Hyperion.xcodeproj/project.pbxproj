@@ -17,12 +17,18 @@
 		52A9306124A5F7D9003BDCDC /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306024A5F7D9003BDCDC /* AppReducer.swift */; };
 		52A9306324A5F801003BDCDC /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* ApiClient.swift */; };
 		52A9306924A60D8D003BDCDC /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* Models.swift */; };
+		52C591FC24A7B9DA007CDAE3 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */; };
+		52EBA9E524A7DEDC00BA5A45 /* ConnectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */; };
+		52EBA9E724A7E30A00BA5A45 /* InstanceSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */; };
+		52EBA9E924A7E41600BA5A45 /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */; };
+		52EBA9EB24A7E4A800BA5A45 /* InstanceControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */; };
+		52EBA9ED24A7E57E00BA5A45 /* IntensityControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */; };
 		52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BA92494E51600A69D01 /* AppDelegate.swift */; };
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
 		52F16BB62494E51700A69D01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BB42494E51700A69D01 /* LaunchScreen.storyboard */; };
 		52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC34D24A74FFF000AF55F /* Compose.swift */; };
-		52FEC35124A797D9000AF55F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC35024A797D9000AF55F /* Settings.swift */; };
+		52FEC35124A797D9000AF55F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC35024A797D9000AF55F /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +40,12 @@
 		52A9306024A5F7D9003BDCDC /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		52A9306224A5F801003BDCDC /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		52A9306824A60D8D003BDCDC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
+		52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHeader.swift; sourceTree = "<group>"; };
+		52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceSelection.swift; sourceTree = "<group>"; };
+		52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessControl.swift; sourceTree = "<group>"; };
+		52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceControl.swift; sourceTree = "<group>"; };
+		52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityControl.swift; sourceTree = "<group>"; };
 		52F16BA62494E51600A69D01 /* Hyperion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hyperion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F16BA92494E51600A69D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F16BAB2494E51600A69D01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +53,7 @@
 		52F16BB52494E51700A69D01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52F16BB72494E51700A69D01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52FEC34D24A74FFF000AF55F /* Compose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compose.swift; sourceTree = "<group>"; };
-		52FEC35024A797D9000AF55F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		52FEC35024A797D9000AF55F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +106,7 @@
 				524787072495530500826DA5 /* BrightnessSlider.swift */,
 				5247871024961DCA00826DA5 /* IntensityButton.swift */,
 				5247871224961FBD00826DA5 /* SectionHeader.swift */,
+				52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -102,6 +115,11 @@
 			isa = PBXGroup;
 			children = (
 				52A9305C24A5CFD1003BDCDC /* HomeView.swift */,
+				52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */,
+				52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */,
+				52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */,
+				52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */,
+				52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -146,7 +164,7 @@
 		52FEC34F24A797C7000AF55F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				52FEC35024A797D9000AF55F /* Settings.swift */,
+				52FEC35024A797D9000AF55F /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -182,7 +200,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Hack, Thomas";
 				TargetAttributes = {
 					52F16BA52494E51600A69D01 = {
@@ -235,12 +253,18 @@
 				52A9305D24A5CFD1003BDCDC /* HomeView.swift in Sources */,
 				52A9306124A5F7D9003BDCDC /* AppReducer.swift in Sources */,
 				529F0C4E24A6624E00EE402B /* IntensityButton.swift in Sources */,
-				52FEC35124A797D9000AF55F /* Settings.swift in Sources */,
+				52EBA9E724A7E30A00BA5A45 /* InstanceSelection.swift in Sources */,
+				52FEC35124A797D9000AF55F /* SettingsView.swift in Sources */,
 				529F0C4D24A6624C00EE402B /* SectionHeader.swift in Sources */,
+				52EBA9E524A7DEDC00BA5A45 /* ConnectionHeader.swift in Sources */,
 				52A9306924A60D8D003BDCDC /* Models.swift in Sources */,
 				529F0C4F24A6625000EE402B /* BrightnessSlider.swift in Sources */,
 				52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */,
+				52EBA9EB24A7E4A800BA5A45 /* InstanceControl.swift in Sources */,
+				52EBA9E924A7E41600BA5A45 /* BrightnessControl.swift in Sources */,
 				52A9306324A5F801003BDCDC /* ApiClient.swift in Sources */,
+				52C591FC24A7B9DA007CDAE3 /* NavigationButton.swift in Sources */,
+				52EBA9ED24A7E57E00BA5A45 /* IntensityControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +308,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -344,6 +369,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
