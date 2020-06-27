@@ -91,7 +91,6 @@ extension ApiClient {
         },
         disconnect: { id in
             .run { subscriber in
-               print("ApiClient.disconnect")
                 dependencies[id]?.socket.disconnect()
                 dependencies[id]?.subscriber.send(.didDisconnect)
                 return AnyCancellable {
@@ -104,7 +103,6 @@ extension ApiClient {
             .run { subscriber in
                 let data = try! JSONEncoder().encode(message)
                 let string = String(data: data, encoding: .utf8)!
-                print("ApiClient.send \(string)")
                 dependencies[id]?.socket.write(string: string, completion: {
                     subscriber.send(completion: .finished)
                 })
@@ -113,7 +111,6 @@ extension ApiClient {
         },
         subscribe: { id in
             .run { subscriber in
-                print("subscribe")
                 let message = ApiSubscribeRequest(ApiRequest(command: .serverinfo), ApiSubscribeRequestData(subscribe: [.instanceUpdate, .adjustmentUpdate]))
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -235,11 +232,9 @@ class ApiClientDelegate: WebSocketDelegate {
     }
 
     private func didReceiveText(_ string: String) {
-        print("didReceiveText \(string)")
         guard let data = string.data(using: .utf8, allowLossyConversion: false) else { return }
         do {
             let response = try JSONDecoder().decode(ApiResponse.self, from: data)
-            print("response \(response)")
             switch response {
             case .serverInfo(let serverInfo):
                 self.didUpdateInstances(serverInfo.info.instances)

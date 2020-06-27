@@ -28,7 +28,7 @@ struct IntensityButton: View {
                 .padding()
                 .padding([.top, .bottom], 14)
                 .foregroundColor(Color(UIColor.label))
-                .background(Color(running ? UIColor.systemBackground : UIColor.tertiarySystemFill))
+                .background(Color(running ? UIColor.systemBackground : UIColor.secondarySystemBackground))
                 .cornerRadius(5)
                 .shadow(color: Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
 

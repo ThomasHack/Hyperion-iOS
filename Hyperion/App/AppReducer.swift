@@ -89,6 +89,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
     case .apiClient(.didUpdateSelectedInstance(let selectedInstance)):
         print("didUpdateSelectedInstance \(selectedInstance)")
         state.selectedInstance = selectedInstance
+        return environment.apiClient.subscribe(ApiId())
+            .receive(on: environment.mainQueue)
+            .map(AppAction.apiClient)
+            .eraseToEffect()
     }
     return .none
 }

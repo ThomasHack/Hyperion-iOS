@@ -16,29 +16,38 @@ struct BrightnessSlider: View {
 
     var body: some View {
         GeometryReader { geometry in
-            // TODO: - there might be a need for horizontal and vertical alignments
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .foregroundColor(Color(UIColor.tertiarySystemBackground).opacity(0.90))
+                    .foregroundColor(Color(UIColor.secondarySystemBackground).opacity(1.0))
                 ZStack(alignment: .trailing) {
                     HStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .background(LinearGradient(gradient:
-                                Gradient(colors: [Color(UIColor.systemGray6).opacity(0.2), Color(UIColor.systemGray4)
-                                    .opacity(0.95)]), startPoint: .leading, endPoint: .trailing))
+                            .background(Color(UIColor.systemYellow)
+                                // LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemYellow).opacity(1.0), Color(UIColor.systemBackground).opacity(0.95)]), startPoint: .leading, endPoint: .trailing)
+                            )
                     }.cornerRadius(12)
                         .clipped()
                     HStack {
                         Rectangle()
                             .frame(width: 4, height: 20, alignment: .trailing)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color.white)
                             .cornerRadius(3)
                             .shadow(color: Color.black.opacity(0.1), radius: 2, x: -1, y: 1)
                     }.padding([.trailing], 6)
                 }.frame(width: geometry.size.width * CGFloat(self.percentage / 100))
+
+                HStack(alignment: .bottom, spacing: 2) {
+                    Text("\(Int(self.percentage))")
+                    .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                    Text("%")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                }.frame(maxWidth: .infinity, alignment: .center)
             }
             .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
             .gesture(DragGesture(minimumDistance: 0)
             .onChanged({ value in
                 self.percentage = Double(min(max(0, Float(value.location.x / geometry.size.width * 100)), 100))
@@ -71,6 +80,6 @@ struct BrightnessSlider_Previews: PreviewProvider {
     static var previews: some View {
         BindingTestHolder()
             .frame(width: 320, height: 64, alignment: .center)
-            .environment(\.colorScheme, .dark)
+            .environment(\.colorScheme, .light)
     }
 }
