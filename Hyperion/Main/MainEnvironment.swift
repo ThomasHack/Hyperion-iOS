@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 import Combine
 
-struct AppEnvironment {
+struct MainEnvironment {
     var mainQueue: AnySchedulerOf<DispatchQueue>
     var apiClient: ApiClient
 }

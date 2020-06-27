@@ -10,9 +10,9 @@ import ComposableArchitecture
 import SwiftUI
 
 struct HomeView: View {
-    let store: Store<AppState, AppAction>
+    let store: Store<HomeState, HomeAction>
 
-    @State var settingsModal = false
+    @State var showSettingsModal = false
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -46,7 +46,9 @@ struct HomeView: View {
                     }
                     .padding()
                 }
-                .sheet(isPresented: self.$settingsModal) { SettingsView() }
+                .sheet(isPresented: self.$showSettingsModal) {
+                    SettingsView(showSettingsModal: $showSettingsModal)
+                }
                 .navigationBarTitle(Text("Hue Sync"), displayMode: .automatic)
                 .background(Color(.secondarySystemBackground))
                 .edgesIgnoringSafeArea(.all)
@@ -62,7 +64,7 @@ struct HomeView: View {
                                         : "bolt")
                                     .imageScale(.large)
                             }
-                            Button(action: { self.settingsModal.toggle() }) {
+                            Button(action: { self.showSettingsModal.toggle() }) {
                                 Image(systemName: "gear")
                                     .imageScale(.large)
                             }
@@ -76,28 +78,26 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
 
-    static var store = Store(
-        initialState: AppState(
-            connectivityState: .connected,
-            receivedMessages: [],
-            brightness: 55,
-            hostname: "Preview",
-            instances: [
-                Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
-                Instance(instance: 1, running: false, friendlyName: "Hue Sync")
-            ]
-        ),
-        reducer: appReducer,
-        environment: AppEnvironment(
-            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-            apiClient: .live
-        )
-    )
-
     static var previews: some View {
         HomeView(
-            store: store,
-            settingsModal: false
+            store: Store(
+                initialState: HomeState(
+                    connectivityState: .connected,
+                    receivedMessages: [],
+                    brightness: 55,
+                    hostname: "Preview",
+                    instances: [
+                        Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
+                        Instance(instance: 1, running: false, friendlyName: "Hue Sync")
+                    ]
+                ),
+                reducer: homeReducer,
+                environment: MainEnvironment(
+                    mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+                    apiClient: .live
+                )
+            ),
+            showSettingsModal: false
         )
     }
 }

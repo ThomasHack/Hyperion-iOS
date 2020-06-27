@@ -12,7 +12,7 @@ import SwiftUI
 extension HomeView {
 
     struct InstanceControl: View {
-        var store: Store<AppState, AppAction>
+        var store: Store<HomeState, HomeAction>
 
         var body: some View {
             WithViewStore(self.store) { viewStore in
@@ -35,14 +35,14 @@ struct InstanceControl_Previews: PreviewProvider {
     static var previews: some View {
         HomeView.InstanceControl(
             store: Store(
-                initialState: AppState(
+                initialState: HomeState(
                     instances: [
                         Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
                         Instance(instance: 1, running: false, friendlyName: "Hue Sync")
                     ]
                 ),
-                reducer: appReducer,
-                environment: AppEnvironment(
+                reducer: homeReducer,
+                environment: MainEnvironment(
                     mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
                     apiClient: .live
                 )

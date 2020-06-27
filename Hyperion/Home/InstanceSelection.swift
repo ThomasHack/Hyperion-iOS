@@ -12,13 +12,13 @@ import SwiftUI
 extension HomeView {
 
     struct InstanceSelection: View {
-        var store: Store<AppState, AppAction>
+        var store: Store<HomeState, HomeAction>
 
         var body: some View {
             WithViewStore(self.store) { viewStore in
                 VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Selected Instance")
-                    Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: AppAction.selectInstance)) {
+                    Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: HomeAction.selectInstance)) {
                         ForEach(viewStore.instances.filter { $0.running }, id: \.self) {instance in
                             Text("\(instance.friendlyName)").tag(instance.instance)
                         }
@@ -34,14 +34,14 @@ struct InstanceSelection_Previews: PreviewProvider {
     static var previews: some View {
         HomeView.InstanceSelection(
             store: Store(
-                initialState: AppState(
+                initialState: HomeState(
                     instances: [
                         Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
                         Instance(instance: 1, running: true, friendlyName: "Hue Sync")
                     ]
                 ),
-                reducer: appReducer,
-                environment: AppEnvironment(
+                reducer: homeReducer,
+                environment: MainEnvironment(
                     mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
                     apiClient: .live
                 )

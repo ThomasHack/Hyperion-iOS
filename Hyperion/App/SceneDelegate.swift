@@ -23,9 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI view that provides the window contents.
         let homeView = HomeView(
             store: Store(
-                initialState: AppState(),
-                reducer: appReducer,
-                environment: AppEnvironment(
+                initialState: HomeState(),
+                reducer: homeReducer,
+                environment: MainEnvironment(
                     mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
                     apiClient: .live
                 )

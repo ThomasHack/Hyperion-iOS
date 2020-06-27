@@ -12,13 +12,13 @@ import SwiftUI
 extension HomeView {
 
     struct BrightnessControl: View {
-        var store: Store<AppState, AppAction>
+        var store: Store<HomeState, HomeAction>
 
         var body: some View {
             WithViewStore(self.store) { viewStore in
                 VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Brightness")
-                    BrightnessSlider(percentage: viewStore.binding( get: { $0.brightness }, send: AppAction.updateBrightness))
+                    BrightnessSlider(percentage: viewStore.binding( get: { $0.brightness }, send: HomeAction.updateBrightness))
                         .frame(height: 72)
                 }
             }
@@ -30,9 +30,9 @@ struct BrightnessControl_Previews: PreviewProvider {
     static var previews: some View {
         HomeView.BrightnessControl(
             store: Store(
-                initialState: AppState(),
-                reducer: appReducer,
-                environment: AppEnvironment(
+                initialState: HomeState(),
+                reducer: homeReducer,
+                environment: MainEnvironment(
                     mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
                     apiClient: .live
                 )

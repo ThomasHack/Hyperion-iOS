@@ -12,7 +12,7 @@ import SwiftUI
 extension HomeView {
 
     struct IntensityControl: View {
-        var store: Store<AppState, AppAction>
+        var store: Store<HomeState, HomeAction>
 
         var body: some View {
             WithViewStore(self.store) { viewStore in
@@ -34,9 +34,9 @@ struct IntensityControl_Previews: PreviewProvider {
     static var previews: some View {
         HomeView.IntensityControl(
             store: Store(
-                initialState: AppState(),
-                reducer: appReducer,
-                environment: AppEnvironment(
+                initialState: HomeState(),
+                reducer: homeReducer,
+                environment: MainEnvironment(
                     mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
                     apiClient: .live
                 )
