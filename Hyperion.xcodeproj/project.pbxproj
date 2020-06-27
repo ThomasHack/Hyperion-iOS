@@ -15,13 +15,13 @@
 		52A9305F24A5F7BE003BDCDC /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305E24A5F7BE003BDCDC /* AppEnvironment.swift */; };
 		52A9306124A5F7D9003BDCDC /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306024A5F7D9003BDCDC /* AppReducer.swift */; };
 		52A9306324A5F801003BDCDC /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* ApiClient.swift */; };
-		52A9306724A60D83003BDCDC /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306624A60D83003BDCDC /* ApiRequest.swift */; };
 		52A9306924A60D8D003BDCDC /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* ApiResponse.swift */; };
 		52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BA92494E51600A69D01 /* AppDelegate.swift */; };
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
 		52F16BB62494E51700A69D01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BB42494E51700A69D01 /* LaunchScreen.storyboard */; };
 		52FC1060249FDC8F003A4EA8 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 52FC105F249FDC8F003A4EA8 /* Starscream */; };
+		52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC34D24A74FFF000AF55F /* Compose.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,6 @@
 		52A9305E24A5F7BE003BDCDC /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		52A9306024A5F7D9003BDCDC /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		52A9306224A5F801003BDCDC /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
-		52A9306624A60D83003BDCDC /* ApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		52A9306824A60D8D003BDCDC /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		52F16BA62494E51600A69D01 /* Hyperion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hyperion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F16BA92494E51600A69D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +39,7 @@
 		52F16BAF2494E51700A69D01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52F16BB52494E51700A69D01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52F16BB72494E51700A69D01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52FEC34D24A74FFF000AF55F /* Compose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compose.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +80,8 @@
 		52A9306524A60D77003BDCDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				52A9306624A60D83003BDCDC /* ApiRequest.swift */,
 				52A9306824A60D8D003BDCDC /* ApiResponse.swift */,
+				52FEC34D24A74FFF000AF55F /* Compose.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				529F0C4D24A6624C00EE402B /* SectionHeader.swift in Sources */,
 				52A9306924A60D8D003BDCDC /* ApiResponse.swift in Sources */,
 				529F0C4F24A6625000EE402B /* BrightnessSlider.swift in Sources */,
-				52A9306724A60D83003BDCDC /* ApiRequest.swift in Sources */,
+				52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */,
 				52A9306324A5F801003BDCDC /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

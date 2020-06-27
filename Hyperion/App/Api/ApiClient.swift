@@ -29,6 +29,9 @@ struct ApiClient {
         case didConnect
         case didReceiveWebSocketEvent(ApiEvent)
         case didUpdateBrightness(Double)
+        case didUpdateInstances([Instance])
+        case didUpdateHostname(String)
+        case didUpdateSelectedInstance(Int)
         case didDisconnect
     }
 
@@ -37,9 +40,8 @@ struct ApiClient {
     var sendMessage: (AnyHashable, ApiRequest) -> Effect<Action, Never>
     var subscribe: (AnyHashable) -> Effect<Action, Never>
     var updateBrightness: (AnyHashable, Double) -> Effect<Action, Never>
-
-    // "{\"command\":\"instance\",\"subcommand\":\"startInstance\",\"instance\":\"\(instance)\"}"
-    // "{\"command\":\"instance\",\"subcommand\":\"stopInstance\",\"instance\":\"\(instance)\"}"
+    var updateInstance: (AnyHashable, Int, Bool) -> Effect<Action, Never>
+    var switchToInstance: (AnyHashable, Int) -> Effect<Action, Never>
 }
 
 private var dependencies: [AnyHashable: Dependencies] = [:]
@@ -65,6 +67,15 @@ extension ApiClient {
                     },
                     didUpdateBrightness: {
                         subscriber.send(.didUpdateBrightness($0 as Double))
+                    },
+                    didUpdateInstances: {
+                        subscriber.send(.didUpdateInstances($0 as [Instance]))
+                    },
+                    didUpdateHostname: {
+                        subscriber.send(.didUpdateHostname($0 as String))
+                    },
+                    didUpdateSelectedInstance: {
+                        subscriber.send(.didUpdateSelectedInstance($0 as Int))
                     }
                 )
                 let request = URLRequest(url: url)
@@ -102,7 +113,8 @@ extension ApiClient {
         },
         subscribe: { id in
             .run { subscriber in
-                let message = ApiRequest(command: .serverInfo, subscribe: [.adjustmentUpdate, .instanceUpdate])
+                print("subscribe")
+                let message = ApiSubscribeRequest(ApiRequest(command: .serverinfo), ApiSubscribeRequestData(subscribe: [.instanceUpdate, .adjustmentUpdate]))
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
@@ -116,7 +128,44 @@ extension ApiClient {
         },
         updateBrightness: { id, brightness in
             .run { subscriber in
-                let message = ApiRequest(command: .adjustment, adjustment: AdjustmentData(brightness: brightness))
+                let message = ApiAdjustmentRequest(
+                        ApiRequest(command: .adjustment),
+                        ApiAdjustmentRequestData(adjustment: Adjustment(brightness: Int(brightness)))
+                    )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.write(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        updateInstance: { id, instanceId, running in
+            .run { subscriber in
+                let message = ApiInstanceRequest(
+                    ApiRequest(command: .instance),
+                    ApiInstanceRequestData(subcommand: running ? .stopInstance : .startInstance, instance: instanceId)
+                )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.write(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        switchToInstance: { id, instanceId in
+            .run { subscriber in
+                let message = ApiInstanceRequest(
+                    ApiRequest(command: .instance),
+                    ApiInstanceRequestData(subcommand: .switchTo, instance: instanceId)
+                )
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
@@ -136,18 +185,27 @@ class ApiClientDelegate: WebSocketDelegate {
     let didDisconnect: () -> Void
     let didReceiveWebSocketEvent: (ApiEvent) -> Void
     let didUpdateBrightness: (Double) -> Void
+    let didUpdateInstances: ([Instance]) -> Void
+    let didUpdateHostname: (String) -> Void
+    let didUpdateSelectedInstance: (Int) -> Void
 
 
     init(
         didConnect: @escaping() -> Void,
         didDisconnect: @escaping() -> Void,
         didReceiveWebSocketEvent: @escaping (ApiEvent) -> Void,
-        didUpdateBrightness: @escaping (Double) -> Void
+        didUpdateBrightness: @escaping (Double) -> Void,
+        didUpdateInstances: @escaping ([Instance]) -> Void,
+        didUpdateHostname: @escaping (String) -> Void,
+        didUpdateSelectedInstance: @escaping (Int) -> Void
     ) {
         self.didConnect = didConnect
         self.didDisconnect = didDisconnect
         self.didReceiveWebSocketEvent = didReceiveWebSocketEvent
         self.didUpdateBrightness = didUpdateBrightness
+        self.didUpdateInstances = didUpdateInstances
+        self.didUpdateHostname = didUpdateHostname
+        self.didUpdateSelectedInstance = didUpdateSelectedInstance
     }
 
     func didReceive(event: WebSocketEvent, client: WebSocket) {
@@ -177,24 +235,33 @@ class ApiClientDelegate: WebSocketDelegate {
     }
 
     private func didReceiveText(_ string: String) {
+        print("didReceiveText \(string)")
         guard let data = string.data(using: .utf8, allowLossyConversion: false) else { return }
         do {
-            let message = try JSONDecoder().decode(ApiResponse.self, from: data)
-            switch message.command {
-            case .adjustment:
-                break
-            case .adjustmentUpdate:
-                guard let data = message.data, let adjustment = data.first else { return }
-                self.didUpdateBrightness(adjustment.brightness)
-            case .instanceUpdate:
-                break
-            case .serverInfo:
-                break
+            let response = try JSONDecoder().decode(ApiResponse.self, from: data)
+            print("response \(response)")
+            switch response {
+            case .serverInfo(let serverInfo):
+                self.didUpdateInstances(serverInfo.info.instances)
+                self.didUpdateHostname(serverInfo.info.hostname)
+                guard let adjustments = serverInfo.info.adjustments.first else { return }
+                self.didUpdateBrightness(Double(adjustments.brightness))
+            case .adjustmentUpdate(let adjustmentUpdate):
+                guard let adjustment = adjustmentUpdate.data.first else { return }
+                self.didUpdateBrightness(Double(adjustment.brightness))
+            case .instanceUpdate(let instanceUpdate):
+                self.didUpdateInstances(instanceUpdate.data)
+            case .unknown:
+                print("unknown")
+            case .adjustmentResponse(let response), .instanceStart(let response), .instanceStop(let response):
+                if !response.success {
+                    print("Something went wrong")
+                }
+            case .instanceSwitch(let instance):
+                self.didUpdateSelectedInstance(instance.info.instance)
             }
         } catch {
             print("error: \(error.localizedDescription)")
         }
     }
-
-    // private func didReceive
 }

@@ -37,13 +37,11 @@ struct BrightnessSlider: View {
                             .shadow(color: Color.black.opacity(0.1), radius: 2, x: -1, y: 1)
                     }.padding([.trailing], 6)
                 }.frame(width: geometry.size.width * CGFloat(self.percentage / 100))
-
             }
             .cornerRadius(12)
             .gesture(DragGesture(minimumDistance: 0)
             .onChanged({ value in
                 self.percentage = Double(min(max(0, Float(value.location.x / geometry.size.width * 100)), 100))
-                print("value \(Double(Int(self.percentage)))")
                 if let callback = self.callback {
                     callback()
                 }
@@ -73,5 +71,6 @@ struct BrightnessSlider_Previews: PreviewProvider {
     static var previews: some View {
         BindingTestHolder()
             .frame(width: 320, height: 64, alignment: .center)
+            .environment(\.colorScheme, .dark)
     }
 }
