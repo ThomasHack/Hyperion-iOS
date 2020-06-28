@@ -14,11 +14,9 @@ struct MainView: View {
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            NavigationView {
-                HomeView(
-                    store: Main.initialStore.homeStore
-                )
-            }
+            HomeView(
+                store: Main.initialStore.homeStore
+            )
         }
     }
 }

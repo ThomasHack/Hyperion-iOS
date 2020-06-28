@@ -16,8 +16,12 @@ struct BrightnessControl: View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Brightness")
+
                 BrightnessSlider(percentage: viewStore.binding( get: { $0.brightness }, send: Home.Action.updateBrightness))
                     .frame(height: 72)
+
+                Spacer()
+                    .frame(height: 16.0)
             }
         }
     }

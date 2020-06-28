@@ -10,20 +10,16 @@ import ComposableArchitecture
 import Foundation
 
 enum Home {
+    
     struct State: Equatable {
         var connectivityState: ConnectivityState = .disconnected
         var receivedMessages: [String] = []
         var brightness: Double = 0
         var hostname: String = ""
-        var instances: [Instance] = []
+        var instances: [HyperionApi.Instance] = []
+        var effects: [HyperionApi.Effect]
         var selectedInstance: Int = 0
         var showSettingsModal: Bool = false
-
-        enum ConnectivityState {
-            case connected
-            case connecting
-            case disconnected
-        }
     }
 
     enum Action {
@@ -94,10 +90,11 @@ enum Home {
                     .map(Action.apiClient)
                     .eraseToEffect()
             }
+        case .apiClient(.didUpdateEffects(let effects)):
+                state.effects = effects
         case .apiClient(.didUpdateHostname(let hostname)):
             state.hostname = hostname
         case .apiClient(.didUpdateSelectedInstance(let selectedInstance)):
-            print("didUpdateSelectedInstance \(selectedInstance)")
             state.selectedInstance = selectedInstance
             return environment.apiClient.subscribe(ApiId())
                 .receive(on: environment.mainQueue)
@@ -109,14 +106,23 @@ enum Home {
     //.debug()
 
     static let initialState = State(
+        connectivityState: .disconnected,
+        brightness: 0,
+        hostname: "",
+        instances: [],
+        effects: [],
+        showSettingsModal: false
+    )
+
+    static let previewState = State(
         connectivityState: .connected,
-        receivedMessages: [],
         brightness: 55,
         hostname: "Preview",
         instances: [
-            Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
-            Instance(instance: 1, running: false, friendlyName: "Hue Sync")
+            HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
+            HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Sync")
         ],
+        effects: [],
         showSettingsModal: false
     )
 }

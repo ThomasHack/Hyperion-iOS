@@ -16,12 +16,16 @@ struct IntensityControl: View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Intensity")
+
                 HStack(alignment: .center, spacing: 8.0) {
                     IntensityButton(imageName: "rays", text: "Subtle", callback: {})
                     IntensityButton(imageName: "slowmo", text: "Moderate", callback: {})
                     IntensityButton(imageName: "wind", text: "High", callback: {})
                     IntensityButton(imageName: "tornado", text: "Extreme", callback: {})
                 }
+
+                Spacer()
+                    .frame(height: 16.0)
             }
         }
     }

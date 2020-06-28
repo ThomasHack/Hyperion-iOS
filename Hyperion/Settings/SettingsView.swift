@@ -12,15 +12,16 @@ import SwiftUI
 struct SettingsView: View {
     let store: Store<Settings.State, Settings.Action>
 
-    @Binding var showSettingsModal: Bool
-
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                  VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Host")
                     TextField("https://hyperion.home:8090",
-                              text: viewStore.binding( get: { $0.hostnameInput}, send: Settings.Action.hostInputTextChanged))
+                              text: viewStore.binding( get: { $0.hostInput ?? "" }, send: Settings.Action.hostInputTextChanged))
+                    Button(action: { viewStore.send(.saveHostButtonTapped)}) {
+                        Text("Save")
+                    }
                     Spacer()
                 }
                 .padding()
@@ -31,7 +32,7 @@ struct SettingsView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 16) {
-                            Button(action: { self.showSettingsModal = false }) {
+                            Button(action: { viewStore.send(.closeSettingsModal) }) {
                                 Text("Done")
                                     .font(.system(size: 17, weight: .bold))
                             }
@@ -43,12 +44,9 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
-    @State static var showSettingsModal = false
-
     static var previews: some View {
         SettingsView(
-            store: Main.initialStore.settingsStore,
-            showSettingsModal: $showSettingsModal
+            store: Main.initialStore.settingsStore
         )
     }
 }

@@ -9,8 +9,16 @@
 import ComposableArchitecture
 import Foundation
 
+enum ConnectivityState {
+    case connected
+    case connecting
+    case disconnected
+}
+
 enum Main {
     struct State: Equatable {
+        var host: String?
+
         var homeState: Home.State
         var settingsState: Settings.State
     }
@@ -21,13 +29,24 @@ enum Main {
     }
 
     struct Environment {
-        var mainQueue: AnySchedulerOf<DispatchQueue>
-        var apiClient: ApiClient
+        let mainQueue: AnySchedulerOf<DispatchQueue>
+        let apiClient: ApiClient
+        let defaults: UserDefaults
     }
 
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer<State, Action, Environment> { _, _, _ in
-            .none
+        Reducer<State, Action, Environment> { state, action, environment in
+            switch action {
+            case .settingsAction(.closeSettingsModal):
+                state.homeState.showSettingsModal = false
+            case .homeAction(.settingsButtonTapped):
+                state.settingsState.showSettingsModal = true
+            case .settingsAction(.saveHostButtonTapped):
+                state.host = state.settingsState.host
+            case .homeAction, .settingsAction:
+                return .none
+            }
+            return .none
         },
         Home.reducer.pullback(
             state: \State.homeState,
@@ -39,10 +58,11 @@ enum Main {
             action: /Action.settingsAction,
             environment: { $0 }
         )
-    )
+    ).debug()
 
     static let initialStore = Store(
         initialState: State(
+            host: UserDefaults.standard.string(forKey: hostDefaultsKeyName),
             homeState: Home.initialState,
             settingsState: Settings.initialState
         ),
@@ -52,8 +72,11 @@ enum Main {
 
     static let initialEnvironment = Environment(
         mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-        apiClient: .live
+        apiClient: .live,
+        defaults: UserDefaults.standard
     )
+
+    static let hostDefaultsKeyName = "hostname"
 }
 
 extension Store where State == Main.State, Action == Main.Action {

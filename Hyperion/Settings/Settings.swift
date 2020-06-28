@@ -11,24 +11,34 @@ import Foundation
 
 enum Settings {
     struct State: Equatable {
-        var hostnameInput: String = ""
+        var showSettingsModal = false
+        var hostInput: String?
+        var host: String?
     }
 
     enum Action {
+        case closeSettingsModal
         case hostInputTextChanged(String)
+        case saveHostButtonTapped
     }
 
     typealias Environment = Main.Environment
 
     static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
+        case .closeSettingsModal:
+            state.showSettingsModal = false
         case .hostInputTextChanged(let text):
-            print("text: \(text)")
+            state.hostInput = text
+        case .saveHostButtonTapped:
+            state.host = state.hostInput
+            environment.defaults.set(state.hostInput, forKey: Main.hostDefaultsKeyName)
         }
         return .none
     }
 
     static let initialState = State(
-        hostnameInput: "hostname.local"
+        showSettingsModal: false,
+        hostInput: UserDefaults.standard.string(forKey: Main.hostDefaultsKeyName)
     )
 }

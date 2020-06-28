@@ -29,7 +29,8 @@ struct ApiClient {
         case didConnect
         case didReceiveWebSocketEvent(ApiEvent)
         case didUpdateBrightness(Double)
-        case didUpdateInstances([Instance])
+        case didUpdateInstances([HyperionApi.Instance])
+        case didUpdateEffects([HyperionApi.Effect])
         case didUpdateHostname(String)
         case didUpdateSelectedInstance(Int)
         case didDisconnect
@@ -37,7 +38,7 @@ struct ApiClient {
 
     var connect: (AnyHashable, URL) -> Effect<Action, Never>
     var disconnect: (AnyHashable) -> Effect<Action, Never>
-    var sendMessage: (AnyHashable, ApiRequest) -> Effect<Action, Never>
+    var sendMessage: (AnyHashable, HyperionApi.Request) -> Effect<Action, Never>
     var subscribe: (AnyHashable) -> Effect<Action, Never>
     var updateBrightness: (AnyHashable, Double) -> Effect<Action, Never>
     var updateInstance: (AnyHashable, Int, Bool) -> Effect<Action, Never>
@@ -69,7 +70,10 @@ extension ApiClient {
                         subscriber.send(.didUpdateBrightness($0 as Double))
                     },
                     didUpdateInstances: {
-                        subscriber.send(.didUpdateInstances($0 as [Instance]))
+                        subscriber.send(.didUpdateInstances($0 as [HyperionApi.Instance]))
+                    },
+                    didUpdateEffects: {
+                        subscriber.send(.didUpdateEffects($0 as [HyperionApi.Effect]))
                     },
                     didUpdateHostname: {
                         subscriber.send(.didUpdateHostname($0 as String))
@@ -111,7 +115,9 @@ extension ApiClient {
         },
         subscribe: { id in
             .run { subscriber in
-                let message = ApiSubscribeRequest(ApiRequest(command: .serverinfo), ApiSubscribeRequestData(subscribe: [.instanceUpdate, .adjustmentUpdate]))
+                let message = HyperionApi.SubscribeRequest(
+                    HyperionApi.Request(command: .serverinfo),
+                    HyperionApi.SubscribeRequestData(subscribe: [.instanceUpdate, .adjustmentUpdate]))
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
@@ -125,9 +131,9 @@ extension ApiClient {
         },
         updateBrightness: { id, brightness in
             .run { subscriber in
-                let message = ApiAdjustmentRequest(
-                        ApiRequest(command: .adjustment),
-                        ApiAdjustmentRequestData(adjustment: Adjustment(brightness: Int(brightness)))
+                let message = HyperionApi.AdjustmentRequest(
+                        HyperionApi.Request(command: .adjustment),
+                    HyperionApi.AdjustmentRequestData(adjustment: HyperionApi.Adjustment(brightness: Int(brightness)))
                     )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -142,9 +148,9 @@ extension ApiClient {
         },
         updateInstance: { id, instanceId, running in
             .run { subscriber in
-                let message = ApiInstanceRequest(
-                    ApiRequest(command: .instance),
-                    ApiInstanceRequestData(subcommand: running ? .stopInstance : .startInstance, instance: instanceId)
+                let message = HyperionApi.InstanceRequest(
+                    HyperionApi.Request(command: .instance),
+                    HyperionApi.InstanceRequestData(subcommand: running ? .stopInstance : .startInstance, instance: instanceId)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -159,9 +165,9 @@ extension ApiClient {
         },
         switchToInstance: { id, instanceId in
             .run { subscriber in
-                let message = ApiInstanceRequest(
-                    ApiRequest(command: .instance),
-                    ApiInstanceRequestData(subcommand: .switchTo, instance: instanceId)
+                let message = HyperionApi.InstanceRequest(
+                    HyperionApi.Request(command: .instance),
+                    HyperionApi.InstanceRequestData(subcommand: .switchTo, instance: instanceId)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -182,7 +188,8 @@ class ApiClientDelegate: WebSocketDelegate {
     let didDisconnect: () -> Void
     let didReceiveWebSocketEvent: (ApiEvent) -> Void
     let didUpdateBrightness: (Double) -> Void
-    let didUpdateInstances: ([Instance]) -> Void
+    let didUpdateInstances: ([HyperionApi.Instance]) -> Void
+    let didUpdateEffects: ([HyperionApi.Effect]) -> Void
     let didUpdateHostname: (String) -> Void
     let didUpdateSelectedInstance: (Int) -> Void
 
@@ -192,7 +199,8 @@ class ApiClientDelegate: WebSocketDelegate {
         didDisconnect: @escaping() -> Void,
         didReceiveWebSocketEvent: @escaping (ApiEvent) -> Void,
         didUpdateBrightness: @escaping (Double) -> Void,
-        didUpdateInstances: @escaping ([Instance]) -> Void,
+        didUpdateInstances: @escaping ([HyperionApi.Instance]) -> Void,
+        didUpdateEffects: @escaping ([HyperionApi.Effect]) -> Void,
         didUpdateHostname: @escaping (String) -> Void,
         didUpdateSelectedInstance: @escaping (Int) -> Void
     ) {
@@ -201,6 +209,7 @@ class ApiClientDelegate: WebSocketDelegate {
         self.didReceiveWebSocketEvent = didReceiveWebSocketEvent
         self.didUpdateBrightness = didUpdateBrightness
         self.didUpdateInstances = didUpdateInstances
+        self.didUpdateEffects = didUpdateEffects
         self.didUpdateHostname = didUpdateHostname
         self.didUpdateSelectedInstance = didUpdateSelectedInstance
     }
@@ -234,11 +243,12 @@ class ApiClientDelegate: WebSocketDelegate {
     private func didReceiveText(_ string: String) {
         guard let data = string.data(using: .utf8, allowLossyConversion: false) else { return }
         do {
-            let response = try JSONDecoder().decode(ApiResponse.self, from: data)
+            let response = try JSONDecoder().decode(HyperionApi.Response.self, from: data)
             switch response {
             case .serverInfo(let serverInfo):
                 self.didUpdateInstances(serverInfo.info.instances)
                 self.didUpdateHostname(serverInfo.info.hostname)
+                self.didUpdateEffects(serverInfo.info.effects)
                 guard let adjustments = serverInfo.info.adjustments.first else { return }
                 self.didUpdateBrightness(Double(adjustments.brightness))
             case .adjustmentUpdate(let adjustmentUpdate):

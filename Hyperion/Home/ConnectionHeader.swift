@@ -14,25 +14,31 @@ struct ConnectionHeader: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            HStack(alignment: .center, spacing: 8) {
-                Circle()
-                    .frame(width: 10, height: 10)
-                    .foregroundColor(
-                        Color(viewStore.connectivityState == .connected
-                                ? UIColor.systemGreen
-                                : viewStore.connectivityState == .disconnected
-                                ? UIColor.systemRed
-                                : UIColor.systemOrange)
-                    )
-                Text(
-                    viewStore.connectivityState == .connected
-                        ? "Status: Connected to \(viewStore.hostname)"
-                        : viewStore.connectivityState == .disconnected
-                        ? "Status: Disconnected"
-                        : "Status: Connecting...")
-                    .font(.system(size: 13))
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .center, spacing: 8) {
+                    Circle()
+                        .frame(width: 10, height: 10)
+                        .foregroundColor(
+                            Color(viewStore.connectivityState == .connected
+                                    ? UIColor.systemGreen
+                                    : viewStore.connectivityState == .disconnected
+                                    ? UIColor.systemRed
+                                    : UIColor.systemOrange)
+                        )
+                    Text(
+                        viewStore.connectivityState == .connected
+                            ? "Status: Connected to \(viewStore.hostname)"
+                            : viewStore.connectivityState == .disconnected
+                            ? "Status: Disconnected"
+                            : "Status: Connecting...")
+                        .font(.system(size: 13))
+
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+
+                Spacer()
+                    .frame(height: 16.0)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }

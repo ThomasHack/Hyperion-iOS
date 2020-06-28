@@ -16,6 +16,7 @@ struct InstanceControl: View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Instances")
+
                 HStack {
                     ForEach(viewStore.instances, id: \.self) {instance in
                         IntensityButton(imageName: instance.friendlyName == "LG OLED Ambilight" ? "tv" : "lightbulb", text: instance.friendlyName, running: instance.running, callback: {
@@ -23,6 +24,9 @@ struct InstanceControl: View {
                         })
                     }
                 }
+
+                Spacer()
+                    .frame(height: 16.0)
             }
         }
     }
