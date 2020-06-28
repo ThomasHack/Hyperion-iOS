@@ -13,11 +13,10 @@ enum Home {
     
     struct State: Equatable {
         var connectivityState: ConnectivityState = .disconnected
-        var receivedMessages: [String] = []
         var brightness: Double = 0
         var hostname: String = ""
         var instances: [HyperionApi.Instance] = []
-        var effects: [HyperionApi.Effect]
+        var effects: [HyperionApi.Effect] = []
         var selectedInstance: Int = 0
         var showSettingsModal: Bool = false
     }
@@ -25,10 +24,9 @@ enum Home {
     enum Action {
         case connectButtonTapped
         case instanceButtonTapped(Int, Bool)
-        case settingsButtonTapped
-        case didUpdateSettingsModal(Bool)
         case selectInstance(Int)
         case updateBrightness(Double)
+        case toggleSettingsModal
         case apiClient(ApiClient.Action)
     }
 
@@ -38,6 +36,7 @@ enum Home {
         struct ApiId: Hashable {}
 
         switch action {
+
         case .connectButtonTapped:
             switch state.connectivityState {
             case .connected, .connecting:
@@ -51,37 +50,44 @@ enum Home {
                     .map(Action.apiClient)
                     .eraseToEffect()
             }
+
         case .instanceButtonTapped(let instanceId, let running):
             return environment.apiClient.updateInstance(ApiId(), instanceId, running)
                 .receive(on: environment.mainQueue)
                 .map(Action.apiClient)
                 .eraseToEffect()
-        case .settingsButtonTapped:
-            state.showSettingsModal = true
-        case .didUpdateSettingsModal(let show):
-            state.showSettingsModal = show
+
         case .selectInstance(let instanceId):
             return environment.apiClient.switchToInstance(ApiId(), instanceId)
                 .receive(on: environment.mainQueue)
                 .map(Action.apiClient)
                 .eraseToEffect()
+
         case .updateBrightness(let brightness):
             return environment.apiClient.updateBrightness(ApiId(), brightness)
                 .receive(on: environment.mainQueue)
                 .map(Action.apiClient)
                 .eraseToEffect()
+
+        case .toggleSettingsModal:
+            return .none
+
         case .apiClient(.didConnect):
             state.connectivityState = .connected
             return environment.apiClient.subscribe(ApiId())
                 .receive(on: environment.mainQueue)
                 .map(Action.apiClient)
                 .eraseToEffect()
+
         case .apiClient(.didDisconnect):
             state.connectivityState = .disconnected
+
         case .apiClient(.didReceiveWebSocketEvent(let event)):
             print("event")
+
         case .apiClient(.didUpdateBrightness(let brightness)):
             state.brightness = Double(brightness)
+
         case .apiClient(.didUpdateInstances(let instances)):
             state.instances = instances
             if let instance = instances.first(where: { $0.instance == state.selectedInstance }), !instance.running {
@@ -90,29 +96,26 @@ enum Home {
                     .map(Action.apiClient)
                     .eraseToEffect()
             }
+
         case .apiClient(.didUpdateEffects(let effects)):
                 state.effects = effects
+
         case .apiClient(.didUpdateHostname(let hostname)):
             state.hostname = hostname
+
         case .apiClient(.didUpdateSelectedInstance(let selectedInstance)):
             state.selectedInstance = selectedInstance
             return environment.apiClient.subscribe(ApiId())
                 .receive(on: environment.mainQueue)
                 .map(Action.apiClient)
                 .eraseToEffect()
+
         }
         return .none
     }
     //.debug()
 
-    static let initialState = State(
-        connectivityState: .disconnected,
-        brightness: 0,
-        hostname: "",
-        instances: [],
-        effects: [],
-        showSettingsModal: false
-    )
+    static let initialState = State()
 
     static let previewState = State(
         connectivityState: .connected,
@@ -121,8 +124,6 @@ enum Home {
         instances: [
             HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
             HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Sync")
-        ],
-        effects: [],
-        showSettingsModal: false
+        ]
     )
 }

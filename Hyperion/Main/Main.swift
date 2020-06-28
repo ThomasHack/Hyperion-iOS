@@ -18,12 +18,18 @@ enum ConnectivityState {
 enum Main {
     struct State: Equatable {
         var host: String?
-
+        var showSettingsModal: Bool = false
+        
+        var sharedState: Shared.State
         var homeState: Home.State
         var settingsState: Settings.State
     }
 
     enum Action {
+        case updateHost(String)
+        case toggleSettingsModal
+
+        case sharedAction(Shared.Action)
         case homeAction(Home.Action)
         case settingsAction(Settings.Action)
     }
@@ -35,19 +41,26 @@ enum Main {
     }
 
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer<State, Action, Environment> { state, action, environment in
+        Reducer<State, Action, Environment> { state, action, _ in
             switch action {
-            case .settingsAction(.closeSettingsModal):
-                state.homeState.showSettingsModal = false
-            case .homeAction(.settingsButtonTapped):
-                state.settingsState.showSettingsModal = true
-            case .settingsAction(.saveHostButtonTapped):
-                state.host = state.settingsState.host
-            case .homeAction, .settingsAction:
-                return .none
+            case .updateHost(let string):
+                state.host = string
+            case .toggleSettingsModal:
+                print("toggle")
+                state.showSettingsModal.toggle()
+            case .homeAction(.toggleSettingsModal), .settingsAction(.toggleSettingsModal):
+                state.homeState.showSettingsModal.toggle()
+                // state.settingsState.showSettingsModal.toggle()
+            case .sharedAction, .homeAction, .settingsAction:
+                return.none
             }
             return .none
         },
+        Shared.reducer.pullback(
+            state: \State.sharedState,
+            action: /Action.sharedAction,
+            environment: { $0 }
+        ),
         Home.reducer.pullback(
             state: \State.homeState,
             action: /Action.homeAction,
@@ -58,11 +71,12 @@ enum Main {
             action: /Action.settingsAction,
             environment: { $0 }
         )
-    ).debug()
+    )
+    .debug()
 
     static let initialStore = Store(
         initialState: State(
-            host: UserDefaults.standard.string(forKey: hostDefaultsKeyName),
+            sharedState: Shared.initialState,
             homeState: Home.initialState,
             settingsState: Settings.initialState
         ),
@@ -75,11 +89,13 @@ enum Main {
         apiClient: .live,
         defaults: UserDefaults.standard
     )
-
-    static let hostDefaultsKeyName = "hostname"
 }
 
 extension Store where State == Main.State, Action == Main.Action {
+    var sharedStore: Store<Shared.State, Shared.Action> {
+        scope(state: \.sharedState, action: Action.sharedAction)
+    }
+
     var homeStore: Store<Home.State, Home.Action> {
         scope(state: \.homeState, action: Action.homeAction)
     }

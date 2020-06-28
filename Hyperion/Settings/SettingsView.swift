@@ -18,8 +18,10 @@ struct SettingsView: View {
                  VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Host")
                     TextField("https://hyperion.home:8090",
-                              text: viewStore.binding( get: { $0.hostInput ?? "" }, send: Settings.Action.hostInputTextChanged))
-                    Button(action: { viewStore.send(.saveHostButtonTapped)}) {
+                              text: viewStore.binding( get: { $0.hostInput }, send: Settings.Action.hostInputTextChanged))
+                    Button(action: {
+                        // viewStore.send(Main.Action.updateHost)
+                    }) {
                         Text("Save")
                     }
                     Spacer()
@@ -32,7 +34,9 @@ struct SettingsView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 16) {
-                            Button(action: { viewStore.send(.closeSettingsModal) }) {
+                            Button(action: {
+                                viewStore.send(.toggleSettingsModal)
+                            }) {
                                 Text("Done")
                                     .font(.system(size: 17, weight: .bold))
                             }

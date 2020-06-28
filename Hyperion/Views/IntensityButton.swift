@@ -21,7 +21,7 @@ struct IntensityButton: View {
                 Image(systemName: imageName).font(.title)
             }
             .buttonStyle(DefaultButtonStyle())
-            // .background(Color(running ? UIColor.systemBackground : UIColor.secondarySystemBackground))
+            .background(Color(running ? UIColor.systemBackground : UIColor.secondarySystemBackground))
 
             Text(text)
                 .foregroundColor(Color(UIColor.label))

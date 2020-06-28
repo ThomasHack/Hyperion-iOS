@@ -25,6 +25,7 @@
 		52EBA9EF24A7EE4E00BA5A45 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EE24A7EE4E00BA5A45 /* Settings.swift */; };
 		52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F224A7F2C900BA5A45 /* Main.swift */; };
 		52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F424A7F88000BA5A45 /* MainView.swift */; };
+		52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F924A8CEDE00BA5A45 /* Shared.swift */; };
 		52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BA92494E51600A69D01 /* AppDelegate.swift */; };
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		52EBA9EE24A7EE4E00BA5A45 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		52EBA9F224A7F2C900BA5A45 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		52EBA9F424A7F88000BA5A45 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		52EBA9F924A8CEDE00BA5A45 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		52F16BA62494E51600A69D01 /* Hyperion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hyperion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F16BA92494E51600A69D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F16BAB2494E51600A69D01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				52EBA9F224A7F2C900BA5A45 /* Main.swift */,
 				52EBA9F424A7F88000BA5A45 /* MainView.swift */,
+				52EBA9F924A8CEDE00BA5A45 /* Shared.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				52EBA9E524A7DEDC00BA5A45 /* ConnectionHeader.swift in Sources */,
 				52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */,
 				52A9306924A60D8D003BDCDC /* HyperionApi.swift in Sources */,
+				52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */,
 				529F0C4F24A6625000EE402B /* BrightnessSlider.swift in Sources */,
 				52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */,
 				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,

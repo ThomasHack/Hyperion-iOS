@@ -50,13 +50,13 @@ struct HomeView: View {
                                         : "bolt")
                                     .imageScale(.large)
                             }
-                            Button(action: { viewStore.send(.settingsButtonTapped) }) {
+                            Button(action: { viewStore.send(.toggleSettingsModal) }) {
                                 Image(systemName: "gear")
                                     .imageScale(.large)
                             }
                         }
                 )
-                .sheet(isPresented: viewStore.binding( get: { $0.showSettingsModal }, send: Home.Action.didUpdateSettingsModal )) {
+                .sheet(isPresented: viewStore.binding( get: { $0.showSettingsModal }, send: .toggleSettingsModal)) {
                     SettingsView(
                         store: Main.initialStore.settingsStore
                     )
@@ -70,11 +70,7 @@ struct HomeView_Previews: PreviewProvider {
 
     static var previews: some View {
         HomeView(
-            store: Store(
-                initialState: Home.previewState,
-                reducer: Home.reducer,
-                environment: Main.initialEnvironment
-            )
+            store: Main.initialStore.homeStore
         )
     }
 }

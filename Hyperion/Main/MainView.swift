@@ -14,9 +14,12 @@ struct MainView: View {
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            HomeView(
-                store: Main.initialStore.homeStore
-            )
+            VStack {
+                Text("\(viewStore.sharedState.host ?? "")")
+                HomeView(
+                    store: Main.initialStore.homeStore
+                )
+            }
         }
     }
 }
