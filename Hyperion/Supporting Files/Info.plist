@@ -12,6 +12,8 @@
 			<string></string>
 			<key>echo.websocket.org</key>
 			<string></string>
+			<key>192.168.0.21</key>
+			<string></string>
 		</dict>
 	</dict>
 	<key>LSApplicationCategoryType</key>

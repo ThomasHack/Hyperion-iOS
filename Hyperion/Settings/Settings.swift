@@ -11,29 +11,40 @@ import Foundation
 
 enum Settings {
     struct State: Equatable {
-        var showSettingsModal: Bool = false
         var hostInput: String = ""
     }
 
     enum Action {
         case hostInputTextChanged(String)
-        case toggleSettingsModal
+        case saveHostButtonTapped
+        case hideSettingsModal
+
+        case shared(Shared.Action)
     }
 
     typealias Environment = Main.Environment
 
-    static let reducer = Reducer<Settings.State, Settings.Action, Settings.Environment> { state, action, environment in
-        switch action {
-        case .hostInputTextChanged(let text):
-            state.hostInput = text
-        case .toggleSettingsModal:
-            state.showSettingsModal.toggle()
-        }
-        return .none
-    }
-
+    static let reducer = Reducer<SettingsFeatureState, Action, Environment>.combine(
+        Reducer { state, action, environment in
+            switch action {
+            case .hostInputTextChanged(let text):
+                state.hostInput = text
+            case .hideSettingsModal:
+                state.showSettingsModal = false
+            case .saveHostButtonTapped:
+                state.shared.host = state.hostInput
+            case .shared:
+                break
+            }
+            return .none
+        },
+        Shared.reducer.pullback(
+            state: \SettingsFeatureState.shared,
+            action: /Action.shared,
+            environment: { $0 }
+        )
+    )
     static let initialState = State(
-        showSettingsModal: false,
-        hostInput: ""
+        hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? ""
     )
 }

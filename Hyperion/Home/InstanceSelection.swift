@@ -10,7 +10,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct InstanceSelection: View {
-    let store: Store<Home.State, Home.Action>
+    let store: Store<Home.HomeFeatureState, Home.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -18,7 +18,7 @@ struct InstanceSelection: View {
                 SectionHeader(text: "Selected Instance")
 
                 Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: Home.Action.selectInstance)) {
-                    ForEach(viewStore.instances.filter { $0.running }, id: \.self) {instance in
+                    ForEach(viewStore.instances.filter { $0.running }, id: \HyperionApi.Instance.self) { instance in
                         Text("\(instance.friendlyName)").tag(instance.instance)
                     }
                 }
@@ -34,9 +34,7 @@ struct InstanceSelection: View {
 
 struct InstanceSelection_Previews: PreviewProvider {
     static var previews: some View {
-        InstanceSelection(
-            store: Main.initialStore.homeStore
-        )
+        InstanceSelection(store: Main.store.home)
         .previewLayout(.fixed(width: 375, height: 80))
     }
 }

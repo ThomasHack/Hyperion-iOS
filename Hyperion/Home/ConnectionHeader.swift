@@ -10,7 +10,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct ConnectionHeader: View {
-    let store: Store<Home.State, Home.Action>
+    let store: Store<Home.HomeFeatureState, Home.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -37,7 +37,7 @@ struct ConnectionHeader: View {
                 .frame(maxWidth: .infinity, alignment: .center)
 
                 Spacer()
-                    .frame(height: 16.0)
+                    .frame(height: 8.0)
             }
         }
     }
@@ -45,9 +45,7 @@ struct ConnectionHeader: View {
 
 struct ConnectionHeader_Previews: PreviewProvider {
     static var previews: some View {
-        ConnectionHeader(
-            store: Main.initialStore.homeStore
-        )
+        ConnectionHeader(store: Main.store.home)
         .previewLayout(.fixed(width: 375, height: 40))
     }
 }

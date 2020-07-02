@@ -10,120 +10,76 @@ import ComposableArchitecture
 import Foundation
 
 enum Home {
-    
-    struct State: Equatable {
-        var connectivityState: ConnectivityState = .disconnected
-        var brightness: Double = 0
-        var hostname: String = ""
-        var instances: [HyperionApi.Instance] = []
-        var effects: [HyperionApi.Effect] = []
-        var selectedInstance: Int = 0
-        var showSettingsModal: Bool = false
-    }
+    struct State: Equatable {}
 
     enum Action {
         case connectButtonTapped
+        case settingsButtonTapped
         case instanceButtonTapped(Int, Bool)
+        case toggleSettingsModal(Bool)
+
         case selectInstance(Int)
         case updateBrightness(Double)
-        case toggleSettingsModal
-        case apiClient(ApiClient.Action)
+        case turnOnSmoothing
+        case turnOffSmoothing
+        // case didUpdateInstances
+
+        case api(Api.Action)
+        case shared(Shared.Action)
     }
 
     typealias Environment = Main.Environment
 
-    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
-        struct ApiId: Hashable {}
+    static let reducer = Reducer<HomeFeatureState, Action, Environment>.combine(
+        Reducer { state, action, environment in
+            switch action {
+            case .connectButtonTapped:
+                switch state.connectivityState {
+                case .connected, .connecting:
+                    return Effect(value: Action.api(.disconnect))
 
-        switch action {
+                case .disconnected:
+                    guard let host = state.host, let url = URL(string: host) else { return .none }
+                    return Effect(value: Action.api(.connect(url)))
+                }
 
-        case .connectButtonTapped:
-            switch state.connectivityState {
-            case .connected, .connecting:
-                return environment.apiClient.disconnect(ApiId())
-                    .receive(on: environment.mainQueue)
-                    .map(Action.apiClient)
-                    .eraseToEffect()
-            case .disconnected:
-                return environment.apiClient.connect(ApiId(), URL(string: "ws://hyperion.home:8090/")!)
-                    .receive(on: environment.mainQueue)
-                    .map(Action.apiClient)
-                    .eraseToEffect()
+            case .settingsButtonTapped:
+                return Effect(value: Action.shared(.showSettingsModal))
+
+            case .toggleSettingsModal(let toggle):
+                return Effect(value: Action.shared(.toggleSettingsModal(toggle)))
+
+            case .instanceButtonTapped(let instanceId, let running):
+                return Effect(value: Action.api(.updateInstance(instanceId, !running)))
+
+            case .selectInstance(let instanceId):
+                return Effect(value: Action.api(.selectInstance(instanceId)))
+
+            case .updateBrightness(let brightness):
+                return Effect(value: Action.api(.updateBrightness(brightness)))
+
+            case .turnOnSmoothing:
+                return Effect(value: Action.api(.turnOnSmoothing))
+
+            case .turnOffSmoothing:
+                return Effect(value: Action.api(.turnOffSmoothing))
+
+            case .api, .shared:
+                return .none
             }
-
-        case .instanceButtonTapped(let instanceId, let running):
-            return environment.apiClient.updateInstance(ApiId(), instanceId, running)
-                .receive(on: environment.mainQueue)
-                .map(Action.apiClient)
-                .eraseToEffect()
-
-        case .selectInstance(let instanceId):
-            return environment.apiClient.switchToInstance(ApiId(), instanceId)
-                .receive(on: environment.mainQueue)
-                .map(Action.apiClient)
-                .eraseToEffect()
-
-        case .updateBrightness(let brightness):
-            return environment.apiClient.updateBrightness(ApiId(), brightness)
-                .receive(on: environment.mainQueue)
-                .map(Action.apiClient)
-                .eraseToEffect()
-
-        case .toggleSettingsModal:
-            return .none
-
-        case .apiClient(.didConnect):
-            state.connectivityState = .connected
-            return environment.apiClient.subscribe(ApiId())
-                .receive(on: environment.mainQueue)
-                .map(Action.apiClient)
-                .eraseToEffect()
-
-        case .apiClient(.didDisconnect):
-            state.connectivityState = .disconnected
-
-        case .apiClient(.didReceiveWebSocketEvent(let event)):
-            print("event")
-
-        case .apiClient(.didUpdateBrightness(let brightness)):
-            state.brightness = Double(brightness)
-
-        case .apiClient(.didUpdateInstances(let instances)):
-            state.instances = instances
-            if let instance = instances.first(where: { $0.instance == state.selectedInstance }), !instance.running {
-                return environment.apiClient.switchToInstance(ApiId(), 0)
-                    .receive(on: environment.mainQueue)
-                    .map(Action.apiClient)
-                    .eraseToEffect()
-            }
-
-        case .apiClient(.didUpdateEffects(let effects)):
-                state.effects = effects
-
-        case .apiClient(.didUpdateHostname(let hostname)):
-            state.hostname = hostname
-
-        case .apiClient(.didUpdateSelectedInstance(let selectedInstance)):
-            state.selectedInstance = selectedInstance
-            return environment.apiClient.subscribe(ApiId())
-                .receive(on: environment.mainQueue)
-                .map(Action.apiClient)
-                .eraseToEffect()
-
-        }
-        return .none
-    }
+        },
+        Shared.reducer.pullback(
+            state: \HomeFeatureState.shared,
+            action: /Action.shared,
+            environment: { $0 }
+        ),
+        Api.reducer.pullback(
+            state: \HomeFeatureState.api,
+            action: /Action.api,
+            environment: { $0 }
+        )
+    )
     //.debug()
 
     static let initialState = State()
-
-    static let previewState = State(
-        connectivityState: .connected,
-        brightness: 55,
-        hostname: "Preview",
-        instances: [
-            HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
-            HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Sync")
-        ]
-    )
 }

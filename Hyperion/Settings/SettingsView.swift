@@ -10,20 +10,23 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SettingsView: View {
-    let store: Store<Settings.State, Settings.Action>
+    let store: Store<Settings.SettingsFeatureState, Settings.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                  VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Host")
-                    TextField("https://hyperion.home:8090",
-                              text: viewStore.binding( get: { $0.hostInput }, send: Settings.Action.hostInputTextChanged))
+                    TextField("https://hyperion.home:8090", text: viewStore.binding( get: { $0.hostInput }, send: Settings.Action.hostInputTextChanged))
+                        .keyboardType(.URL)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+
                     Button(action: {
-                        // viewStore.send(Main.Action.updateHost)
+                        viewStore.send(.saveHostButtonTapped)
                     }) {
                         Text("Save")
-                    }
+                    }.disabled(viewStore.hostInput.count < 3)
                     Spacer()
                 }
                 .padding()
@@ -35,7 +38,7 @@ struct SettingsView: View {
                     trailing:
                         HStack(spacing: 16) {
                             Button(action: {
-                                viewStore.send(.toggleSettingsModal)
+                                viewStore.send(.hideSettingsModal)
                             }) {
                                 Text("Done")
                                     .font(.system(size: 17, weight: .bold))
@@ -49,8 +52,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(
-            store: Main.initialStore.settingsStore
-        )
+        SettingsView(store: Main.store.settings)
     }
 }

@@ -20,6 +20,10 @@ enum HyperionApi {
         case instance = "instance"
         case serverinfo = "serverinfo"
         case adjustment = "adjustment"
+        case component = "componentstate"
+        case color = "color"
+        case effect = "effect"
+        case clear = "clear"
     }
 
     enum RequestSubCommandType: String, Codable {
@@ -31,6 +35,7 @@ enum HyperionApi {
     enum SubscribeType: String, Codable {
         case adjustmentUpdate = "adjustment-update"
         case instanceUpdate = "instance-update"
+        case componentUpdate = "components-update"
     }
 
     struct InstanceRequestData: Equatable, Codable {
@@ -46,9 +51,49 @@ enum HyperionApi {
         var adjustment: Adjustment
     }
 
+    struct ComponentRequestData: Equatable, Codable {
+        var componentstate: ComponentState
+    }
+
+    struct ColorRequestData: Equatable, Codable {
+        var color: [Int]
+        var priority: Int
+        var origin: String
+    }
+
+    struct EffectRequestData: Equatable, Codable {
+        var effect: Effect
+        var priority: Int
+        var origin: String
+    }
+
+    struct ClearRequestData: Equatable, Codable {
+        var priority: Int
+    }
+
+    struct ComponentState: Equatable, Codable {
+        var component: ComponentType
+        var state: Bool
+    }
+
+    enum ComponentType: String, Equatable, Codable {
+        case all = "ALL"
+        case smoothing = "SMOOTHING"
+        case blackborder = "BLACKBORDER"
+        case forwarder = "FORWARDER"
+        case boblight = "BOBLIGHTSERVER"
+        case grabber = "GRABBER"
+        case v4l = "V4L"
+        case led = "LEDDEVICE"
+    }
+
     typealias InstanceRequest = Compose<Request, InstanceRequestData>
     typealias SubscribeRequest = Compose<Request, SubscribeRequestData>
     typealias AdjustmentRequest = Compose<Request, AdjustmentRequestData>
+    typealias ComponentRequest = Compose<Request, ComponentRequestData>
+    typealias ColorRequest = Compose<Request, ColorRequestData>
+    typealias EffectRequest = Compose<Request, EffectRequestData>
+    typealias ClearRequest = Compose<Request, ClearRequestData>
 
     // MARK: - Response
 
@@ -56,7 +101,9 @@ enum HyperionApi {
         case serverInfo = "serverinfo"
         case instanceUpdate = "instance-update"
         case adjustmentUpdate = "adjustment-update"
+        case componentUpdate = "components-update"
         case adjustmentResponse = "adjustment"
+        case component = "componentstate"
         case instanceSwitch = "instance-switchTo"
         case instanceStop = "instance-stopInstance"
         case instanceStart = "instance-startInstance"
@@ -74,9 +121,11 @@ enum HyperionApi {
         case instanceUpdate(ResponseInstanceUpdate)
         case adjustmentUpdate(ResponseAdjustmentUpdate)
         case adjustmentResponse(ResponseSucess)
+        case componentUpdate(ResponseComponentUpdate)
         case instanceSwitch(ResponseInstanceSwitch)
         case instanceStop(ResponseSucess)
         case instanceStart(ResponseSucess)
+        case component(ResponseSucess)
         case unknown
 
         enum CodingKeys: String, CodingKey {
@@ -101,10 +150,13 @@ enum HyperionApi {
             case .adjustmentUpdate:
                 let update = try data.decode(ResponseAdjustmentUpdate.self)
                 self = .adjustmentUpdate(update)
+            case .componentUpdate:
+                let update = try data.decode(ResponseComponentUpdate.self)
+                self = .componentUpdate(update)
             case .instanceSwitch:
                 let update = try data.decode(ResponseInstanceSwitch.self)
                 self = .instanceSwitch(update)
-            case .adjustmentResponse, .instanceStart, .instanceStop:
+            case .adjustmentResponse, .instanceStart, .instanceStop, .component:
                 let update = try data.decode(ResponseSucess.self)
                 self = .adjustmentResponse(update)
             case .unknown:
@@ -130,6 +182,10 @@ enum HyperionApi {
         var data: [Adjustment]
     }
 
+    struct ResponseComponentUpdate: Decodable {
+        var data: Component
+    }
+
     struct ResponseSucess: Decodable {
         var success: Bool
     }
@@ -143,12 +199,14 @@ enum HyperionApi {
         var instances: [Instance]
         var hostname: String
         var effects: [Effect]
+        var components: [Component]
 
         enum CodingKeys: String, CodingKey {
             case adjustments = "adjustment"
             case instances = "instance"
             case hostname = "hostname"
             case effects = "effects"
+            case components = "components"
         }
     }
 
@@ -168,7 +226,12 @@ enum HyperionApi {
         }
     }
 
-    struct Effect: Equatable, Decodable {
+    struct Effect: Equatable, Codable, Hashable {
         var name: String
+    }
+
+    struct Component: Equatable, Decodable {
+        var name: ComponentType
+        var enabled: Bool
     }
 }

@@ -10,19 +10,30 @@ import ComposableArchitecture
 import SwiftUI
 
 struct InstanceControl: View {
-    let store: Store<Home.State, Home.Action>
+    let store: Store<Home.HomeFeatureState, Home.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Instances")
 
-                HStack {
-                    ForEach(viewStore.instances, id: \.self) {instance in
-                        IntensityButton(imageName: instance.friendlyName == "LG OLED Ambilight" ? "tv" : "lightbulb", text: instance.friendlyName, running: instance.running, callback: {
-                            viewStore.send(.instanceButtonTapped(instance.instance, instance.running))
-                        })
+                if viewStore.api.instances.count > 0 {
+                    HStack {
+                        ForEach(viewStore.api.instances, id: \.self) {instance in
+                            IntensityButton(
+                                imageName: instance.friendlyName == "LG OLED Ambilight" ? "tv" : "lightbulb",
+                                text: instance.friendlyName,
+                                isRunning: instance.running,
+                                callback: {
+                                    viewStore.send(.instanceButtonTapped(instance.instance, instance.running))
+                                }
+                            )
+                        }
                     }
+                } else {
+                    Text("No instances available")
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
                 Spacer()
@@ -34,9 +45,7 @@ struct InstanceControl: View {
 
 struct InstanceControl_Previews: PreviewProvider {
     static var previews: some View {
-        InstanceControl(
-            store: Main.initialStore.homeStore
-        )
+        InstanceControl(store: Main.previewStoreHome)
         .previewLayout(.fixed(width: 375, height: 150))
     }
 }

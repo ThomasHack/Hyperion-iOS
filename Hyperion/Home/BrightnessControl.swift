@@ -10,14 +10,16 @@ import ComposableArchitecture
 import SwiftUI
 
 struct BrightnessControl: View {
-    let store: Store<Home.State, Home.Action>
-
+    let store: Store<Home.HomeFeatureState, Home.Action>
+    
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Brightness")
 
-                BrightnessSlider(percentage: viewStore.binding( get: { $0.brightness }, send: Home.Action.updateBrightness))
+                BrightnessSlider(
+                    percentage: viewStore.binding( get: { $0.api.brightness }, send: Home.Action.updateBrightness)
+                )
                     .frame(height: 72)
 
                 Spacer()
@@ -29,9 +31,7 @@ struct BrightnessControl: View {
 
 struct BrightnessControl_Previews: PreviewProvider {
     static var previews: some View {
-        BrightnessControl(
-            store: Main.initialStore.homeStore
-        )
+        BrightnessControl(store: Main.store.home)
         .previewLayout(.fixed(width: 375, height: 120))
     }
 }

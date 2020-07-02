@@ -10,7 +10,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct IntensityControl: View {
-    let store: Store<Home.State, Home.Action>
+    let store: Store<Home.HomeFeatureState, Home.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -18,10 +18,29 @@ struct IntensityControl: View {
                 SectionHeader(text: "Intensity")
 
                 HStack(alignment: .center, spacing: 8.0) {
-                    IntensityButton(imageName: "rays", text: "Subtle", callback: {})
-                    IntensityButton(imageName: "slowmo", text: "Moderate", callback: {})
-                    IntensityButton(imageName: "wind", text: "High", callback: {})
-                    IntensityButton(imageName: "tornado", text: "Extreme", callback: {})
+                    if let smoothing = viewStore.api.smoothingComponent {
+                        IntensityButton(
+                            imageName: "rays",
+                            text: "Subtle",
+                            isDisabled: false, //smoothing.enabled,
+                            isRunning: smoothing.enabled,
+                            callback: {
+                                viewStore.send(.turnOnSmoothing)
+                            })
+
+                        IntensityButton(
+                            imageName: "tornado",
+                            text: "Extreme",
+                            isDisabled: false, //!smoothing.enabled,
+                            isRunning: !smoothing.enabled,
+                            callback: {
+                                viewStore.send(.turnOffSmoothing)
+                            })
+                    } else {
+                        Text("Smoothing unavailable")
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
 
                 Spacer()
@@ -33,9 +52,7 @@ struct IntensityControl: View {
 
 struct IntensityControl_Previews: PreviewProvider {
     static var previews: some View {
-        IntensityControl(
-            store: Main.initialStore.homeStore
-        )
-        .previewLayout(.fixed(width: 375, height: 140))
+        IntensityControl(store: Main.store.home)
+        .previewLayout(.fixed(width: 375, height: 160))
     }
 }

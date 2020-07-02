@@ -17,21 +17,35 @@ enum ConnectivityState {
 
 enum Main {
     struct State: Equatable {
-        var host: String?
-        var showSettingsModal: Bool = false
-        
-        var sharedState: Shared.State
-        var homeState: Home.State
-        var settingsState: Settings.State
+
+        var api: Api.State
+        var shared: Shared.State
+        var home: Home.State
+        var settings: Settings.State
+        var control: Control.State
+
+        var homeFeature: Home.HomeFeatureState {
+            get { Home.HomeFeatureState(home: self.home, shared: self.shared, api: self.api) }
+            set { self.home = newValue.home; self.shared = newValue.shared; self.api = newValue.api }
+        }
+
+        var settingsFeature: Settings.SettingsFeatureState {
+            get { Settings.SettingsFeatureState(settings: self.settings, shared: self.shared) }
+            set { self.settings = newValue.settings; self.shared = newValue.shared }
+        }
+
+        var controlFeature: Control.ControlFeatureState {
+            get { Control.ControlFeatureState(control: self.control, api: self.api) }
+            set { self.control = newValue.control; self.api = newValue.api }
+        }
     }
 
     enum Action {
-        case updateHost(String)
-        case toggleSettingsModal
-
-        case sharedAction(Shared.Action)
-        case homeAction(Home.Action)
-        case settingsAction(Settings.Action)
+        case api(Api.Action)
+        case home(Home.Action)
+        case shared(Shared.Action)
+        case settings(Settings.Action)
+        case control(Control.Action)
     }
 
     struct Environment {
@@ -41,66 +55,86 @@ enum Main {
     }
 
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer<State, Action, Environment> { state, action, _ in
-            switch action {
-            case .updateHost(let string):
-                state.host = string
-            case .toggleSettingsModal:
-                print("toggle")
-                state.showSettingsModal.toggle()
-            case .homeAction(.toggleSettingsModal), .settingsAction(.toggleSettingsModal):
-                state.homeState.showSettingsModal.toggle()
-                // state.settingsState.showSettingsModal.toggle()
-            case .sharedAction, .homeAction, .settingsAction:
-                return.none
-            }
+        Reducer<State, Action, Environment>{ _, _, _ in
             return .none
         },
+        Api.reducer.pullback(
+            state: \State.api,
+            action: /Action.api,
+            environment: { $0 }
+        ),
         Shared.reducer.pullback(
-            state: \State.sharedState,
-            action: /Action.sharedAction,
+            state: \State.shared,
+            action: /Action.shared,
             environment: { $0 }
         ),
         Home.reducer.pullback(
-            state: \State.homeState,
-            action: /Action.homeAction,
+            state: \State.homeFeature,
+            action: /Action.home,
             environment: { $0 }
         ),
         Settings.reducer.pullback(
-            state: \State.settingsState,
-            action: /Action.settingsAction,
+            state: \State.settingsFeature,
+            action: /Action.settings,
+            environment: { $0 }
+        ),
+        Control.reducer.pullback(
+            state: \State.controlFeature,
+            action: /Action.control,
             environment: { $0 }
         )
     )
-    .debug()
+    // .debug()
 
-    static let initialStore = Store(
+    static let store = Store(
         initialState: State(
-            sharedState: Shared.initialState,
-            homeState: Home.initialState,
-            settingsState: Settings.initialState
+            api: Api.initialState,
+            shared: Shared.initialState,
+            home: Home.initialState,
+            settings: Settings.initialState,
+            control: Control.initialState
         ),
         reducer: reducer,
         environment: initialEnvironment
     )
 
+    static let previewStoreHome = Store(
+        initialState: Home.previewState,
+        reducer: Home.reducer,
+        environment: Main.Environment(
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            apiClient: ApiClient.live,
+            defaults: UserDefaults.standard
+        )
+    )
+
+    static let previewStoreControl = Store(
+        initialState: Control.previewState,
+        reducer: Control.reducer,
+        environment: Main.Environment(
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            apiClient: ApiClient.live,
+            defaults: UserDefaults.standard
+        )
+    )
+
     static let initialEnvironment = Environment(
         mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-        apiClient: .live,
+        apiClient: ApiClient.live,
         defaults: UserDefaults.standard
     )
 }
 
 extension Store where State == Main.State, Action == Main.Action {
-    var sharedStore: Store<Shared.State, Shared.Action> {
-        scope(state: \.sharedState, action: Action.sharedAction)
+    var home: Store<Home.HomeFeatureState, Home.Action> {
+        scope(state: \.homeFeature, action: Main.Action.home)
     }
 
-    var homeStore: Store<Home.State, Home.Action> {
-        scope(state: \.homeState, action: Action.homeAction)
+    var settings: Store<Settings.SettingsFeatureState, Settings.Action> {
+        scope(state: \.settingsFeature, action: Main.Action.settings)
     }
 
-    var settingsStore: Store<Settings.State, Settings.Action> {
-        scope(state: \.settingsState, action: Action.settingsAction)
+    var control: Store<Control.ControlFeatureState, Control.Action> {
+        scope(state: \.controlFeature, action: Main.Action.control)
     }
 }
