@@ -14,19 +14,22 @@ struct InstanceSelection: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            VStack(alignment: .leading, spacing: 8) {
-                SectionHeader(text: "Selected Instance")
+            let runningInstances = viewStore.instances.filter { $0.running }
+            if runningInstances.count > 1 {
+                VStack(alignment: .leading, spacing: 8) {
+                    SectionHeader(text: "Selected Instance")
 
-                Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: Home.Action.selectInstance)) {
-                    ForEach(viewStore.instances.filter { $0.running }, id: \HyperionApi.Instance.self) { instance in
-                        Text("\(instance.friendlyName)").tag(instance.instance)
+                    Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: Home.Action.selectInstance)) {
+                        ForEach(runningInstances, id: \HyperionApi.Instance.self) { instance in
+                            Text("\(instance.friendlyName)").tag(instance.instance)
+                        }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
+
+                    Spacer()
+                        .frame(height: 16.0)
+
                 }
-                .pickerStyle(SegmentedPickerStyle())
-
-                Spacer()
-                    .frame(height: 16.0)
-
             }
         }
     }

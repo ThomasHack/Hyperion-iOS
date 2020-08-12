@@ -12,6 +12,8 @@ import SwiftUI
 struct HomeView: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
 
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
@@ -28,9 +30,9 @@ struct HomeView: View {
 
                                 InstanceControl(store: store)
 
-                                IntensityControl(store: store)
+                                ComponentControl(store: store)
 
-                                Spacer()
+                                Spacer().frame(height: 48)
                             }
                             .padding()
                         }
@@ -46,9 +48,13 @@ struct HomeView: View {
                                             Text("Not Connected")
                                         }.foregroundColor(.secondary)
                                         Button(action: {
-                                            viewStore.send(.settingsButtonTapped)
+                                            if viewStore.shared.host != nil {
+                                                viewStore.send(.connectButtonTapped)
+                                            } else {
+                                                viewStore.send(.settingsButtonTapped)
+                                            }
                                         }) {
-                                            Text("Connect")
+                                            Text(viewStore.shared.host != nil ? "Connect" : "Set Host")
                                         }
                                     }
                                 }
@@ -90,6 +96,18 @@ struct HomeView: View {
                 .onAppear {
                     if viewStore.shared.host != nil && viewStore.connectivityState == .disconnected {
                         viewStore.send(.connectButtonTapped)
+                    }
+                }
+                .onChange(of: scenePhase) { (newScenePhase) in
+                    switch newScenePhase {
+                    case .active:
+                        print("scene is now active!")
+                    case .inactive:
+                        print("scene is now inactive!")
+                    case .background:
+                        print("scene is now in the background!")
+                    @unknown default:
+                        print("Apple must have added something new!")
                     }
                 }
             }

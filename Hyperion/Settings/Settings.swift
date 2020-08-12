@@ -12,13 +12,16 @@ import Foundation
 enum Settings {
     struct State: Equatable {
         var hostInput: String = ""
+        var iconNames: [String: String] = [:]
     }
 
     enum Action {
         case hostInputTextChanged(String)
-        case saveHostButtonTapped
+        case iconNameChanged(instance: String, iconName: String)
+        case doneButtonTapped
         case hideSettingsModal
 
+        case api(Api.Action)
         case shared(Shared.Action)
     }
 
@@ -29,11 +32,16 @@ enum Settings {
             switch action {
             case .hostInputTextChanged(let text):
                 state.hostInput = text
+            case .iconNameChanged(let instance, let text):
+                state.iconNames[instance] = text
             case .hideSettingsModal:
                 state.showSettingsModal = false
-            case .saveHostButtonTapped:
+            case .doneButtonTapped:
+                // Effect(value: Shared.Action.updateHost(state.host))
                 state.shared.host = state.hostInput
-            case .shared:
+                // state.shared.icons = state.icons
+                return Effect(value: .shared(.updateIcons(state.iconNames)))
+            case .shared, .api:
                 break
             }
             return .none
@@ -42,9 +50,16 @@ enum Settings {
             state: \SettingsFeatureState.shared,
             action: /Action.shared,
             environment: { $0 }
+        ),
+        Api.reducer.pullback(
+            state: \SettingsFeatureState.api,
+            action: /Action.api,
+            environment: { $0 }
         )
     )
+    
     static let initialState = State(
-        hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? ""
+        hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? "",
+        iconNames: UserDefaults.standard.value(forKey: Shared.iconsDefaultsKeyName) as? [String: String] ?? [:]
     )
 }

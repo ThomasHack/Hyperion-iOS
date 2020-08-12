@@ -15,21 +15,47 @@ struct SettingsView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
-                 VStack(alignment: .leading, spacing: 8) {
-                    SectionHeader(text: "Host")
-                    TextField("https://hyperion.home:8090", text: viewStore.binding( get: { $0.hostInput }, send: Settings.Action.hostInputTextChanged))
-                        .keyboardType(.URL)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
+                VStack {
+                    List {
+                        Section(header: Text("Host")) {
+                            VStack(alignment: .leading) {
+                                SectionHeader(text: "Host")
+                                TextField("https://hyperion.home:8090",
+                                          text: viewStore.binding(
+                                            get: { $0.hostInput },
+                                            send: Settings.Action.hostInputTextChanged)
+                                )
+                                    .keyboardType(.URL)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                            }
+                        }
 
-                    Button(action: {
-                        viewStore.send(.saveHostButtonTapped)
-                    }) {
-                        Text("Save")
-                    }.disabled(viewStore.hostInput.count < 3)
-                    Spacer()
+                        if viewStore.instances.count > 0 {
+                            Section(header: Text("Icons")) {
+                                VStack(alignment: .leading, spacing: 16) {
+                                    ForEach(viewStore.instances, id: \HyperionApi.Instance.self) { instance in
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            SectionHeader(text: "\(instance.friendlyName)")
+                                            TextField("Icon Name",
+                                                      text: viewStore.binding(
+                                                        get: { ($0.iconNames[instance.friendlyName] ?? "") },
+                                                        send: { text in
+                                                            Settings.Action.iconNameChanged(instance: instance.friendlyName, iconName: text)
+                                                        }
+                                                      )
+                                                )
+                                                .keyboardType(.URL)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }.listStyle(InsetGroupedListStyle())
                 }
-                .padding()
+                // .padding()
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .background(Color(.secondarySystemBackground))
                 .edgesIgnoringSafeArea(.all)
@@ -38,6 +64,7 @@ struct SettingsView: View {
                     trailing:
                         HStack(spacing: 16) {
                             Button(action: {
+                                viewStore.send(.doneButtonTapped)
                                 viewStore.send(.hideSettingsModal)
                             }) {
                                 Text("Done")
@@ -52,6 +79,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(store: Main.store.settings)
+        SettingsView(store: Main.previewStoreSettings)
     }
 }

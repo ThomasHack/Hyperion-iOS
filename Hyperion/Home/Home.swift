@@ -22,7 +22,8 @@ enum Home {
         case updateBrightness(Double)
         case turnOnSmoothing
         case turnOffSmoothing
-        // case didUpdateInstances
+        case turnOnBlackborderDetection
+        case turnOffBlackborderDetection
 
         case api(Api.Action)
         case shared(Shared.Action)
@@ -63,6 +64,12 @@ enum Home {
 
             case .turnOffSmoothing:
                 return Effect(value: Action.api(.turnOffSmoothing))
+
+            case .turnOnBlackborderDetection:
+                return Effect(value: Action.api(.turnOnBlackborderDetection))
+
+            case .turnOffBlackborderDetection:
+                return Effect(value: Action.api(.turnOffBlackborderDetection))
 
             case .api, .shared:
                 return .none

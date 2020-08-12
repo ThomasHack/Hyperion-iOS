@@ -13,20 +13,29 @@ enum Shared {
     struct State: Equatable {
         var host: String? {
             didSet {
-                UserDefaults.standard.setValue(host, forKey: Shared.hostDefaultsKeyName)
+                UserDefaults.standard.set(host, forKey: hostDefaultsKeyName)
+                // UserDefaults.standard.setValue(host, forKey: Shared.hostDefaultsKeyName)
+            }
+        }
+        var icons: [String: String]? {
+            didSet {
+                UserDefaults.standard.set(icons, forKey: iconsDefaultsKeyName)
             }
         }
         var showSettingsModal: Bool = false
     }
 
     static let hostDefaultsKeyName = "hyperion.hostname"
+    static let iconsDefaultsKeyName = "hyperion.instanceIcons"
 
     static let initialState = State(
-        host: UserDefaults.standard.string(forKey: hostDefaultsKeyName)
+        host: UserDefaults.standard.string(forKey: hostDefaultsKeyName),
+        icons: UserDefaults.standard.value(forKey: iconsDefaultsKeyName) as? [String: String] ?? [:]
     )
 
     enum Action {
         case updateHost(String)
+        case updateIcons([String: String])
         case showSettingsModal
         case hideSettingsModal
         case toggleSettingsModal(Bool)
@@ -38,6 +47,8 @@ enum Shared {
         switch action {
         case .updateHost(let string):
             state.host = string
+        case .updateIcons(let icons):
+            state.icons = icons
         case .showSettingsModal:
             state.showSettingsModal = true
         case .hideSettingsModal:

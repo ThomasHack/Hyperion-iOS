@@ -23,8 +23,14 @@ enum Api {
         var smoothingComponent: HyperionApi.Component? {
             components.first(where: { $0.name == HyperionApi.ComponentType.smoothing })
         }
+        var blackborderComponent: HyperionApi.Component? {
+            components.first(where: { $0.name == HyperionApi.ComponentType.blackborder})
+        }
         var smoothingEnabled: Bool {
             smoothingComponent?.enabled ?? false
+        }
+        var blackborderDetectionEnabled: Bool {
+            blackborderComponent?.enabled ?? false
         }
 
         var brightness: Double = 0
@@ -42,6 +48,8 @@ enum Api {
         case updateEffect(HyperionApi.Effect)
         case turnOnSmoothing
         case turnOffSmoothing
+        case turnOnBlackborderDetection
+        case turnOffBlackborderDetection
         case clear
 
         case didConnect
@@ -111,6 +119,16 @@ enum Api {
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
+        case .turnOnBlackborderDetection:
+            return environment.apiClient.toggleBlackborderDetection(ApiId(), true)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .turnOffBlackborderDetection:
+            return environment.apiClient.toggleBlackborderDetection(ApiId(), false)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
         case .clear:
             return environment.apiClient.clear(ApiId())
                 .receive(on: environment.mainQueue)
@@ -174,11 +192,12 @@ enum Api {
     static let initialState = State()
 
     static let previewState = State(
-        connectivityState: .connected,
+        connectivityState: .disconnected,
         hostname: "Preview",
         instances: [
-            HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
-            HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Sync")
+            HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED Ambilight"),
+            HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Sync"),
+            HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Play Lightbars")
         ],
         effects: [
             HyperionApi.Effect(name: "Atomic swirl"),

@@ -25,12 +25,12 @@ enum Main {
         var control: Control.State
 
         var homeFeature: Home.HomeFeatureState {
-            get { Home.HomeFeatureState(home: self.home, shared: self.shared, api: self.api) }
+            get { Home.HomeFeatureState(home: self.home, settings: self.settings, shared: self.shared, api: self.api) }
             set { self.home = newValue.home; self.shared = newValue.shared; self.api = newValue.api }
         }
 
         var settingsFeature: Settings.SettingsFeatureState {
-            get { Settings.SettingsFeatureState(settings: self.settings, shared: self.shared) }
+            get { Settings.SettingsFeatureState(settings: self.settings, shared: self.shared, api: self.api) }
             set { self.settings = newValue.settings; self.shared = newValue.shared }
         }
 
@@ -101,6 +101,16 @@ enum Main {
     static let previewStoreHome = Store(
         initialState: Home.previewState,
         reducer: Home.reducer,
+        environment: Main.Environment(
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            apiClient: ApiClient.live,
+            defaults: UserDefaults.standard
+        )
+    )
+
+    static let previewStoreSettings = Store(
+        initialState: Settings.previewState,
+        reducer: Settings.reducer,
         environment: Main.Environment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
             apiClient: ApiClient.live,

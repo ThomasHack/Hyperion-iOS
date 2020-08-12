@@ -20,17 +20,19 @@
 		525837D524AA2B2D0084932D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306024A5F7D9003BDCDC /* Home.swift */; };
 		525837D624AA2CF60084932D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305C24A5CFD1003BDCDC /* HomeView.swift */; };
 		525837D724AA2D020084932D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC35024A797D9000AF55F /* SettingsView.swift */; };
+		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
+		528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528E8E1324E2BE8200F4531B /* ComponentControl.swift */; };
+		52970CFF24E400F100B3B4E0 /* IntensityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52970CFE24E400F100B3B4E0 /* IntensityButton.swift */; };
 		52A9306324A5F801003BDCDC /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* Api.swift */; };
 		52A9306924A60D8D003BDCDC /* HyperionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* HyperionApi.swift */; };
 		52B38EC924AE153D00A0DDC8 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38EC824AE153D00A0DDC8 /* ApiClient.swift */; };
 		52B38ECB24AE15BF00A0DDC8 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */; };
 		52BC893B24ACF6BF005607DB /* Home+HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */; };
 		52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */; };
-		52BC893D24ACF737005607DB /* IntensityControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */; };
 		52BC893E24ACF737005607DB /* InstanceControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */; };
 		52BC893F24ACF737005607DB /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */; };
 		52BC894124ACF74D005607DB /* Settings+SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC894024ACF74D005607DB /* Settings+SettingsFeature.swift */; };
-		52BC894224ACF772005607DB /* IntensityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871024961DCA00826DA5 /* IntensityButton.swift */; };
+		52BC894224ACF772005607DB /* InstanceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871024961DCA00826DA5 /* InstanceButton.swift */; };
 		52BC894324ACF772005607DB /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524787072495530500826DA5 /* BrightnessSlider.swift */; };
 		52BC894424ACF772005607DB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871224961FBD00826DA5 /* SectionHeader.swift */; };
 		52BC894524ACF772005607DB /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */; };
@@ -54,9 +56,13 @@
 		52385DC424AE676700317AC9 /* ColourWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourWheel.swift; sourceTree = "<group>"; };
 		52385DC624AE684100317AC9 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		524787072495530500826DA5 /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
-		5247871024961DCA00826DA5 /* IntensityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityButton.swift; sourceTree = "<group>"; };
+		5247871024961DCA00826DA5 /* InstanceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceButton.swift; sourceTree = "<group>"; };
 		5247871224961FBD00826DA5 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		52480FF924E2B30900D7EAF0 /* BlackborderControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackborderControl.swift; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
+		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		528E8E1324E2BE8200F4531B /* ComponentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentControl.swift; sourceTree = "<group>"; };
+		52970CFE24E400F100B3B4E0 /* IntensityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityButton.swift; sourceTree = "<group>"; };
 		52A9305C24A5CFD1003BDCDC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		52A9306024A5F7D9003BDCDC /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		52A9306224A5F801003BDCDC /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
@@ -135,9 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				524787072495530500826DA5 /* BrightnessSlider.swift */,
-				5247871024961DCA00826DA5 /* IntensityButton.swift */,
+				5247871024961DCA00826DA5 /* InstanceButton.swift */,
+				52970CFE24E400F100B3B4E0 /* IntensityButton.swift */,
 				5247871224961FBD00826DA5 /* SectionHeader.swift */,
 				52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */,
+				52739D1224E31B7C00A69B0C /* ButtonStyles.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,14 +153,16 @@
 		52A9306B24A60E06003BDCDC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				52A9306024A5F7D9003BDCDC /* Home.swift */,
-				52A9305C24A5CFD1003BDCDC /* HomeView.swift */,
-				52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */,
-				52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */,
+				52480FF924E2B30900D7EAF0 /* BlackborderControl.swift */,
+				528E8E1324E2BE8200F4531B /* ComponentControl.swift */,
 				52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */,
-				52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */,
-				52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */,
+				52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */,
+				52A9306024A5F7D9003BDCDC /* Home.swift */,
 				52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */,
+				52A9305C24A5CFD1003BDCDC /* HomeView.swift */,
+				52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */,
+				52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */,
+				52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -303,7 +313,7 @@
 				52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */,
 				52BC894124ACF74D005607DB /* Settings+SettingsFeature.swift in Sources */,
 				52385DC324AE673000317AC9 /* CIHueSaturationValueGradientView.swift in Sources */,
-				52BC894224ACF772005607DB /* IntensityButton.swift in Sources */,
+				52BC894224ACF772005607DB /* InstanceButton.swift in Sources */,
 				52BC894424ACF772005607DB /* SectionHeader.swift in Sources */,
 				52385DBD24AE53D100317AC9 /* Control.swift in Sources */,
 				52BC894524ACF772005607DB /* NavigationButton.swift in Sources */,
@@ -314,6 +324,7 @@
 				52A9306924A60D8D003BDCDC /* HyperionApi.swift in Sources */,
 				52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */,
 				52385DC524AE676700317AC9 /* ColourWheel.swift in Sources */,
+				52970CFF24E400F100B3B4E0 /* IntensityButton.swift in Sources */,
 				52B38EC924AE153D00A0DDC8 /* ApiClient.swift in Sources */,
 				524F3C9724AA798100B4C345 /* ConnectionHeader.swift in Sources */,
 				525837D624AA2CF60084932D /* HomeView.swift in Sources */,
@@ -321,10 +332,11 @@
 				52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */,
 				52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */,
 				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,
+				52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */,
 				525837D724AA2D020084932D /* SettingsView.swift in Sources */,
 				52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */,
-				52BC893D24ACF737005607DB /* IntensityControl.swift in Sources */,
 				52B38ECB24AE15BF00A0DDC8 /* ApiDelegate.swift in Sources */,
+				528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */,
 				52A9306324A5F801003BDCDC /* Api.swift in Sources */,
 				52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */,
 				52BC894324ACF772005607DB /* BrightnessSlider.swift in Sources */,
@@ -399,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -454,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

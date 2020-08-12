@@ -18,10 +18,11 @@ struct InstanceControl: View {
                 SectionHeader(text: "Instances")
 
                 if viewStore.api.instances.count > 0 {
-                    HStack {
+                    HStack(alignment: .top, spacing: 8) {
                         ForEach(viewStore.api.instances, id: \.self) {instance in
-                            IntensityButton(
-                                imageName: instance.friendlyName == "LG OLED Ambilight" ? "tv" : "lightbulb",
+                            let imageName = viewStore.icons?[instance.friendlyName]
+                            InstanceButton(
+                                imageName: imageName,
                                 text: instance.friendlyName,
                                 isRunning: instance.running,
                                 callback: {
@@ -46,6 +47,6 @@ struct InstanceControl: View {
 struct InstanceControl_Previews: PreviewProvider {
     static var previews: some View {
         InstanceControl(store: Main.previewStoreHome)
-        .previewLayout(.fixed(width: 375, height: 150))
+            .previewLayout(.fixed(width: 375, height: 175))
     }
 }

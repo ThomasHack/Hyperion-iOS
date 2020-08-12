@@ -42,6 +42,7 @@ struct ApiClient {
     var updateColor: (AnyHashable, RGB) -> Effect<Api.Action, Never>
     var updateEffect: (AnyHashable, HyperionApi.Effect) -> Effect<Api.Action, Never>
     var toggleSmoothing: (AnyHashable, Bool) -> Effect<Api.Action, Never>
+    var toggleBlackborderDetection: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var selectInstance: (AnyHashable, Int) -> Effect<Api.Action, Never>
     var clear: (AnyHashable) -> Effect<Api.Action, Never>
 }
@@ -202,6 +203,23 @@ extension ApiClient {
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
                     HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .smoothing, state: state))
+                )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.write(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        toggleBlackborderDetection: { id, state in
+            .run { subscriber in
+                let message = HyperionApi.ComponentRequest(
+                    HyperionApi.Request(command: .component),
+                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .blackborder, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
