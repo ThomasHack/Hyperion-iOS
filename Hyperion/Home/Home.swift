@@ -15,6 +15,7 @@ enum Home {
     enum Action {
         case connectButtonTapped
         case settingsButtonTapped
+        case powerButtonTapped
         case instanceButtonTapped(Int, Bool)
         case toggleSettingsModal(Bool)
 
@@ -46,6 +47,12 @@ enum Home {
 
             case .settingsButtonTapped:
                 return Effect(value: Action.shared(.showSettingsModal))
+
+            case .powerButtonTapped:
+                if state.api.highestPriority?.componentId == HyperionApi.ComponentType.color {
+                    return Effect(value: Action.api(.clear))
+                }
+                return Effect(value: Action.api(.updateColor(RGB(red: 0, green: 0, blue: 0))))
 
             case .toggleSettingsModal(let toggle):
                 return Effect(value: Action.shared(.toggleSettingsModal(toggle)))

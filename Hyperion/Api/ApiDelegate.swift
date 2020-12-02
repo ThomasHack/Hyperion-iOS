@@ -20,6 +20,7 @@ class ApiClientDelegate: WebSocketDelegate {
     let didUpdateComponents: ([HyperionApi.Component]) -> Void
     let didUpdateHostname: (String) -> Void
     let didUpdateSelectedInstance: (Int) -> Void
+    let didUpdatePriorities: ([HyperionApi.Priority]) -> Void
 
     init(
         didConnect: @escaping() -> Void,
@@ -31,7 +32,9 @@ class ApiClientDelegate: WebSocketDelegate {
         didUpdateComponent: @escaping (HyperionApi.Component) -> Void,
         didUpdateComponents: @escaping ([HyperionApi.Component]) -> Void,
         didUpdateHostname: @escaping (String) -> Void,
-        didUpdateSelectedInstance: @escaping (Int) -> Void
+        didUpdateSelectedInstance: @escaping (Int) -> Void,
+        didUpdatePriorities: @escaping ([HyperionApi.Priority]) -> Void
+
     ) {
         self.didConnect = didConnect
         self.didDisconnect = didDisconnect
@@ -43,6 +46,7 @@ class ApiClientDelegate: WebSocketDelegate {
         self.didUpdateComponents = didUpdateComponents
         self.didUpdateHostname = didUpdateHostname
         self.didUpdateSelectedInstance = didUpdateSelectedInstance
+        self.didUpdatePriorities = didUpdatePriorities
     }
 
     func didReceive(event: WebSocketEvent, client: WebSocket) {
@@ -79,6 +83,7 @@ class ApiClientDelegate: WebSocketDelegate {
                 self.didUpdateHostname(serverInfo.info.hostname)
                 self.didUpdateEffects(serverInfo.info.effects)
                 self.didUpdateComponents(serverInfo.info.components)
+                self.didUpdatePriorities(serverInfo.info.priorities)
 
                 if let adjustments = serverInfo.info.adjustments.first {
                     self.didUpdateBrightness(Double(adjustments.brightness))
@@ -98,6 +103,8 @@ class ApiClientDelegate: WebSocketDelegate {
                 }
             case .instanceSwitch(let instance):
                 self.didUpdateSelectedInstance(instance.info.instance)
+            case .priorityUpdate(let priorityUpdate):
+                self.didUpdatePriorities(priorityUpdate.data.priorities)
             }
         } catch {
             print("error: \(error.localizedDescription)")

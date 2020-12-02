@@ -53,9 +53,24 @@ struct SettingsView: View {
                                 }
                             }
                         }
+
+                        Section(header: Text("Background")) {
+                            VStack(alignment: .leading, spacing: 0) {
+                                SectionHeader(text: "Background Image")
+                                TextField("Icon Name",
+                                          text: viewStore.binding(
+                                            get: { $0.backgroundImage },
+                                            send: Settings.Action.backgroundImageChanged
+                                          )
+                                    )
+                                    .keyboardType(.URL)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                            }
+                        }
+
                     }.listStyle(InsetGroupedListStyle())
                 }
-                // .padding()
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .background(Color(.secondarySystemBackground))
                 .edgesIgnoringSafeArea(.all)

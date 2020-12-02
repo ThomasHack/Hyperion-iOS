@@ -6,14 +6,14 @@
 //  Copyright © 2020 Hack, Thomas. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Request
 
 enum HyperionApi {
 
     struct Request: Equatable, Codable {
-        var command: RequestCommandType
+        let command: RequestCommandType
     }
 
     enum RequestCommandType: String, Codable {
@@ -36,44 +36,45 @@ enum HyperionApi {
         case adjustmentUpdate = "adjustment-update"
         case instanceUpdate = "instance-update"
         case componentUpdate = "components-update"
+        case priorityUpdate = "priorities-update"
     }
 
     struct InstanceRequestData: Equatable, Codable {
-        var subcommand: RequestSubCommandType
-        var instance: Int
+        let subcommand: RequestSubCommandType
+        let instance: Int
     }
 
     struct SubscribeRequestData: Equatable, Codable {
-        var subscribe: [SubscribeType]
+        let subscribe: [SubscribeType]
     }
 
     struct AdjustmentRequestData: Equatable, Codable {
-        var adjustment: Adjustment
+        let adjustment: Adjustment
     }
 
     struct ComponentRequestData: Equatable, Codable {
-        var componentstate: ComponentState
+        let componentstate: ComponentState
     }
 
     struct ColorRequestData: Equatable, Codable {
-        var color: [Int]
-        var priority: Int
-        var origin: String
+        let color: [Int]
+        let priority: Int
+        let origin: String
     }
 
     struct EffectRequestData: Equatable, Codable {
-        var effect: Effect
-        var priority: Int
-        var origin: String
+        let effect: Effect
+        let priority: Int
+        let origin: String
     }
 
     struct ClearRequestData: Equatable, Codable {
-        var priority: Int
+        let priority: Int
     }
 
     struct ComponentState: Equatable, Codable {
-        var component: ComponentType
-        var state: Bool
+        let component: ComponentType
+        let state: Bool
     }
 
     enum ComponentType: String, Equatable, Codable {
@@ -85,6 +86,7 @@ enum HyperionApi {
         case grabber = "GRABBER"
         case v4l = "V4L"
         case led = "LEDDEVICE"
+        case color = "COLOR"
     }
 
     typealias InstanceRequest = Compose<Request, InstanceRequestData>
@@ -103,6 +105,7 @@ enum HyperionApi {
         case adjustmentUpdate = "adjustment-update"
         case componentUpdate = "components-update"
         case adjustmentResponse = "adjustment"
+        case priorityUpdate = "priorities-update"
         case component = "componentstate"
         case instanceSwitch = "instance-switchTo"
         case instanceStop = "instance-stopInstance"
@@ -121,6 +124,7 @@ enum HyperionApi {
         case instanceUpdate(ResponseInstanceUpdate)
         case adjustmentUpdate(ResponseAdjustmentUpdate)
         case adjustmentResponse(ResponseSucess)
+        case priorityUpdate(ResponsePriorityUpdate)
         case componentUpdate(ResponseComponentUpdate)
         case instanceSwitch(ResponseInstanceSwitch)
         case instanceStop(ResponseSucess)
@@ -150,6 +154,9 @@ enum HyperionApi {
             case .adjustmentUpdate:
                 let update = try data.decode(ResponseAdjustmentUpdate.self)
                 self = .adjustmentUpdate(update)
+            case .priorityUpdate:
+                let update = try data.decode(ResponsePriorityUpdate.self)
+                self = .priorityUpdate(update)
             case .componentUpdate:
                 let update = try data.decode(ResponseComponentUpdate.self)
                 self = .componentUpdate(update)
@@ -166,40 +173,50 @@ enum HyperionApi {
     }
 
     struct ResponseServerInfo: Decodable {
-        var info: InfoData
+        let info: InfoData
     }
 
     struct ResponseInstanceUpdate: Decodable {
-        var data: [Instance]
+        let data: [Instance]
     }
 
     struct ResponseInstanceSwitch: Decodable {
-        var info: ResponseInstanceInfo
-        var success: Bool
+        let info: ResponseInstanceInfo
+        let success: Bool
     }
 
     struct ResponseAdjustmentUpdate: Decodable {
-        var data: [Adjustment]
+        let data: [Adjustment]
     }
 
     struct ResponseComponentUpdate: Decodable {
-        var data: Component
+        let data: Component
+    }
+
+    struct ResponsePriorityUpdate: Decodable {
+        let data: PrioritiesData
     }
 
     struct ResponseSucess: Decodable {
-        var success: Bool
+        let success: Bool
     }
 
     struct ResponseInstanceInfo: Decodable {
-        var instance: Int
+        let instance: Int
+    }
+
+    struct PrioritiesData: Equatable, Decodable {
+        let priorities: [Priority]
+        let priorities_autoselect: Bool
     }
 
     struct InfoData: Equatable, Decodable {
-        var adjustments: [Adjustment]
-        var instances: [Instance]
-        var hostname: String
-        var effects: [Effect]
-        var components: [Component]
+        let adjustments: [Adjustment]
+        let instances: [Instance]
+        let hostname: String
+        let effects: [Effect]
+        let components: [Component]
+        let priorities: [Priority]
 
         enum CodingKeys: String, CodingKey {
             case adjustments = "adjustment"
@@ -207,17 +224,18 @@ enum HyperionApi {
             case hostname = "hostname"
             case effects = "effects"
             case components = "components"
+            case priorities = "priorities"
         }
     }
 
     struct Adjustment: Equatable, Codable {
-        var brightness: Int
+        let brightness: Int
     }
 
     struct Instance: Equatable, Decodable, Hashable {
-        var instance: Int
-        var running: Bool
-        var friendlyName: String
+        let instance: Int
+        let running: Bool
+        let friendlyName: String
 
         enum CodingKeys: String, CodingKey {
             case instance = "instance"
@@ -227,11 +245,37 @@ enum HyperionApi {
     }
 
     struct Effect: Equatable, Codable, Hashable {
-        var name: String
+        let name: String
     }
 
     struct Component: Equatable, Decodable {
-        var name: ComponentType
-        var enabled: Bool
+        let name: ComponentType
+        let enabled: Bool
+    }
+
+    struct Priority: Equatable, Decodable {
+        let active: Bool
+        let componentId: ComponentType
+        let origin: String
+        let priority: Int
+        let visible: Bool
+        let value: PriorityValue?
+    }
+
+    struct PriorityValue: Equatable, Decodable {
+        let hsl: [Float]
+        let rgb: [Float]
+
+        var color: UIColor? {
+            get {
+                guard rgb.count == 3 else { return nil }
+                return UIColor(red: CGFloat(rgb[0]/255), green: CGFloat(rgb[1]/255), blue: CGFloat(rgb[2]/255), alpha: 1.0)
+            }
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case hsl = "HSL"
+            case rgb = "RGB"
+        }
     }
 }

@@ -14,14 +14,25 @@ struct HomeView: View {
 
     @Environment(\.scenePhase) private var scenePhase
 
+    init(store: Store<Home.HomeFeatureState, Home.Action>) {
+        self.store = store
+
+        UINavigationBar.appearance().scrollEdgeAppearance = Appearance.transparentAppearance
+        UINavigationBar.appearance().standardAppearance = Appearance.transparentAppearance
+    }
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
-                VStack(alignment: .leading, spacing: 0) {
+                ZStack {
+                    Color(.secondarySystemBackground)
+
                     if viewStore.connectivityState == .connected {
                         ScrollView {
                             VStack(alignment: .leading, spacing: 8) {
 
+                                PriorityPreview(store: store)
+                                
                                 ConnectionHeader(store: store)
 
                                 InstanceSelection(store: store)
@@ -38,37 +49,23 @@ struct HomeView: View {
                         }
                     }
                     else {
-                        VStack {
-                            ZStack {
-                                Color(.secondarySystemBackground)
-                                HStack(alignment: .center) {
-                                    VStack(alignment: .center, spacing: 8) {
-                                        HStack() {
-                                            Image(systemName: "bolt.slash.fill")
-                                            Text("Not Connected")
-                                        }.foregroundColor(.secondary)
-                                        Button(action: {
-                                            if viewStore.shared.host != nil {
-                                                viewStore.send(.connectButtonTapped)
-                                            } else {
-                                                viewStore.send(.settingsButtonTapped)
-                                            }
-                                        }) {
-                                            Text(viewStore.shared.host != nil ? "Connect" : "Set Host")
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        NotConnected(store: store)
                     }
                 }
-                .background(Color(.secondarySystemBackground))
                 .edgesIgnoringSafeArea(.all)
                 .padding([.top], 10)
                 .navigationBarTitle(Text("Hue Sync"), displayMode: .automatic)
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 24) {
+                            Button(action: {
+                                viewStore.send(.powerButtonTapped)
+                            }) {
+                                Image(systemName: "power")
+                                    .imageScale(.large)
+                            }
+                            .foregroundColor(viewStore.api.priorityShutdown || viewStore.connectivityState != .connected ? Color.red : Color(.label))
+
                             Button(action: {
                                 viewStore.send(.connectButtonTapped)
                             }) {
@@ -77,14 +74,17 @@ struct HomeView: View {
                                         : viewStore.connectivityState == .disconnected
                                         ? "bolt.slash.fill"
                                         : "bolt")
-                                   .imageScale(.large)
+                                    .imageScale(.large)
                             }
+                            .foregroundColor(viewStore.connectivityState == .connected ? Color(.label) : Color.red)
+
                             Button(action: {
                                 viewStore.send(.settingsButtonTapped)
                             }) {
                                 Image(systemName: "gear")
                                     .imageScale(.large)
                             }
+                            .foregroundColor(Color(.label))
                         }
                 )
                 .sheet(isPresented: viewStore.binding(

@@ -14,7 +14,6 @@ enum Shared {
         var host: String? {
             didSet {
                 UserDefaults.standard.set(host, forKey: hostDefaultsKeyName)
-                // UserDefaults.standard.setValue(host, forKey: Shared.hostDefaultsKeyName)
             }
         }
         var icons: [String: String]? {
@@ -22,20 +21,29 @@ enum Shared {
                 UserDefaults.standard.set(icons, forKey: iconsDefaultsKeyName)
             }
         }
+
+        var backgroundImage: String? {
+            didSet {
+                UserDefaults.standard.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
+            }
+        }
         var showSettingsModal: Bool = false
     }
 
     static let hostDefaultsKeyName = "hyperion.hostname"
     static let iconsDefaultsKeyName = "hyperion.instanceIcons"
+    static let backgroundImageDefaultsKeyName = "hyperion.backgroundImage"
 
     static let initialState = State(
         host: UserDefaults.standard.string(forKey: hostDefaultsKeyName),
-        icons: UserDefaults.standard.value(forKey: iconsDefaultsKeyName) as? [String: String] ?? [:]
+        icons: UserDefaults.standard.value(forKey: iconsDefaultsKeyName) as? [String: String] ?? [:],
+        backgroundImage: UserDefaults.standard.string(forKey: backgroundImageDefaultsKeyName)
     )
 
     enum Action {
         case updateHost(String)
         case updateIcons([String: String])
+        case updateBackgroundImage(String)
         case showSettingsModal
         case hideSettingsModal
         case toggleSettingsModal(Bool)
@@ -49,6 +57,8 @@ enum Shared {
             state.host = string
         case .updateIcons(let icons):
             state.icons = icons
+        case .updateBackgroundImage(let string):
+            state.backgroundImage = string
         case .showSettingsModal:
             state.showSettingsModal = true
         case .hideSettingsModal:

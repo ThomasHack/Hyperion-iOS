@@ -12,40 +12,58 @@ import SwiftUI
 struct ComponentControl: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
 
+    let columns = [
+            GridItem(.adaptive(minimum: 150))
+        ]
+    
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Components")
 
-                HStack(alignment: .center, spacing: 8.0) {
+                LazyVGrid(columns: columns, spacing: 8) {
                     if let blackborderDetection = viewStore.api.blackborderComponent {
                         InstanceButton(
-                            imageName: "Blackborder",
+                            imageName: "blackborder",
                             text: "Blackborder Detection",
                             isDisabled: false,
                             isRunning: blackborderDetection.enabled,
                             callback: {
                                 viewStore.send(blackborderDetection.enabled ? .turnOffBlackborderDetection : .turnOnBlackborderDetection)
                             })
-                    } else {
-                        Text("Blackborder Detection unavailable")
-                            .foregroundColor(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
 
                     if let smoothing = viewStore.api.smoothingComponent {
                         InstanceButton(
-                            imageName: "Smoothing",
+                            imageName: "smoothing",
                             text: "Smoothing",
                             isDisabled: false,
                             isRunning: smoothing.enabled,
                             callback: {
                                 viewStore.send(smoothing.enabled ? .turnOffSmoothing : .turnOnSmoothing)
                             })
-                    } else {
-                        Text("Smoothing unavailable")
-                            .foregroundColor(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+
+                    if let led = viewStore.api.ledComponent {
+                        InstanceButton(
+                            imageName: "led-hardware",
+                            text: "LED Hardware",
+                            isDisabled: false,
+                            isRunning: led.enabled,
+                            callback: {
+                                viewStore.send(led.enabled ? .turnOffSmoothing : .turnOnSmoothing)
+                            })
+                    }
+
+                    if let v4l = viewStore.api.v4lComponent {
+                        InstanceButton(
+                            imageName: "v4l-hardware",
+                            text: "HDMI Grabber",
+                            isDisabled: false,
+                            isRunning: v4l.enabled,
+                            callback: {
+                                viewStore.send(v4l.enabled ? .turnOffSmoothing : .turnOnSmoothing)
+                            })
                     }
                 }
 

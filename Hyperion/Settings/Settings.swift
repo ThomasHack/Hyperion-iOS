@@ -13,11 +13,13 @@ enum Settings {
     struct State: Equatable {
         var hostInput: String = ""
         var iconNames: [String: String] = [:]
+        var backgroundImage: String = ""
     }
 
     enum Action {
         case hostInputTextChanged(String)
         case iconNameChanged(instance: String, iconName: String)
+        case backgroundImageChanged(String)
         case doneButtonTapped
         case hideSettingsModal
 
@@ -34,12 +36,13 @@ enum Settings {
                 state.hostInput = text
             case .iconNameChanged(let instance, let text):
                 state.iconNames[instance] = text
+            case .backgroundImageChanged(let text):
+                state.backgroundImage = text
+                return Effect(value: .shared(.updateBackgroundImage(state.backgroundImage)))
             case .hideSettingsModal:
                 state.showSettingsModal = false
             case .doneButtonTapped:
-                // Effect(value: Shared.Action.updateHost(state.host))
                 state.shared.host = state.hostInput
-                // state.shared.icons = state.icons
                 return Effect(value: .shared(.updateIcons(state.iconNames)))
             case .shared, .api:
                 break

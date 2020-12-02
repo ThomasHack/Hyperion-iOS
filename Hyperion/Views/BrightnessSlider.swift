@@ -1,5 +1,5 @@
 //
-//  BrightnessSlider.swift
+//  BrightnessControlSlider.swift
 //  Hyperion
 //
 //  Created by Hack, Thomas on 13.06.20.
@@ -18,7 +18,8 @@ struct BrightnessSlider: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .foregroundColor(Color(UIColor.tertiarySystemBackground).opacity(1.0))
+                    .foregroundColor(Color(UIColor.tertiarySystemBackground).opacity(0.1))
+                    .background(BlurView())
                 ZStack(alignment: .trailing) {
                     HStack {
                         Rectangle()
@@ -31,7 +32,7 @@ struct BrightnessSlider: View {
                     HStack {
                         Rectangle()
                             .frame(width: 4, height: 20, alignment: .trailing)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.secondary)
                             .cornerRadius(3)
                             .shadow(color: Color.black.opacity(0.1), radius: 2, x: -1, y: 1)
                     }.padding([.trailing], 6)
@@ -48,7 +49,7 @@ struct BrightnessSlider: View {
                     .foregroundColor(Color(UIColor.secondaryLabel))
                 }.frame(maxWidth: .infinity, alignment: .center)
             }
-            .cornerRadius(12)
+            .cornerRadius(15)
             .shadow(color: Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
             .gesture(DragGesture(minimumDistance: 0)
             .onChanged({ value in
@@ -69,8 +70,7 @@ extension BrightnessSlider {
     }
 }
 
-
-struct BrightnessSlider_Previews: PreviewProvider {
+struct BrightnessControlSlider_Previews: PreviewProvider {
 
     struct BindingTestHolder: View {
         @State var percentage: Double = 0

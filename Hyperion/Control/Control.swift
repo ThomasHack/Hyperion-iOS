@@ -8,12 +8,14 @@
 
 import ComposableArchitecture
 import UIKit
+import SwiftUI
 
 enum Control {
     struct State: Equatable {
         var showEffectPopover: Bool = false
         var selectedEffect: String = ""
-        var rgbColor: RGB = RGB(r: 0, g: 0, b: 0)
+        var rgbColor: RGB = RGB(red: 255, green: 255, blue: 255)
+        var color: Color = Color.red
         var brightness: CGFloat = 1
     }
 
@@ -22,9 +24,10 @@ enum Control {
         case hideEffectPopover
         case toggleEffectPopover(Bool)
         case didChangeEffect(String)
-        case updateColor(RGB)
+        case updateColor(Color)
         case updateBrightness(CGFloat)
         case clearButtonTapped
+        case void
 
         case api(Api.Action)
     }
@@ -47,20 +50,25 @@ enum Control {
                 state.selectedEffect = effect
 
             case .updateColor(let color):
-                state.rgbColor = color
-                //return Effect(value: Action.api(.updateColor(color)))
+                state.color = color
+                state.rgbColor = color.rgbColor
+                return Effect(value: Action.api(.updateColor(color.rgbColor)))
 
             case .updateBrightness(let brightness):
                 state.brightness = brightness
+                return Effect(value: Action.api(.updateBrightness(Double(brightness*100))))
 
             case .clearButtonTapped:
                 return Effect(value: Action.api(.clear))
 
+            case .void:
+                break
+
             case .api:
-                return .none
+                break
             }
             return .none
-        }.debug(),
+        },
         Api.reducer.pullback(
             state: \ControlFeatureState.api,
             action: /Action.api,

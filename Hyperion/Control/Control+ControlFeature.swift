@@ -27,7 +27,7 @@ extension Control {
     }
 
     static let previewState = ControlFeatureState(
-        control: Control.State(),
+        control: Control.initialState,
         api: Api.previewState
     )
 }

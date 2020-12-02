@@ -27,12 +27,13 @@ struct MainView: View {
                         Image(systemName: "house")
                         Text("Home")
                     }
-//                ControlView(store: Main.store.control)
-//                    .tag(ViewKind.control)
-//                    .tabItem {
-//                        Image(systemName: "gamecontroller")
-//                        Text("Control")
-//                    }
+
+                ControlView(store: Main.store.control)
+                    .tag(ViewKind.control)
+                    .tabItem {
+                        Image(systemName: "gamecontroller")
+                        Text("Control")
+                    }
             }
         }
     }

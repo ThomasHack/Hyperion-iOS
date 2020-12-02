@@ -23,7 +23,6 @@ struct InstanceButton: View {
             if isDisabled { return }
             self.callback()
         }) {
-
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top, spacing: 0) {
                     VStack(spacing: 0) {
@@ -40,7 +39,7 @@ struct InstanceButton: View {
                         }
                     }
                     .frame(width: 36, height: 36)
-                    .background(Color(hue: 0, saturation: 0, brightness: 0.95))
+                    .background(BlurView())
                     .cornerRadius(36)
 
                     Spacer()
@@ -53,22 +52,21 @@ struct InstanceButton: View {
                     }
                 }
 
-                Spacer().frame(minHeight: 8)
+                Spacer(minLength: 8)
 
                 Text(text)
                     .foregroundColor(isDisabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
                     .font(.system(size: 13.0, weight: .semibold))
                     .lineLimit(2)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text(isRunning ? "On" : "Off")
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .font(.system(size: 13.0, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
+            .padding(8)
         }
-        .buttonStyle(DefaultButtonStyle(disabled: isDisabled))
+        .buttonStyle(CardButtonStyle(active: isRunning, disabled: isDisabled))
     }
 }
 
@@ -100,5 +98,6 @@ struct InstanceButton_Previews: PreviewProvider {
             }
             .padding(16)
         }
+        .previewLayout(.fixed(width: 375, height: 140))
     }
 }

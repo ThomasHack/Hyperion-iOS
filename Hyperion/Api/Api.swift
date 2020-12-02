@@ -6,7 +6,7 @@
 //  Copyright © 2020 Hack, Thomas. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import ComposableArchitecture
 import Combine
 import Starscream
@@ -20,17 +20,37 @@ enum Api {
         var instances: [HyperionApi.Instance] = []
         var effects: [HyperionApi.Effect] = []
         var components: [HyperionApi.Component] = []
+        var priorities: [HyperionApi.Priority] = []
+
         var smoothingComponent: HyperionApi.Component? {
             components.first(where: { $0.name == HyperionApi.ComponentType.smoothing })
         }
         var blackborderComponent: HyperionApi.Component? {
             components.first(where: { $0.name == HyperionApi.ComponentType.blackborder})
         }
+
+        var ledComponent: HyperionApi.Component? {
+            components.first(where: { $0.name == HyperionApi.ComponentType.led})
+        }
+
+        var v4lComponent: HyperionApi.Component? {
+            components.first(where: { $0.name == HyperionApi.ComponentType.v4l})
+        }
+
         var smoothingEnabled: Bool {
             smoothingComponent?.enabled ?? false
         }
         var blackborderDetectionEnabled: Bool {
             blackborderComponent?.enabled ?? false
+        }
+
+        var highestPriority: HyperionApi.Priority? {
+            priorities.sorted(by: { $0.priority < $1.priority}).first
+        }
+
+        var priorityShutdown: Bool {
+            guard let priority = highestPriority, let color = priority.value?.color else { return false }
+            return priority.componentId == HyperionApi.ComponentType.color && color.isEqual(UIColor(red: 0, green: 0, blue: 0, alpha: 1.0))
         }
 
         var brightness: Double = 0
@@ -63,6 +83,7 @@ enum Api {
         case didUpdateComponents([HyperionApi.Component])
         case didUpdateHostname(String)
         case didUpdateSelectedInstance(Int)
+        case didUpdatePriorities([HyperionApi.Priority])
     }
 
     typealias Environment = Main.Environment
@@ -182,6 +203,9 @@ enum Api {
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
+        case .didUpdatePriorities(let priorities):
+            state.priorities = priorities
+
         case .didSubscribe:
             break
         }
@@ -192,7 +216,7 @@ enum Api {
     static let initialState = State()
 
     static let previewState = State(
-        connectivityState: .disconnected,
+        connectivityState: .connected,
         hostname: "Preview",
         instances: [
             HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED Ambilight"),
@@ -213,7 +237,12 @@ enum Api {
             HyperionApi.Effect(name: "Strobe red"),
             HyperionApi.Effect(name: "Waves with Color"),
         ],
-        components: [],
+        components: [
+            HyperionApi.Component(name: .blackborder, enabled: true),
+            HyperionApi.Component(name: .smoothing, enabled: true),
+            HyperionApi.Component(name: .led, enabled: true),
+            HyperionApi.Component(name: .v4l, enabled: true),
+        ],
         brightness: 65,
         selectedInstance: 0
     )

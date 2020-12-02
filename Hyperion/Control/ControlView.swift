@@ -17,26 +17,32 @@ struct ControlView: View {
             NavigationView {
                 VStack(alignment: .leading, spacing: 16) {
                     SectionHeader(text: "Color")
-                        GeometryReader { (geometry) in
-                            VStack(alignment: .leading, spacing: 16) {
-                                ColourWheel(
-                                    radius: geometry.size.width,
-                                    rgbColour: viewStore.binding( get: { $0.rgbColor }, send: Control.Action.updateColor),
-                                    brightness: viewStore.binding( get: { $0.brightness }, send: Control.Action.updateBrightness)
-                                ).frame(height: geometry.size.width)
+                    VStack(spacing: 16) {
+                        ColorControl(color: viewStore.binding(get: { $0.color }, send: Control.Action.updateColor))
 
-                                CustomSlider(
-                                    rgbColour: viewStore.binding( get: { $0.rgbColor }, send: Control.Action.updateColor),
-                                    value: viewStore.binding( get: { $0.brightness }, send: Control.Action.updateBrightness),
-                                    range: 0.01...1
-                                )
-                            }
+                        Button(action: {
+                            viewStore.send(.clearButtonTapped)
+                        }) {
+                            HStack {
+                                    Image(systemName: "clear.fill")
+                                        .font(.body)
+                                    Text("Clear")
+                                        .fontWeight(.semibold)
+                                        .font(.body)
+                                }
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding([.top, .bottom], 12)
+                                .foregroundColor(.white)
+                                .background(Color(UIColor.black))
+                                .cornerRadius(40)
                         }
-
                         Spacer()
+                    }
+                    .cornerRadius(15)
+
+                    Spacer()
                 }
-                .padding(.all, 16)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
                 .background(Color(.secondarySystemBackground))
                 .edgesIgnoringSafeArea(.all)
                 .padding([.top], 10)
@@ -44,15 +50,6 @@ struct ControlView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 24) {
-                            Button(action: {
-                                viewStore.send(.clearButtonTapped)
-                            }) {
-                                HStack {
-                                    Image(systemName: "clear")
-                                        .imageScale(.large)
-                                    Text("Clear")
-                                }
-                            }
                         }
                 )
             }

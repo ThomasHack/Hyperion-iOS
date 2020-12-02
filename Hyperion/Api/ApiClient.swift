@@ -81,6 +81,9 @@ extension ApiClient {
                     },
                     didUpdateSelectedInstance: {
                         subscriber.send(.didUpdateSelectedInstance($0 as Int))
+                    },
+                    didUpdatePriorities: {
+                        subscriber.send(.didUpdatePriorities($0 as [HyperionApi.Priority]))
                     }
                 )
                 let request = URLRequest(url: url)
@@ -118,7 +121,13 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.SubscribeRequest(
                     HyperionApi.Request(command: .serverinfo),
-                    HyperionApi.SubscribeRequestData(subscribe: [.instanceUpdate, .adjustmentUpdate, .componentUpdate]))
+                    HyperionApi.SubscribeRequestData(subscribe: [
+                        .instanceUpdate,
+                        .adjustmentUpdate,
+                        .componentUpdate,
+                        .priorityUpdate
+                    ])
+                )
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
@@ -168,7 +177,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ColorRequest(
                     HyperionApi.Request(command: .color),
-                    HyperionApi.ColorRequestData(color: [Int(rgb.r*255), Int(rgb.g*255), Int(rgb.b*255)], priority: 1, origin: "HyperionApp")
+                    HyperionApi.ColorRequestData(color: [Int(rgb.red * 255), Int(rgb.green * 255), Int(rgb.blue * 255)], priority: 1, origin: "HyperionApp")
                 )
                 do {
                     let data = try JSONEncoder().encode(message)

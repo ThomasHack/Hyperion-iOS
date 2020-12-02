@@ -40,7 +40,6 @@ struct IntensityButton: View {
                         }
                     }
                 }
-                // .fixedSize(horizontal: false, vertical: true)
 
                 Spacer().frame(minHeight: 8)
 
@@ -56,7 +55,7 @@ struct IntensityButton: View {
             }
             .padding([.top, .bottom], 8)
             .padding([.leading, .trailing], 8)
-        }.buttonStyle(DefaultButtonStyle(disabled: isDisabled))
+        }.buttonStyle(CardButtonStyle(disabled: isDisabled))
     }
 }
 
