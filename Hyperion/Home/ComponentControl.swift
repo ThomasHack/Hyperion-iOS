@@ -22,6 +22,15 @@ struct ComponentControl: View {
                 SectionHeader(text: "Components")
 
                 LazyVGrid(columns: columns, spacing: 8) {
+                    InstanceButton(
+                        imageName: "hdr-tone-mapping",
+                        text: "HDR Tone Mapping",
+                        isDisabled: false,
+                        isRunning: viewStore.api.hdrToneMapping,
+                        callback: {
+                            viewStore.send(viewStore.api.hdrToneMapping ? .turnOffHdrToneMapping : .turnOnHdrToneMapping)
+                        })
+                    
                     if let blackborderDetection = viewStore.api.blackborderComponent {
                         InstanceButton(
                             imageName: "blackborder",
@@ -51,7 +60,7 @@ struct ComponentControl: View {
                             isDisabled: false,
                             isRunning: led.enabled,
                             callback: {
-                                viewStore.send(led.enabled ? .turnOffSmoothing : .turnOnSmoothing)
+                                viewStore.send(led.enabled ? .turnOffLedHardware : .turnOnLedHardware)
                             })
                     }
 
@@ -62,7 +71,7 @@ struct ComponentControl: View {
                             isDisabled: false,
                             isRunning: v4l.enabled,
                             callback: {
-                                viewStore.send(v4l.enabled ? .turnOffSmoothing : .turnOnSmoothing)
+                                viewStore.send(v4l.enabled ? .turnOffHdmiGrabber : .turnOnHdmiGrabber)
                             })
                     }
                 }

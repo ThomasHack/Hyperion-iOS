@@ -43,6 +43,9 @@ struct ApiClient {
     var updateEffect: (AnyHashable, HyperionApi.Effect) -> Effect<Api.Action, Never>
     var toggleSmoothing: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var toggleBlackborderDetection: (AnyHashable, Bool) -> Effect<Api.Action, Never>
+    var toggleLedHardware: (AnyHashable, Bool) -> Effect<Api.Action, Never>
+    var toggleHdmiGrabber: (AnyHashable, Bool) -> Effect<Api.Action, Never>
+    var toggleHdrToneMapping: (AnyHashable, Int) -> Effect<Api.Action, Never>
     var selectInstance: (AnyHashable, Int) -> Effect<Api.Action, Never>
     var clear: (AnyHashable) -> Effect<Api.Action, Never>
 }
@@ -84,6 +87,9 @@ extension ApiClient {
                     },
                     didUpdatePriorities: {
                         subscriber.send(.didUpdatePriorities($0 as [HyperionApi.Priority]))
+                    },
+                    didUpdateHdrToneMapping: {
+                        subscriber.send(.didUpdateHdrToneMapping($0 as Bool))
                     }
                 )
                 let request = URLRequest(url: url)
@@ -125,7 +131,8 @@ extension ApiClient {
                         .instanceUpdate,
                         .adjustmentUpdate,
                         .componentUpdate,
-                        .priorityUpdate
+                        .priorityUpdate,
+                        .videoModeHdrUpdate
                     ])
                 )
                 do {
@@ -233,6 +240,58 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.write(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        toggleLedHardware: { id, state in
+            .run { subscriber in
+                let message = HyperionApi.ComponentRequest(
+                    HyperionApi.Request(command: .component),
+                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .led, state: state))
+                )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.write(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        toggleHdmiGrabber: { id, state in
+            .run { subscriber in
+                let message = HyperionApi.ComponentRequest(
+                    HyperionApi.Request(command: .component),
+                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .v4l, state: state))
+                )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.write(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        toggleHdrToneMapping: { id, state in
+            .run { subscriber in
+                let message = HyperionApi.HdrToneMappingRequest(
+                    HyperionApi.Request(command: .hdr),
+                    HyperionApi.HdrToneMappingRequestData(hdr: state)
+                )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    print("\(string)")
                     dependencies[id]?.socket.write(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")

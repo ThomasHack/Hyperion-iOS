@@ -21,6 +21,7 @@ enum Api {
         var effects: [HyperionApi.Effect] = []
         var components: [HyperionApi.Component] = []
         var priorities: [HyperionApi.Priority] = []
+        var hdrToneMapping: Bool = false
 
         var smoothingComponent: HyperionApi.Component? {
             components.first(where: { $0.name == HyperionApi.ComponentType.smoothing })
@@ -70,6 +71,12 @@ enum Api {
         case turnOffSmoothing
         case turnOnBlackborderDetection
         case turnOffBlackborderDetection
+        case turnOnLedHardware
+        case turnOffLedHardware
+        case turnOnHdmiGrabber
+        case turnOffHdmiGrabber
+        case turnOnHdrToneMapping
+        case turnOffHdrToneMapping
         case clear
 
         case didConnect
@@ -84,6 +91,7 @@ enum Api {
         case didUpdateHostname(String)
         case didUpdateSelectedInstance(Int)
         case didUpdatePriorities([HyperionApi.Priority])
+        case didUpdateHdrToneMapping(Bool)
     }
 
     typealias Environment = Main.Environment
@@ -150,6 +158,36 @@ enum Api {
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
+        case .turnOnLedHardware:
+            return environment.apiClient.toggleLedHardware(ApiId(), true)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .turnOffLedHardware:
+            return environment.apiClient.toggleLedHardware(ApiId(), false)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .turnOnHdmiGrabber:
+            return environment.apiClient.toggleHdmiGrabber(ApiId(), true)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .turnOffHdmiGrabber:
+            return environment.apiClient.toggleHdmiGrabber(ApiId(), false)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .turnOnHdrToneMapping:
+            return environment.apiClient.toggleHdrToneMapping(ApiId(), 1)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .turnOffHdrToneMapping:
+            return environment.apiClient.toggleHdrToneMapping(ApiId(), 0)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
         case .clear:
             return environment.apiClient.clear(ApiId())
                 .receive(on: environment.mainQueue)
@@ -206,6 +244,9 @@ enum Api {
         case .didUpdatePriorities(let priorities):
             state.priorities = priorities
 
+        case .didUpdateHdrToneMapping(let hdrToneMapping):
+            state.hdrToneMapping = hdrToneMapping
+
         case .didSubscribe:
             break
         }
@@ -243,6 +284,7 @@ enum Api {
             HyperionApi.Component(name: .led, enabled: true),
             HyperionApi.Component(name: .v4l, enabled: true),
         ],
+        hdrToneMapping: false,
         brightness: 65,
         selectedInstance: 0
     )

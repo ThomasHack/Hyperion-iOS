@@ -59,14 +59,6 @@ struct HomeView: View {
                     trailing:
                         HStack(spacing: 24) {
                             Button(action: {
-                                viewStore.send(.powerButtonTapped)
-                            }) {
-                                Image(systemName: "power")
-                                    .imageScale(.large)
-                            }
-                            .foregroundColor(viewStore.api.priorityShutdown || viewStore.connectivityState != .connected ? Color.red : Color(.label))
-
-                            Button(action: {
                                 viewStore.send(.connectButtonTapped)
                             }) {
                                 Image(systemName: viewStore.connectivityState == .connected

@@ -21,6 +21,7 @@ class ApiClientDelegate: WebSocketDelegate {
     let didUpdateHostname: (String) -> Void
     let didUpdateSelectedInstance: (Int) -> Void
     let didUpdatePriorities: ([HyperionApi.Priority]) -> Void
+    let didUpdateHdrToneMapping: (Bool) -> Void
 
     init(
         didConnect: @escaping() -> Void,
@@ -33,8 +34,8 @@ class ApiClientDelegate: WebSocketDelegate {
         didUpdateComponents: @escaping ([HyperionApi.Component]) -> Void,
         didUpdateHostname: @escaping (String) -> Void,
         didUpdateSelectedInstance: @escaping (Int) -> Void,
-        didUpdatePriorities: @escaping ([HyperionApi.Priority]) -> Void
-
+        didUpdatePriorities: @escaping ([HyperionApi.Priority]) -> Void,
+        didUpdateHdrToneMapping: @escaping (Bool) -> Void
     ) {
         self.didConnect = didConnect
         self.didDisconnect = didDisconnect
@@ -47,6 +48,7 @@ class ApiClientDelegate: WebSocketDelegate {
         self.didUpdateHostname = didUpdateHostname
         self.didUpdateSelectedInstance = didUpdateSelectedInstance
         self.didUpdatePriorities = didUpdatePriorities
+        self.didUpdateHdrToneMapping = didUpdateHdrToneMapping
     }
 
     func didReceive(event: WebSocketEvent, client: WebSocket) {
@@ -84,6 +86,7 @@ class ApiClientDelegate: WebSocketDelegate {
                 self.didUpdateEffects(serverInfo.info.effects)
                 self.didUpdateComponents(serverInfo.info.components)
                 self.didUpdatePriorities(serverInfo.info.priorities)
+                self.didUpdateHdrToneMapping((serverInfo.info.hdrToneMapping != 0))
 
                 if let adjustments = serverInfo.info.adjustments.first {
                     self.didUpdateBrightness(Double(adjustments.brightness))
@@ -95,9 +98,11 @@ class ApiClientDelegate: WebSocketDelegate {
                 self.didUpdateInstances(instanceUpdate.data)
             case .componentUpdate(let componentUpdate):
                 self.didUpdateComponent(componentUpdate.data)
+            case .hdrToneMappingUpdate(let hdrToneMapping):
+                self.didUpdateHdrToneMapping(hdrToneMapping.data.videomodehdr != 0)
             case .unknown:
                 print("unknown")
-            case .adjustmentResponse(let response), .instanceStart(let response), .instanceStop(let response), .component(let response):
+            case .adjustmentResponse(let response), .instanceStart(let response), .instanceStop(let response), .component(let response), .hdrToneMapping(let response):
                 if !response.success {
                     print("Something went wrong")
                 }

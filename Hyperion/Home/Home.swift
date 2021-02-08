@@ -25,6 +25,12 @@ enum Home {
         case turnOffSmoothing
         case turnOnBlackborderDetection
         case turnOffBlackborderDetection
+        case turnOnLedHardware
+        case turnOffLedHardware
+        case turnOnHdmiGrabber
+        case turnOffHdmiGrabber
+        case turnOnHdrToneMapping
+        case turnOffHdrToneMapping
 
         case api(Api.Action)
         case shared(Shared.Action)
@@ -77,6 +83,24 @@ enum Home {
 
             case .turnOffBlackborderDetection:
                 return Effect(value: Action.api(.turnOffBlackborderDetection))
+
+            case .turnOnHdrToneMapping:
+                return Effect(value: Action.api(.turnOnHdrToneMapping))
+
+            case .turnOffHdrToneMapping:
+                return Effect(value: Action.api(.turnOffHdrToneMapping))
+
+            case .turnOnLedHardware:
+                return Effect(value: Action.api(.turnOnLedHardware))
+                
+            case .turnOffLedHardware:
+                return Effect(value: Action.api(.turnOffLedHardware))
+
+            case .turnOnHdmiGrabber:
+                return Effect(value: Action.api(.turnOnHdmiGrabber))
+
+            case .turnOffHdmiGrabber:
+                return Effect(value: Action.api(.turnOffHdmiGrabber))
 
             case .api, .shared:
                 return .none

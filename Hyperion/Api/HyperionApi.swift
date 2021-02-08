@@ -24,6 +24,7 @@ enum HyperionApi {
         case color = "color"
         case effect = "effect"
         case clear = "clear"
+        case hdr = "videomodehdr"
     }
 
     enum RequestSubCommandType: String, Codable {
@@ -37,6 +38,7 @@ enum HyperionApi {
         case instanceUpdate = "instance-update"
         case componentUpdate = "components-update"
         case priorityUpdate = "priorities-update"
+        case videoModeHdrUpdate = "videomodehdr-update"
     }
 
     struct InstanceRequestData: Equatable, Codable {
@@ -72,6 +74,14 @@ enum HyperionApi {
         let priority: Int
     }
 
+    struct HdrToneMappingRequestData: Equatable, Codable {
+        let hdr: Int
+
+        enum CodingKeys: String, CodingKey {
+            case hdr = "HDR"
+        }
+    }
+
     struct ComponentState: Equatable, Codable {
         let component: ComponentType
         let state: Bool
@@ -96,6 +106,7 @@ enum HyperionApi {
     typealias ColorRequest = Compose<Request, ColorRequestData>
     typealias EffectRequest = Compose<Request, EffectRequestData>
     typealias ClearRequest = Compose<Request, ClearRequestData>
+    typealias HdrToneMappingRequest = Compose<Request, HdrToneMappingRequestData>
 
     // MARK: - Response
 
@@ -104,12 +115,14 @@ enum HyperionApi {
         case instanceUpdate = "instance-update"
         case adjustmentUpdate = "adjustment-update"
         case componentUpdate = "components-update"
+        case hdrToneMappingUpdate = "videomodehdr-update"
         case adjustmentResponse = "adjustment"
         case priorityUpdate = "priorities-update"
         case component = "componentstate"
         case instanceSwitch = "instance-switchTo"
         case instanceStop = "instance-stopInstance"
         case instanceStart = "instance-startInstance"
+        case hdrToneMapping = "videomodehdr"
         case unknown
 
         init(from decoder: Decoder) throws {
@@ -126,10 +139,12 @@ enum HyperionApi {
         case adjustmentResponse(ResponseSucess)
         case priorityUpdate(ResponsePriorityUpdate)
         case componentUpdate(ResponseComponentUpdate)
+        case hdrToneMappingUpdate(ResponseHdrToneMappingUpdate)
         case instanceSwitch(ResponseInstanceSwitch)
         case instanceStop(ResponseSucess)
         case instanceStart(ResponseSucess)
         case component(ResponseSucess)
+        case hdrToneMapping(ResponseSucess)
         case unknown
 
         enum CodingKeys: String, CodingKey {
@@ -160,10 +175,13 @@ enum HyperionApi {
             case .componentUpdate:
                 let update = try data.decode(ResponseComponentUpdate.self)
                 self = .componentUpdate(update)
+            case .hdrToneMappingUpdate:
+                let update = try data.decode(ResponseHdrToneMappingUpdate.self)
+                self = .hdrToneMappingUpdate(update)
             case .instanceSwitch:
                 let update = try data.decode(ResponseInstanceSwitch.self)
                 self = .instanceSwitch(update)
-            case .adjustmentResponse, .instanceStart, .instanceStop, .component:
+            case .adjustmentResponse, .instanceStart, .instanceStop, .component, .hdrToneMapping:
                 let update = try data.decode(ResponseSucess.self)
                 self = .adjustmentResponse(update)
             case .unknown:
@@ -193,6 +211,10 @@ enum HyperionApi {
         let data: Component
     }
 
+    struct ResponseHdrToneMappingUpdate: Decodable {
+        let data: HdrToneMappingData
+    }
+
     struct ResponsePriorityUpdate: Decodable {
         let data: PrioritiesData
     }
@@ -210,6 +232,10 @@ enum HyperionApi {
         let priorities_autoselect: Bool
     }
 
+    struct HdrToneMappingData: Equatable, Decodable {
+        let videomodehdr: Int
+    }
+
     struct InfoData: Equatable, Decodable {
         let adjustments: [Adjustment]
         let instances: [Instance]
@@ -217,6 +243,7 @@ enum HyperionApi {
         let effects: [Effect]
         let components: [Component]
         let priorities: [Priority]
+        let hdrToneMapping: Int
 
         enum CodingKeys: String, CodingKey {
             case adjustments = "adjustment"
@@ -225,6 +252,7 @@ enum HyperionApi {
             case effects = "effects"
             case components = "components"
             case priorities = "priorities"
+            case hdrToneMapping = "videomodehdr"
         }
     }
 
