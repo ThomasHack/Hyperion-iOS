@@ -13,13 +13,13 @@ struct ComponentControl: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
 
     let columns = [
-            GridItem(.adaptive(minimum: 150))
+            GridItem(.adaptive(minimum: 100))
         ]
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
-                SectionHeader(text: "Components")
+                SectionHeader(text: "Settings")
 
                 LazyVGrid(columns: columns, spacing: 8) {
                     InstanceButton(
@@ -53,6 +53,17 @@ struct ComponentControl: View {
                             })
                     }
 
+                    if let v4l = viewStore.api.v4lComponent {
+                        InstanceButton(
+                            imageName: "v4l-hardware",
+                            text: "HDMI Grabber",
+                            isDisabled: false,
+                            isRunning: v4l.enabled,
+                            callback: {
+                                viewStore.send(v4l.enabled ? .turnOffHdmiGrabber : .turnOnHdmiGrabber)
+                            })
+                    }
+
                     if let led = viewStore.api.ledComponent {
                         InstanceButton(
                             imageName: "led-hardware",
@@ -64,16 +75,6 @@ struct ComponentControl: View {
                             })
                     }
 
-                    if let v4l = viewStore.api.v4lComponent {
-                        InstanceButton(
-                            imageName: "v4l-hardware",
-                            text: "HDMI Grabber",
-                            isDisabled: false,
-                            isRunning: v4l.enabled,
-                            callback: {
-                                viewStore.send(v4l.enabled ? .turnOffHdmiGrabber : .turnOnHdmiGrabber)
-                            })
-                    }
                 }
 
                 Spacer()

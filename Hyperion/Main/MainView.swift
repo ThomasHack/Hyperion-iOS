@@ -20,21 +20,12 @@ struct MainView: View {
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            TabView(selection: self.$selectedView) {
-                HomeView(store: Main.store.home)
-                    .tag(ViewKind.home)
-                    .tabItem {
-                        Image(systemName: "house")
-                        Text("Home")
-                    }
-
-                ControlView(store: Main.store.control)
-                    .tag(ViewKind.control)
-                    .tabItem {
-                        Image(systemName: "gamecontroller")
-                        Text("Control")
-                    }
-            }
+            HomeView(store: Main.store.home)
+                .tag(ViewKind.home)
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
         }
     }
 }

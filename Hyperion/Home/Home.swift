@@ -8,6 +8,7 @@
 
 import ComposableArchitecture
 import Foundation
+import SwiftUI
 
 enum Home {
     struct State: Equatable {}
@@ -21,6 +22,8 @@ enum Home {
 
         case selectInstance(Int)
         case updateBrightness(Double)
+        case updateColor(Color)
+        case clearButtonTapped
         case turnOnSmoothing
         case turnOffSmoothing
         case turnOnBlackborderDetection
@@ -69,9 +72,15 @@ enum Home {
             case .selectInstance(let instanceId):
                 return Effect(value: Action.api(.selectInstance(instanceId)))
 
+            case .updateColor(let color):
+                return Effect(value: Action.api(.updateColor(color.rgbColor)))
+                
             case .updateBrightness(let brightness):
                 return Effect(value: Action.api(.updateBrightness(brightness)))
 
+            case .clearButtonTapped:
+                return Effect(value: Action.api(.clear))
+                
             case .turnOnSmoothing:
                 return Effect(value: Action.api(.turnOnSmoothing))
 

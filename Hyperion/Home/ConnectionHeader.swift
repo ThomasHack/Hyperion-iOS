@@ -32,6 +32,26 @@ struct ConnectionHeader: View {
                             ? "Status: Disconnected"
                             : "Status: Connecting...")
                         .font(.system(size: 13))
+                        .frame(minWidth: 200, maxWidth: .infinity)
+
+                    Spacer()
+
+                    ColorPicker("", selection: viewStore.binding(get: { $0.api.currentColor }, send: Home.Action.updateColor), supportsOpacity: false)
+
+                    if viewStore.api.currentColor != Color.clear {
+                        Button(action: {
+                            viewStore.send(.clearButtonTapped)
+                        }) {
+                            HStack {
+                                    Image(systemName: "clear.fill")
+                                        .font(.body)
+                                }
+                            .padding(.all, 5)
+                                .foregroundColor(.white)
+                                .background(Color(UIColor.black))
+                                .cornerRadius(20)
+                        }
+                    }
 
                 }
                 .frame(maxWidth: .infinity, alignment: .center)

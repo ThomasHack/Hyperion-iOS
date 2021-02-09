@@ -36,6 +36,7 @@ enum Settings {
                 state.hostInput = text
             case .iconNameChanged(let instance, let text):
                 state.iconNames[instance] = text
+                return Effect(value: .shared(.updateIcons(state.iconNames)))
             case .backgroundImageChanged(let text):
                 state.backgroundImage = text
                 return Effect(value: .shared(.updateBackgroundImage(state.backgroundImage)))
@@ -43,7 +44,6 @@ enum Settings {
                 state.showSettingsModal = false
             case .doneButtonTapped:
                 state.shared.host = state.hostInput
-                return Effect(value: .shared(.updateIcons(state.iconNames)))
             case .shared, .api:
                 break
             }

@@ -14,10 +14,8 @@ struct PriorityPreview: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            if let priority = viewStore.api.highestPriority?.value, let color = priority.color {
-                Color(color)
+                viewStore.api.currentColor
                     .frame(width: 30, height: 30)
-            }
         }
     }
 }

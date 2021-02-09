@@ -18,7 +18,6 @@ struct ControlView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     SectionHeader(text: "Color")
                     VStack(spacing: 16) {
-                        ColorControl(color: viewStore.binding(get: { $0.color }, send: Control.Action.updateColor))
 
                         Button(action: {
                             viewStore.send(.clearButtonTapped)

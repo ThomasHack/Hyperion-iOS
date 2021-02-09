@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		520E65D124E6A386007E9D3D /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E65D024E6A386007E9D3D /* Favourites.swift */; };
 		523071A824E56EB8001BB98B /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523071A724E56EB8001BB98B /* BlurView.swift */; };
-		523071AA24E56FA7001BB98B /* AnimatedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523071A924E56FA7001BB98B /* AnimatedGradient.swift */; };
 		523203F824A7A0D100386EB2 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 523203F724A7A0D100386EB2 /* Starscream */; };
 		52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBA24AE53CA00317AC9 /* ControlView.swift */; };
 		52385DBD24AE53D100317AC9 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBC24AE53D100317AC9 /* Control.swift */; };
@@ -20,9 +19,10 @@
 		525837D624AA2CF60084932D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305C24A5CFD1003BDCDC /* HomeView.swift */; };
 		525837D724AA2D020084932D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC35024A797D9000AF55F /* SettingsView.swift */; };
 		5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263685924E6CB6700E13707 /* ColorControl.swift */; };
-		5263685C24E6CDE200E13707 /* HueSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263685B24E6CDE200E13707 /* HueSlider.swift */; };
 		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
+		5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */; };
+		5288B79825D2E02700E9AF0C /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */; };
 		528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528E8E1324E2BE8200F4531B /* ComponentControl.swift */; };
 		52970CFF24E400F100B3B4E0 /* IntensityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52970CFE24E400F100B3B4E0 /* IntensityButton.swift */; };
 		52A9306324A5F801003BDCDC /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* Api.swift */; };
@@ -35,7 +35,6 @@
 		52BC893F24ACF737005607DB /* BrightnessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */; };
 		52BC894124ACF74D005607DB /* Settings+SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC894024ACF74D005607DB /* Settings+SettingsFeature.swift */; };
 		52BC894224ACF772005607DB /* InstanceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871024961DCA00826DA5 /* InstanceButton.swift */; };
-		52BC894324ACF772005607DB /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524787072495530500826DA5 /* BrightnessSlider.swift */; };
 		52BC894424ACF772005607DB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871224961FBD00826DA5 /* SectionHeader.swift */; };
 		52BC894524ACF772005607DB /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */; };
 		52C752CD24EAC7980011ABDB /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752CC24EAC7980011ABDB /* RGB.swift */; };
@@ -70,19 +69,17 @@
 /* Begin PBXFileReference section */
 		520E65D024E6A386007E9D3D /* Favourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
 		523071A724E56EB8001BB98B /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
-		523071A924E56FA7001BB98B /* AnimatedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradient.swift; sourceTree = "<group>"; };
 		52385DBA24AE53CA00317AC9 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		52385DBC24AE53D100317AC9 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Control+ControlFeature.swift"; sourceTree = "<group>"; };
-		524787072495530500826DA5 /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		5247871024961DCA00826DA5 /* InstanceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceButton.swift; sourceTree = "<group>"; };
 		5247871224961FBD00826DA5 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
-		52480FF924E2B30900D7EAF0 /* BlackborderControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackborderControl.swift; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
 		5263685924E6CB6700E13707 /* ColorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
-		5263685B24E6CDE200E13707 /* HueSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueSlider.swift; sourceTree = "<group>"; };
 		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		5283E27724EAE82D00713525 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectInput.swift; sourceTree = "<group>"; };
+		5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		528E8E1324E2BE8200F4531B /* ComponentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentControl.swift; sourceTree = "<group>"; };
 		52970CFE24E400F100B3B4E0 /* IntensityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityButton.swift; sourceTree = "<group>"; };
 		52A9305C24A5CFD1003BDCDC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -169,11 +166,10 @@
 		52A9306A24A60DD5003BDCDC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				523071A924E56FA7001BB98B /* AnimatedGradient.swift */,
 				523071A724E56EB8001BB98B /* BlurView.swift */,
-				524787072495530500826DA5 /* BrightnessSlider.swift */,
+				5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */,
 				52739D1224E31B7C00A69B0C /* ButtonStyles.swift */,
-				5263685B24E6CDE200E13707 /* HueSlider.swift */,
+				5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */,
 				5247871024961DCA00826DA5 /* InstanceButton.swift */,
 				52970CFE24E400F100B3B4E0 /* IntensityButton.swift */,
 				52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */,
@@ -185,7 +181,6 @@
 		52A9306B24A60E06003BDCDC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				52480FF924E2B30900D7EAF0 /* BlackborderControl.swift */,
 				52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */,
 				528E8E1324E2BE8200F4531B /* ComponentControl.swift */,
 				52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */,
@@ -386,7 +381,6 @@
 				52E3E80A24E5B84D00E77E1C /* NotConnected.swift in Sources */,
 				524F3C9724AA798100B4C345 /* ConnectionHeader.swift in Sources */,
 				525837D624AA2CF60084932D /* HomeView.swift in Sources */,
-				5263685C24E6CDE200E13707 /* HueSlider.swift in Sources */,
 				5283E27824EAE82D00713525 /* Helpers.swift in Sources */,
 				525837D524AA2B2D0084932D /* Home.swift in Sources */,
 				52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */,
@@ -395,14 +389,14 @@
 				52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */,
 				525837D724AA2D020084932D /* SettingsView.swift in Sources */,
 				52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */,
+				5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */,
 				52B38ECB24AE15BF00A0DDC8 /* ApiDelegate.swift in Sources */,
 				528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */,
 				52A9306324A5F801003BDCDC /* Api.swift in Sources */,
 				52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */,
-				523071AA24E56FA7001BB98B /* AnimatedGradient.swift in Sources */,
-				52BC894324ACF772005607DB /* BrightnessSlider.swift in Sources */,
 				520E65D124E6A386007E9D3D /* Favourites.swift in Sources */,
 				52BC893E24ACF737005607DB /* InstanceControl.swift in Sources */,
+				5288B79825D2E02700E9AF0C /* BrightnessSlider.swift in Sources */,
 				52EBA9EF24A7EE4E00BA5A45 /* Settings.swift in Sources */,
 				523071A824E56EB8001BB98B /* BlurView.swift in Sources */,
 			);

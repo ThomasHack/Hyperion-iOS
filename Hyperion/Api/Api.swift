@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 import ComposableArchitecture
 import Combine
 import Starscream
@@ -47,6 +48,13 @@ enum Api {
 
         var highestPriority: HyperionApi.Priority? {
             priorities.sorted(by: { $0.priority < $1.priority}).first
+        }
+
+        var currentColor: Color {
+            guard let priority = highestPriority?.value, let color = priority.color else {
+                return Color.clear
+            }
+            return Color(color)
         }
 
         var priorityShutdown: Bool {

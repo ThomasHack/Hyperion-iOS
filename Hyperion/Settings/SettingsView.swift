@@ -25,32 +25,21 @@ struct SettingsView: View {
                                             get: { $0.hostInput },
                                             send: Settings.Action.hostInputTextChanged)
                                 )
-                                    .keyboardType(.URL)
-                                    .disableAutocorrection(true)
-                                    .autocapitalization(.none)
+                                .keyboardType(.URL)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
                             }
+                            .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
                         }
 
                         if viewStore.instances.count > 0 {
                             Section(header: Text("Icons")) {
                                 VStack(alignment: .leading, spacing: 16) {
                                     ForEach(viewStore.instances, id: \HyperionApi.Instance.self) { instance in
-                                        VStack(alignment: .leading, spacing: 0) {
-                                            SectionHeader(text: "\(instance.friendlyName)")
-                                            TextField("Icon Name",
-                                                      text: viewStore.binding(
-                                                        get: { ($0.iconNames[instance.friendlyName] ?? "") },
-                                                        send: { text in
-                                                            Settings.Action.iconNameChanged(instance: instance.friendlyName, iconName: text)
-                                                        }
-                                                      )
-                                                )
-                                                .keyboardType(.URL)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
-                                        }
+                                        IconSelectInput(store: self.store, instance: instance)
                                     }
                                 }
+                                .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
                             }
                         }
 
@@ -67,9 +56,10 @@ struct SettingsView: View {
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                             }
+                            .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
                         }
-
-                    }.listStyle(InsetGroupedListStyle())
+                    }
+                    .listStyle(InsetGroupedListStyle())
                 }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .background(Color(.secondarySystemBackground))
