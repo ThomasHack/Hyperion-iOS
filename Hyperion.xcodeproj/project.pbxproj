@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		520E65D124E6A386007E9D3D /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E65D024E6A386007E9D3D /* Favourites.swift */; };
 		523071A824E56EB8001BB98B /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523071A724E56EB8001BB98B /* BlurView.swift */; };
-		523203F824A7A0D100386EB2 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 523203F724A7A0D100386EB2 /* Starscream */; };
 		52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBA24AE53CA00317AC9 /* ControlView.swift */; };
 		52385DBD24AE53D100317AC9 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBC24AE53D100317AC9 /* Control.swift */; };
 		52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */; };
@@ -19,10 +18,7 @@
 		525837D624AA2CF60084932D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305C24A5CFD1003BDCDC /* HomeView.swift */; };
 		525837D724AA2D020084932D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC35024A797D9000AF55F /* SettingsView.swift */; };
 		525F0B4925DA771200A9D603 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* Api.swift */; };
-		525F0B4C25DA772100A9D603 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38EC824AE153D00A0DDC8 /* ApiClient.swift */; };
-		525F0B4F25DA775E00A9D603 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */; };
 		525F0B8825DA78C100A9D603 /* HyperionApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 525F0B8625DA78C100A9D603 /* HyperionApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		525F0B8E25DA78CC00A9D603 /* HyperionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* HyperionApi.swift */; };
 		525F0B8F25DA78CC00A9D603 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752CC24EAC7980011ABDB /* RGB.swift */; };
 		525F0B9025DA78CC00A9D603 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752D024EAD0B50011ABDB /* Color.swift */; };
 		525F0B9925DA792000A9D603 /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC34D24A74FFF000AF55F /* Compose.swift */; };
@@ -60,8 +56,17 @@
 		525F0C2525DA7DCA00A9D603 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2425DA7DCA00A9D603 /* Component.swift */; };
 		525F0C2925DA7DD900A9D603 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2825DA7DD900A9D603 /* Priority.swift */; };
 		525F0C2D25DA7DF100A9D603 /* PriorityValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2C25DA7DF100A9D603 /* PriorityValue.swift */; };
-		525F0C6925DA84BF00A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
-		525F0C6A25DA84BF00A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		525F0C8D25DA96EF00A9D603 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CE4E5725431CF4000ADCD6 /* WidgetKit.framework */; };
+		525F0C8E25DA96EF00A9D603 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CE4E5925431CF4000ADCD6 /* SwiftUI.framework */; };
+		525F0C9125DA96EF00A9D603 /* Control_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C9025DA96EF00A9D603 /* Control_Widget.swift */; };
+		525F0C9325DA96F100A9D603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525F0C9225DA96F100A9D603 /* Assets.xcassets */; };
+		525F0C9725DA96F100A9D603 /* Control WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 525F0C8C25DA96EF00A9D603 /* Control WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		525F0C9F25DA984200A9D603 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */; };
+		525F0CA425DA989F00A9D603 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38EC824AE153D00A0DDC8 /* ApiClient.swift */; };
+		525F0CA825DA9A7800A9D603 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 525F0CA725DA9A7800A9D603 /* Starscream */; };
+		525F0CBA25DA9C2000A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
+		525F0CBB25DA9C2000A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		525F0CC825DA9CED00A9D603 /* ApiEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0CC725DA9CED00A9D603 /* ApiEvent.swift */; };
 		5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263685924E6CB6700E13707 /* ColorControl.swift */; };
 		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
@@ -91,7 +96,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		525F0C6B25DA84BF00A9D603 /* PBXContainerItemProxy */ = {
+		525F0C9525DA96F100A9D603 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F16B9E2494E51600A69D01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 525F0C8B25DA96EF00A9D603;
+			remoteInfo = "Control WidgetExtension";
+		};
+		525F0CBC25DA9C2100A9D603 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 52F16B9E2494E51600A69D01 /* Project object */;
 			proxyType = 1;
@@ -101,13 +113,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		525F0C6D25DA84BF00A9D603 /* Embed Frameworks */ = {
+		525F0CBE25DA9C2100A9D603 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				525F0C6A25DA84BF00A9D603 /* HyperionApi.framework in Embed Frameworks */,
+				525F0CBB25DA9C2000A9D603 /* HyperionApi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +130,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				525F0C9725DA96F100A9D603 /* Control WidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +182,12 @@
 		525F0C2425DA7DCA00A9D603 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		525F0C2825DA7DD900A9D603 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 		525F0C2C25DA7DF100A9D603 /* PriorityValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityValue.swift; sourceTree = "<group>"; };
+		525F0C8C25DA96EF00A9D603 /* Control WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Control WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		525F0C9025DA96EF00A9D603 /* Control_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control_Widget.swift; sourceTree = "<group>"; };
+		525F0C9225DA96F100A9D603 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		525F0C9425DA96F100A9D603 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		525F0C9825DA96F100A9D603 /* Control WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Control WidgetExtension.entitlements"; sourceTree = "<group>"; };
+		525F0CC725DA9CED00A9D603 /* ApiEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEvent.swift; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
 		5263685924E6CB6700E13707 /* ColorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
 		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
@@ -180,7 +199,6 @@
 		52A9305C24A5CFD1003BDCDC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		52A9306024A5F7D9003BDCDC /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		52A9306224A5F801003BDCDC /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		52A9306824A60D8D003BDCDC /* HyperionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperionApi.swift; sourceTree = "<group>"; };
 		52B38EC824AE153D00A0DDC8 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDelegate.swift; sourceTree = "<group>"; };
 		52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+HomeFeature.swift"; sourceTree = "<group>"; };
@@ -217,6 +235,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525F0CA825DA9A7800A9D603 /* Starscream in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		525F0C8925DA96EF00A9D603 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525F0C8E25DA96EF00A9D603 /* SwiftUI.framework in Frameworks */,
+				525F0C8D25DA96EF00A9D603 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,9 +252,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				525F0C6925DA84BF00A9D603 /* HyperionApi.framework in Frameworks */,
 				5247870D24960FEA00826DA5 /* ComposableArchitecture in Frameworks */,
-				523203F824A7A0D100386EB2 /* Starscream in Frameworks */,
+				525F0CBA25DA9C2000A9D603 /* HyperionApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,9 +297,10 @@
 		525F0B7925DA78B700A9D603 /* HyperionApi */ = {
 			isa = PBXGroup;
 			children = (
+				52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */,
+				525F0CC725DA9CED00A9D603 /* ApiEvent.swift */,
 				525F0C7B25DA927F00A9D603 /* Helper */,
 				525F0B8625DA78C100A9D603 /* HyperionApi.h */,
-				52A9306824A60D8D003BDCDC /* HyperionApi.swift */,
 				525F0B8725DA78C100A9D603 /* Info.plist */,
 				525F0C7A25DA922000A9D603 /* Model */,
 				525F0C3325DA815D00A9D603 /* Request */,
@@ -284,9 +312,8 @@
 		525F0C3025DA7E4400A9D603 /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				52A9306224A5F801003BDCDC /* Api.swift */,
 				52B38EC824AE153D00A0DDC8 /* ApiClient.swift */,
-				52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */,
+				52A9306224A5F801003BDCDC /* Api.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -356,6 +383,16 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		525F0C8F25DA96EF00A9D603 /* Control Widget */ = {
+			isa = PBXGroup;
+			children = (
+				525F0C9025DA96EF00A9D603 /* Control_Widget.swift */,
+				525F0C9225DA96F100A9D603 /* Assets.xcassets */,
+				525F0C9425DA96F100A9D603 /* Info.plist */,
+			);
+			path = "Control Widget";
+			sourceTree = "<group>";
+		};
 		52A9306A24A60DD5003BDCDC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,8 +455,10 @@
 		52F16B9D2494E51600A69D01 = {
 			isa = PBXGroup;
 			children = (
+				525F0C9825DA96F100A9D603 /* Control WidgetExtension.entitlements */,
 				52F16BA82494E51600A69D01 /* Hyperion */,
 				525F0B7925DA78B700A9D603 /* HyperionApi */,
+				525F0C8F25DA96EF00A9D603 /* Control Widget */,
 				52CE4E5625431CF4000ADCD6 /* Frameworks */,
 				52F16BA72494E51600A69D01 /* Products */,
 			);
@@ -430,6 +469,7 @@
 			children = (
 				52F16BA62494E51600A69D01 /* Hyperion.app */,
 				525F0B7825DA78B700A9D603 /* HyperionApi.framework */,
+				525F0C8C25DA96EF00A9D603 /* Control WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -488,9 +528,29 @@
 			dependencies = (
 			);
 			name = HyperionApi;
+			packageProductDependencies = (
+				525F0CA725DA9A7800A9D603 /* Starscream */,
+			);
 			productName = HyperionApi;
 			productReference = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		525F0C8B25DA96EF00A9D603 /* Control WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 525F0C9925DA96F100A9D603 /* Build configuration list for PBXNativeTarget "Control WidgetExtension" */;
+			buildPhases = (
+				525F0C8825DA96EF00A9D603 /* Sources */,
+				525F0C8925DA96EF00A9D603 /* Frameworks */,
+				525F0C8A25DA96EF00A9D603 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Control WidgetExtension";
+			productName = "Control WidgetExtension";
+			productReference = 525F0C8C25DA96EF00A9D603 /* Control WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		52F16BA52494E51600A69D01 /* Hyperion */ = {
 			isa = PBXNativeTarget;
@@ -500,17 +560,17 @@
 				52F16BA32494E51600A69D01 /* Frameworks */,
 				52F16BA42494E51600A69D01 /* Resources */,
 				52CE4E6825431CF7000ADCD6 /* Embed App Extensions */,
-				525F0C6D25DA84BF00A9D603 /* Embed Frameworks */,
+				525F0CBE25DA9C2100A9D603 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				525F0C6C25DA84BF00A9D603 /* PBXTargetDependency */,
+				525F0C9625DA96F100A9D603 /* PBXTargetDependency */,
+				525F0CBD25DA9C2100A9D603 /* PBXTargetDependency */,
 			);
 			name = Hyperion;
 			packageProductDependencies = (
 				5247870C24960FEA00826DA5 /* ComposableArchitecture */,
-				523203F724A7A0D100386EB2 /* Starscream */,
 			);
 			productName = Hyperion;
 			productReference = 52F16BA62494E51600A69D01 /* Hyperion.app */;
@@ -527,6 +587,9 @@
 				ORGANIZATIONNAME = "Hack, Thomas";
 				TargetAttributes = {
 					525F0B7725DA78B700A9D603 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					525F0C8B25DA96EF00A9D603 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 					52F16BA52494E51600A69D01 = {
@@ -553,6 +616,7 @@
 			targets = (
 				52F16BA52494E51600A69D01 /* Hyperion */,
 				525F0B7725DA78B700A9D603 /* HyperionApi */,
+				525F0C8B25DA96EF00A9D603 /* Control WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -562,6 +626,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		525F0C8A25DA96EF00A9D603 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525F0C9325DA96F100A9D603 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,7 +655,6 @@
 			files = (
 				525F0BD125DA7AC100A9D603 /* ClearData.swift in Sources */,
 				525F0C2525DA7DCA00A9D603 /* Component.swift in Sources */,
-				525F0B8E25DA78CC00A9D603 /* HyperionApi.swift in Sources */,
 				525F0BF525DA7C8300A9D603 /* AdjustmentUpdate.swift in Sources */,
 				525F0BD925DA7AE800A9D603 /* ComponentState.swift in Sources */,
 				525F0BC125DA7A6800A9D603 /* AdjustmentData.swift in Sources */,
@@ -597,6 +668,7 @@
 				525F0BED25DA7C5D00A9D603 /* InstanceUpdate.swift in Sources */,
 				525F0BF125DA7C7000A9D603 /* InstanceSwitchUpdate.swift in Sources */,
 				525F0B9925DA792000A9D603 /* Compose.swift in Sources */,
+				525F0CC825DA9CED00A9D603 /* ApiEvent.swift in Sources */,
 				525F0BBD25DA7A5500A9D603 /* SubscribeData.swift in Sources */,
 				525F0C2125DA7DBA00A9D603 /* LightEffect.swift in Sources */,
 				525F0C1525DA7D1100A9D603 /* InfoData.swift in Sources */,
@@ -605,6 +677,7 @@
 				525F0C0525DA7CCD00A9D603 /* Success.swift in Sources */,
 				525F0BE125DA7C1B00A9D603 /* ResponseType.swift in Sources */,
 				525F0B9025DA78CC00A9D603 /* Color.swift in Sources */,
+				525F0C9F25DA984200A9D603 /* ApiDelegate.swift in Sources */,
 				525F0BC525DA7A7A00A9D603 /* ComponentData.swift in Sources */,
 				525F0BB925DA7A4300A9D603 /* InstanceData.swift in Sources */,
 				525F0BB125DA7A1900A9D603 /* Request.swift in Sources */,
@@ -619,6 +692,14 @@
 				525F0C1925DA7D2400A9D603 /* Adjustment.swift in Sources */,
 				525F0C1D25DA7DA800A9D603 /* Instance.swift in Sources */,
 				525F0C0925DA7CDC00A9D603 /* InstanceInfo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		525F0C8825DA96EF00A9D603 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525F0C9125DA96EF00A9D603 /* Control_Widget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,14 +721,13 @@
 				52BC893B24ACF6BF005607DB /* Home+HomeFeature.swift in Sources */,
 				52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */,
 				52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */,
-				525F0B4C25DA772100A9D603 /* ApiClient.swift in Sources */,
+				525F0CA425DA989F00A9D603 /* ApiClient.swift in Sources */,
 				52970CFF24E400F100B3B4E0 /* IntensityButton.swift in Sources */,
 				52E3E80A24E5B84D00E77E1C /* NotConnected.swift in Sources */,
 				524F3C9724AA798100B4C345 /* ConnectionHeader.swift in Sources */,
 				525837D624AA2CF60084932D /* HomeView.swift in Sources */,
 				5283E27824EAE82D00713525 /* Helpers.swift in Sources */,
 				525837D524AA2B2D0084932D /* Home.swift in Sources */,
-				525F0B4F25DA775E00A9D603 /* ApiDelegate.swift in Sources */,
 				52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */,
 				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,
 				525F0B4925DA771200A9D603 /* Api.swift in Sources */,
@@ -668,10 +748,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		525F0C6C25DA84BF00A9D603 /* PBXTargetDependency */ = {
+		525F0C9625DA96F100A9D603 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 525F0C8B25DA96EF00A9D603 /* Control WidgetExtension */;
+			targetProxy = 525F0C9525DA96F100A9D603 /* PBXContainerItemProxy */;
+		};
+		525F0CBD25DA9C2100A9D603 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 525F0B7725DA78B700A9D603 /* HyperionApi */;
-			targetProxy = 525F0C6B25DA84BF00A9D603 /* PBXContainerItemProxy */;
+			targetProxy = 525F0CBC25DA9C2100A9D603 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -742,6 +827,54 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		525F0C9A25DA96F100A9D603 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Control WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N9C9UAVR87;
+				INFOPLIST_FILE = "Control Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.thomashack.hyperion-ng.Control-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		525F0C9B25DA96F100A9D603 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Control WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N9C9UAVR87;
+				INFOPLIST_FILE = "Control Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.thomashack.hyperion-ng.Control-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -921,6 +1054,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		525F0C9925DA96F100A9D603 /* Build configuration list for PBXNativeTarget "Control WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				525F0C9A25DA96F100A9D603 /* Debug */,
+				525F0C9B25DA96F100A9D603 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		52F16BA12494E51600A69D01 /* Build configuration list for PBXProject "Hyperion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -961,15 +1103,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		523203F724A7A0D100386EB2 /* Starscream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 523203F624A7A0D100386EB2 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
-		};
 		5247870C24960FEA00826DA5 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5247870B24960FEA00826DA5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		525F0CA725DA9A7800A9D603 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523203F624A7A0D100386EB2 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -15,25 +15,11 @@ import HyperionApi
 private var dependencies: [AnyHashable: Dependencies] = [:]
 private struct Dependencies {
     let socket: WebSocket
-    let delegate: ApiClientDelegate
+    let delegate: HyperionApi.ApiDelegate
     let subscriber: Effect<Api.Action, Never>.Subscriber
 }
 
 struct ApiClient {
-
-    enum Event: Equatable {
-        case connected              // case connected([String: String])
-        case disconnected           // case disconnected(String, UInt16)
-        case text(String)           // case text(String)
-        case binary(Data)           // case binary(Data)
-        case ping                   // case ping(Data?)
-        case pong                   // case pong(Data?)
-        // case viabilityChanged    // case viabilityChanged(Bool)
-        // reconnectSuggested       // case reconnectSuggested(Bool)
-        case cancelled              // case cancelled
-        case error(NSError?)        // case error(Error?)
-    }
-
     var connect: (AnyHashable, URL) -> Effect<Api.Action, Never>
     var disconnect: (AnyHashable) -> Effect<Api.Action, Never>
     var sendMessage: (AnyHashable, HyperionApi.Request) -> Effect<Api.Action, Never>
@@ -55,7 +41,7 @@ extension ApiClient {
     static let live = ApiClient(
         connect: { id, url in
             .run { subscriber in
-                let delegate = ApiClientDelegate(
+                let delegate = HyperionApi.ApiDelegate(
                     didConnect: {
                         subscriber.send(.didConnect)
                     },
@@ -63,7 +49,7 @@ extension ApiClient {
                         subscriber.send(.didDisconnect)
                     },
                     didReceiveWebSocketEvent: {
-                        subscriber.send(.didReceiveWebSocketEvent($0 as Event))
+                        subscriber.send(.didReceiveWebSocketEvent($0 as HyperionApi.ApiEvent))
                     },
                     didUpdateBrightness: {
                         subscriber.send(.didUpdateBrightness($0 as Double))

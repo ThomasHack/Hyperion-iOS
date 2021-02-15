@@ -8,12 +8,12 @@
 
 import Foundation
 import Starscream
-import HyperionApi
 
-class ApiClientDelegate: WebSocketDelegate {
+public class ApiDelegate: WebSocketDelegate {
+
     let didConnect: () -> Void
     let didDisconnect: () -> Void
-    let didReceiveWebSocketEvent: (ApiClient.Event) -> Void
+    let didReceiveWebSocketEvent: (ApiEvent) -> Void
     let didUpdateBrightness: (Double) -> Void
     let didUpdateInstances: ([HyperionApi.Instance]) -> Void
     let didUpdateEffects: ([HyperionApi.LightEffect]) -> Void
@@ -24,10 +24,10 @@ class ApiClientDelegate: WebSocketDelegate {
     let didUpdatePriorities: ([HyperionApi.Priority]) -> Void
     let didUpdateHdrToneMapping: (Bool) -> Void
 
-    init(
+    public init(
         didConnect: @escaping() -> Void,
         didDisconnect: @escaping() -> Void,
-        didReceiveWebSocketEvent: @escaping (ApiClient.Event) -> Void,
+        didReceiveWebSocketEvent: @escaping (ApiEvent) -> Void,
         didUpdateBrightness: @escaping (Double) -> Void,
         didUpdateInstances: @escaping ([HyperionApi.Instance]) -> Void,
         didUpdateEffects: @escaping ([HyperionApi.LightEffect]) -> Void,
@@ -52,7 +52,7 @@ class ApiClientDelegate: WebSocketDelegate {
         self.didUpdateHdrToneMapping = didUpdateHdrToneMapping
     }
 
-    func didReceive(event: WebSocketEvent, client: WebSocket) {
+    public func didReceive(event: WebSocketEvent, client: WebSocket) {
         switch event {
         case .connected:
             self.didConnect()

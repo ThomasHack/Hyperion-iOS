@@ -91,7 +91,7 @@ enum Api {
         case didConnect
         case didDisconnect
         case didSubscribe
-        case didReceiveWebSocketEvent(ApiClient.Event)
+        case didReceiveWebSocketEvent(HyperionApi.ApiEvent)
         case didUpdateBrightness(Double)
         case didUpdateInstances([HyperionApi.Instance])
         case didUpdateEffects([HyperionApi.LightEffect])
