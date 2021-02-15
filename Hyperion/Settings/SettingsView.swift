@@ -8,6 +8,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import HyperionApi
 
 struct SettingsView: View {
     let store: Store<Settings.SettingsFeatureState, Settings.Action>

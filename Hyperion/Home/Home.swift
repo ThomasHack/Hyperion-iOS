@@ -8,6 +8,7 @@
 
 import ComposableArchitecture
 import Foundation
+import HyperionApi
 import SwiftUI
 
 enum Home {
@@ -61,7 +62,7 @@ enum Home {
                 if state.api.highestPriority?.componentId == HyperionApi.ComponentType.color {
                     return Effect(value: Action.api(.clear))
                 }
-                return Effect(value: Action.api(.updateColor(RGB(red: 0, green: 0, blue: 0))))
+                return Effect(value: Action.api(.updateColor(HyperionApi.RGB(red: 0, green: 0, blue: 0))))
 
             case .toggleSettingsModal(let toggle):
                 return Effect(value: Action.shared(.toggleSettingsModal(toggle)))

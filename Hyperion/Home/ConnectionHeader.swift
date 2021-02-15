@@ -32,11 +32,12 @@ struct ConnectionHeader: View {
                             ? "Status: Disconnected"
                             : "Status: Connecting...")
                         .font(.system(size: 13))
-                        .frame(minWidth: 200, maxWidth: .infinity)
+                        .lineLimit(1)
 
                     Spacer()
 
                     ColorPicker("", selection: viewStore.binding(get: { $0.api.currentColor }, send: Home.Action.updateColor), supportsOpacity: false)
+                        .frame(maxWidth: 50)
 
                     if viewStore.api.currentColor != Color.clear {
                         Button(action: {
@@ -46,9 +47,9 @@ struct ConnectionHeader: View {
                                     Image(systemName: "clear.fill")
                                         .font(.body)
                                 }
-                            .padding(.all, 5)
-                                .foregroundColor(.white)
-                                .background(Color(UIColor.black))
+                            .padding(.all, 8)
+                                .foregroundColor(.primary)
+                                .background(Color(UIColor.systemBackground))
                                 .cornerRadius(20)
                         }
                     }
@@ -66,6 +67,6 @@ struct ConnectionHeader: View {
 struct ConnectionHeader_Previews: PreviewProvider {
     static var previews: some View {
         ConnectionHeader(store: Main.store.home)
-        .previewLayout(.fixed(width: 375, height: 40))
+        .previewLayout(.fixed(width: 500, height: 40))
     }
 }

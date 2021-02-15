@@ -18,6 +18,50 @@
 		525837D524AA2B2D0084932D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306024A5F7D9003BDCDC /* Home.swift */; };
 		525837D624AA2CF60084932D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9305C24A5CFD1003BDCDC /* HomeView.swift */; };
 		525837D724AA2D020084932D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC35024A797D9000AF55F /* SettingsView.swift */; };
+		525F0B4925DA771200A9D603 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* Api.swift */; };
+		525F0B4C25DA772100A9D603 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38EC824AE153D00A0DDC8 /* ApiClient.swift */; };
+		525F0B4F25DA775E00A9D603 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */; };
+		525F0B8825DA78C100A9D603 /* HyperionApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 525F0B8625DA78C100A9D603 /* HyperionApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		525F0B8E25DA78CC00A9D603 /* HyperionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* HyperionApi.swift */; };
+		525F0B8F25DA78CC00A9D603 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752CC24EAC7980011ABDB /* RGB.swift */; };
+		525F0B9025DA78CC00A9D603 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752D024EAD0B50011ABDB /* Color.swift */; };
+		525F0B9925DA792000A9D603 /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC34D24A74FFF000AF55F /* Compose.swift */; };
+		525F0BA925DA79C800A9D603 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BA825DA79C800A9D603 /* RequestType.swift */; };
+		525F0BAD25DA79F100A9D603 /* SubCommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BAC25DA79F100A9D603 /* SubCommandType.swift */; };
+		525F0BB125DA7A1900A9D603 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BB025DA7A1900A9D603 /* Request.swift */; };
+		525F0BB525DA7A2E00A9D603 /* SubscribeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BB425DA7A2E00A9D603 /* SubscribeType.swift */; };
+		525F0BB925DA7A4300A9D603 /* InstanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BB825DA7A4300A9D603 /* InstanceData.swift */; };
+		525F0BBD25DA7A5500A9D603 /* SubscribeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BBC25DA7A5500A9D603 /* SubscribeData.swift */; };
+		525F0BC125DA7A6800A9D603 /* AdjustmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BC025DA7A6800A9D603 /* AdjustmentData.swift */; };
+		525F0BC525DA7A7A00A9D603 /* ComponentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BC425DA7A7A00A9D603 /* ComponentData.swift */; };
+		525F0BC925DA7A9800A9D603 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BC825DA7A9800A9D603 /* ColorData.swift */; };
+		525F0BCD25DA7AA900A9D603 /* EffectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BCC25DA7AA900A9D603 /* EffectData.swift */; };
+		525F0BD125DA7AC100A9D603 /* ClearData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BD025DA7AC100A9D603 /* ClearData.swift */; };
+		525F0BD525DA7AD300A9D603 /* HdrToneMappingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BD425DA7AD300A9D603 /* HdrToneMappingData.swift */; };
+		525F0BD925DA7AE800A9D603 /* ComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BD825DA7AE800A9D603 /* ComponentState.swift */; };
+		525F0BDD25DA7BFB00A9D603 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BDC25DA7BFB00A9D603 /* ComponentType.swift */; };
+		525F0BE125DA7C1B00A9D603 /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BE025DA7C1B00A9D603 /* ResponseType.swift */; };
+		525F0BE525DA7C2F00A9D603 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BE425DA7C2F00A9D603 /* Response.swift */; };
+		525F0BE925DA7C4700A9D603 /* ServerInfoUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BE825DA7C4700A9D603 /* ServerInfoUpdate.swift */; };
+		525F0BED25DA7C5D00A9D603 /* InstanceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BEC25DA7C5D00A9D603 /* InstanceUpdate.swift */; };
+		525F0BF125DA7C7000A9D603 /* InstanceSwitchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BF025DA7C7000A9D603 /* InstanceSwitchUpdate.swift */; };
+		525F0BF525DA7C8300A9D603 /* AdjustmentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BF425DA7C8300A9D603 /* AdjustmentUpdate.swift */; };
+		525F0BF925DA7C9400A9D603 /* ComponentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BF825DA7C9400A9D603 /* ComponentUpdate.swift */; };
+		525F0BFD25DA7CA500A9D603 /* HdrToneMappingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0BFC25DA7CA500A9D603 /* HdrToneMappingUpdate.swift */; };
+		525F0C0125DA7CB800A9D603 /* PriorityUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C0025DA7CB800A9D603 /* PriorityUpdate.swift */; };
+		525F0C0525DA7CCD00A9D603 /* Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C0425DA7CCD00A9D603 /* Success.swift */; };
+		525F0C0925DA7CDC00A9D603 /* InstanceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C0825DA7CDC00A9D603 /* InstanceInfo.swift */; };
+		525F0C0D25DA7CF000A9D603 /* PrioritiesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C0C25DA7CF000A9D603 /* PrioritiesData.swift */; };
+		525F0C1125DA7D0200A9D603 /* HdrToneMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C1025DA7D0200A9D603 /* HdrToneMapping.swift */; };
+		525F0C1525DA7D1100A9D603 /* InfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C1425DA7D1100A9D603 /* InfoData.swift */; };
+		525F0C1925DA7D2400A9D603 /* Adjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C1825DA7D2400A9D603 /* Adjustment.swift */; };
+		525F0C1D25DA7DA800A9D603 /* Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C1C25DA7DA800A9D603 /* Instance.swift */; };
+		525F0C2125DA7DBA00A9D603 /* LightEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2025DA7DBA00A9D603 /* LightEffect.swift */; };
+		525F0C2525DA7DCA00A9D603 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2425DA7DCA00A9D603 /* Component.swift */; };
+		525F0C2925DA7DD900A9D603 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2825DA7DD900A9D603 /* Priority.swift */; };
+		525F0C2D25DA7DF100A9D603 /* PriorityValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2C25DA7DF100A9D603 /* PriorityValue.swift */; };
+		525F0C6925DA84BF00A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
+		525F0C6A25DA84BF00A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263685924E6CB6700E13707 /* ColorControl.swift */; };
 		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
@@ -25,10 +69,6 @@
 		5288B79825D2E02700E9AF0C /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */; };
 		528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528E8E1324E2BE8200F4531B /* ComponentControl.swift */; };
 		52970CFF24E400F100B3B4E0 /* IntensityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52970CFE24E400F100B3B4E0 /* IntensityButton.swift */; };
-		52A9306324A5F801003BDCDC /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306224A5F801003BDCDC /* Api.swift */; };
-		52A9306924A60D8D003BDCDC /* HyperionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9306824A60D8D003BDCDC /* HyperionApi.swift */; };
-		52B38EC924AE153D00A0DDC8 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38EC824AE153D00A0DDC8 /* ApiClient.swift */; };
-		52B38ECB24AE15BF00A0DDC8 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */; };
 		52BC893B24ACF6BF005607DB /* Home+HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */; };
 		52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */; };
 		52BC893E24ACF737005607DB /* InstanceControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */; };
@@ -37,8 +77,6 @@
 		52BC894224ACF772005607DB /* InstanceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871024961DCA00826DA5 /* InstanceButton.swift */; };
 		52BC894424ACF772005607DB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871224961FBD00826DA5 /* SectionHeader.swift */; };
 		52BC894524ACF772005607DB /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */; };
-		52C752CD24EAC7980011ABDB /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752CC24EAC7980011ABDB /* RGB.swift */; };
-		52C752D124EAD0B50011ABDB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C752D024EAD0B50011ABDB /* Color.swift */; };
 		52E3E80A24E5B84D00E77E1C /* NotConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3E80924E5B84D00E77E1C /* NotConnected.swift */; };
 		52E3E80C24E5B8DD00E77E1C /* PriorityPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3E80B24E5B8DD00E77E1C /* PriorityPreview.swift */; };
 		52E3E80E24E5BBB000E77E1C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3E80D24E5BBB000E77E1C /* Appearance.swift */; };
@@ -50,10 +88,30 @@
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
 		52F16BB62494E51700A69D01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BB42494E51700A69D01 /* LaunchScreen.storyboard */; };
-		52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FEC34D24A74FFF000AF55F /* Compose.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		525F0C6B25DA84BF00A9D603 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F16B9E2494E51600A69D01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 525F0B7725DA78B700A9D603;
+			remoteInfo = HyperionApi;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		525F0C6D25DA84BF00A9D603 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				525F0C6A25DA84BF00A9D603 /* HyperionApi.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52CE4E6825431CF7000ADCD6 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +132,43 @@
 		52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Control+ControlFeature.swift"; sourceTree = "<group>"; };
 		5247871024961DCA00826DA5 /* InstanceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceButton.swift; sourceTree = "<group>"; };
 		5247871224961FBD00826DA5 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		525F0B7825DA78B700A9D603 /* HyperionApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyperionApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		525F0B8625DA78C100A9D603 /* HyperionApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperionApi.h; sourceTree = "<group>"; };
+		525F0B8725DA78C100A9D603 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		525F0BA825DA79C800A9D603 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
+		525F0BAC25DA79F100A9D603 /* SubCommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCommandType.swift; sourceTree = "<group>"; };
+		525F0BB025DA7A1900A9D603 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		525F0BB425DA7A2E00A9D603 /* SubscribeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeType.swift; sourceTree = "<group>"; };
+		525F0BB825DA7A4300A9D603 /* InstanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceData.swift; sourceTree = "<group>"; };
+		525F0BBC25DA7A5500A9D603 /* SubscribeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeData.swift; sourceTree = "<group>"; };
+		525F0BC025DA7A6800A9D603 /* AdjustmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentData.swift; sourceTree = "<group>"; };
+		525F0BC425DA7A7A00A9D603 /* ComponentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentData.swift; sourceTree = "<group>"; };
+		525F0BC825DA7A9800A9D603 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
+		525F0BCC25DA7AA900A9D603 /* EffectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectData.swift; sourceTree = "<group>"; };
+		525F0BD025DA7AC100A9D603 /* ClearData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearData.swift; sourceTree = "<group>"; };
+		525F0BD425DA7AD300A9D603 /* HdrToneMappingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HdrToneMappingData.swift; sourceTree = "<group>"; };
+		525F0BD825DA7AE800A9D603 /* ComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentState.swift; sourceTree = "<group>"; };
+		525F0BDC25DA7BFB00A9D603 /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
+		525F0BE025DA7C1B00A9D603 /* ResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
+		525F0BE425DA7C2F00A9D603 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		525F0BE825DA7C4700A9D603 /* ServerInfoUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerInfoUpdate.swift; sourceTree = "<group>"; };
+		525F0BEC25DA7C5D00A9D603 /* InstanceUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceUpdate.swift; sourceTree = "<group>"; };
+		525F0BF025DA7C7000A9D603 /* InstanceSwitchUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceSwitchUpdate.swift; sourceTree = "<group>"; };
+		525F0BF425DA7C8300A9D603 /* AdjustmentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentUpdate.swift; sourceTree = "<group>"; };
+		525F0BF825DA7C9400A9D603 /* ComponentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentUpdate.swift; sourceTree = "<group>"; };
+		525F0BFC25DA7CA500A9D603 /* HdrToneMappingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HdrToneMappingUpdate.swift; sourceTree = "<group>"; };
+		525F0C0025DA7CB800A9D603 /* PriorityUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityUpdate.swift; sourceTree = "<group>"; };
+		525F0C0425DA7CCD00A9D603 /* Success.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Success.swift; sourceTree = "<group>"; };
+		525F0C0825DA7CDC00A9D603 /* InstanceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfo.swift; sourceTree = "<group>"; };
+		525F0C0C25DA7CF000A9D603 /* PrioritiesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrioritiesData.swift; sourceTree = "<group>"; };
+		525F0C1025DA7D0200A9D603 /* HdrToneMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HdrToneMapping.swift; sourceTree = "<group>"; };
+		525F0C1425DA7D1100A9D603 /* InfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoData.swift; sourceTree = "<group>"; };
+		525F0C1825DA7D2400A9D603 /* Adjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adjustment.swift; sourceTree = "<group>"; };
+		525F0C1C25DA7DA800A9D603 /* Instance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instance.swift; sourceTree = "<group>"; };
+		525F0C2025DA7DBA00A9D603 /* LightEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightEffect.swift; sourceTree = "<group>"; };
+		525F0C2425DA7DCA00A9D603 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		525F0C2825DA7DD900A9D603 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
+		525F0C2C25DA7DF100A9D603 /* PriorityValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityValue.swift; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
 		5263685924E6CB6700E13707 /* ColorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
 		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
@@ -118,10 +213,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		525F0B7525DA78B700A9D603 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52F16BA32494E51600A69D01 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525F0C6925DA84BF00A9D603 /* HyperionApi.framework in Frameworks */,
 				5247870D24960FEA00826DA5 /* ComposableArchitecture in Frameworks */,
 				523203F824A7A0D100386EB2 /* Starscream in Frameworks */,
 			);
@@ -145,6 +248,7 @@
 		52543D7724A1258600505054 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5261749F24A9071B00FE831D /* Hyperion.entitlements */,
 				52F16BAF2494E51700A69D01 /* Assets.xcassets */,
 				52F16BB42494E51700A69D01 /* LaunchScreen.storyboard */,
 				52F16BB72494E51700A69D01 /* Info.plist */,
@@ -161,6 +265,95 @@
 				5283E27724EAE82D00713525 /* Helpers.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		525F0B7925DA78B700A9D603 /* HyperionApi */ = {
+			isa = PBXGroup;
+			children = (
+				525F0C7B25DA927F00A9D603 /* Helper */,
+				525F0B8625DA78C100A9D603 /* HyperionApi.h */,
+				52A9306824A60D8D003BDCDC /* HyperionApi.swift */,
+				525F0B8725DA78C100A9D603 /* Info.plist */,
+				525F0C7A25DA922000A9D603 /* Model */,
+				525F0C3325DA815D00A9D603 /* Request */,
+				525F0C3425DA816200A9D603 /* Response */,
+			);
+			path = HyperionApi;
+			sourceTree = "<group>";
+		};
+		525F0C3025DA7E4400A9D603 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				52A9306224A5F801003BDCDC /* Api.swift */,
+				52B38EC824AE153D00A0DDC8 /* ApiClient.swift */,
+				52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		525F0C3325DA815D00A9D603 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				525F0BC025DA7A6800A9D603 /* AdjustmentData.swift */,
+				525F0BD025DA7AC100A9D603 /* ClearData.swift */,
+				525F0BC825DA7A9800A9D603 /* ColorData.swift */,
+				525F0BC425DA7A7A00A9D603 /* ComponentData.swift */,
+				525F0BCC25DA7AA900A9D603 /* EffectData.swift */,
+				525F0BD425DA7AD300A9D603 /* HdrToneMappingData.swift */,
+				525F0BB825DA7A4300A9D603 /* InstanceData.swift */,
+				525F0C0C25DA7CF000A9D603 /* PrioritiesData.swift */,
+				525F0BB025DA7A1900A9D603 /* Request.swift */,
+				525F0BA825DA79C800A9D603 /* RequestType.swift */,
+				525F0BAC25DA79F100A9D603 /* SubCommandType.swift */,
+				525F0BBC25DA7A5500A9D603 /* SubscribeData.swift */,
+				525F0BB425DA7A2E00A9D603 /* SubscribeType.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		525F0C3425DA816200A9D603 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				525F0BF425DA7C8300A9D603 /* AdjustmentUpdate.swift */,
+				525F0BF825DA7C9400A9D603 /* ComponentUpdate.swift */,
+				525F0BFC25DA7CA500A9D603 /* HdrToneMappingUpdate.swift */,
+				525F0BF025DA7C7000A9D603 /* InstanceSwitchUpdate.swift */,
+				525F0BEC25DA7C5D00A9D603 /* InstanceUpdate.swift */,
+				525F0C0025DA7CB800A9D603 /* PriorityUpdate.swift */,
+				525F0BE425DA7C2F00A9D603 /* Response.swift */,
+				525F0BE025DA7C1B00A9D603 /* ResponseType.swift */,
+				525F0BE825DA7C4700A9D603 /* ServerInfoUpdate.swift */,
+				525F0C0425DA7CCD00A9D603 /* Success.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		525F0C7A25DA922000A9D603 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				525F0C1825DA7D2400A9D603 /* Adjustment.swift */,
+				525F0C2425DA7DCA00A9D603 /* Component.swift */,
+				525F0BD825DA7AE800A9D603 /* ComponentState.swift */,
+				525F0BDC25DA7BFB00A9D603 /* ComponentType.swift */,
+				525F0C1025DA7D0200A9D603 /* HdrToneMapping.swift */,
+				525F0C1425DA7D1100A9D603 /* InfoData.swift */,
+				525F0C1C25DA7DA800A9D603 /* Instance.swift */,
+				525F0C0825DA7CDC00A9D603 /* InstanceInfo.swift */,
+				525F0C2025DA7DBA00A9D603 /* LightEffect.swift */,
+				525F0C2825DA7DD900A9D603 /* Priority.swift */,
+				525F0C2C25DA7DF100A9D603 /* PriorityValue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		525F0C7B25DA927F00A9D603 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				52FEC34D24A74FFF000AF55F /* Compose.swift */,
+				52C752D024EAD0B50011ABDB /* Color.swift */,
+				52C752CC24EAC7980011ABDB /* RGB.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		52A9306A24A60DD5003BDCDC /* Views */ = {
@@ -196,23 +389,9 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		52A9306C24A60E10003BDCDC /* Api */ = {
-			isa = PBXGroup;
-			children = (
-				52A9306224A5F801003BDCDC /* Api.swift */,
-				52B38EC824AE153D00A0DDC8 /* ApiClient.swift */,
-				52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */,
-				52FEC34D24A74FFF000AF55F /* Compose.swift */,
-				52A9306824A60D8D003BDCDC /* HyperionApi.swift */,
-			);
-			path = Api;
-			sourceTree = "<group>";
-		};
 		52C752CB24EAC7850011ABDB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				52C752CC24EAC7980011ABDB /* RGB.swift */,
-				52C752D024EAD0B50011ABDB /* Color.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -240,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				52F16BA82494E51600A69D01 /* Hyperion */,
+				525F0B7925DA78B700A9D603 /* HyperionApi */,
 				52CE4E5625431CF4000ADCD6 /* Frameworks */,
 				52F16BA72494E51600A69D01 /* Products */,
 			);
@@ -249,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				52F16BA62494E51600A69D01 /* Hyperion.app */,
+				525F0B7825DA78B700A9D603 /* HyperionApi.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,12 +437,11 @@
 		52F16BA82494E51600A69D01 /* Hyperion */ = {
 			isa = PBXGroup;
 			children = (
+				525F0C3025DA7E4400A9D603 /* Api */,
 				52C752CB24EAC7850011ABDB /* Helpers */,
-				52A9306C24A60E10003BDCDC /* Api */,
 				52543D7824A1259900505054 /* App */,
 				52385DB824AE51FE00317AC9 /* Control */,
 				52A9306B24A60E06003BDCDC /* Home */,
-				5261749F24A9071B00FE831D /* Hyperion.entitlements */,
 				52EBA9F124A7F24F00BA5A45 /* Main */,
 				52FEC34F24A797C7000AF55F /* Settings */,
 				52543D7724A1258600505054 /* Supporting Files */,
@@ -282,7 +462,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		525F0B7325DA78B700A9D603 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525F0B8825DA78C100A9D603 /* HyperionApi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		525F0B7725DA78B700A9D603 /* HyperionApi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 525F0B8125DA78B700A9D603 /* Build configuration list for PBXNativeTarget "HyperionApi" */;
+			buildPhases = (
+				525F0B7325DA78B700A9D603 /* Headers */,
+				525F0B7425DA78B700A9D603 /* Sources */,
+				525F0B7525DA78B700A9D603 /* Frameworks */,
+				525F0B7625DA78B700A9D603 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HyperionApi;
+			productName = HyperionApi;
+			productReference = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		52F16BA52494E51600A69D01 /* Hyperion */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52F16BBA2494E51700A69D01 /* Build configuration list for PBXNativeTarget "Hyperion" */;
@@ -291,10 +500,12 @@
 				52F16BA32494E51600A69D01 /* Frameworks */,
 				52F16BA42494E51600A69D01 /* Resources */,
 				52CE4E6825431CF7000ADCD6 /* Embed App Extensions */,
+				525F0C6D25DA84BF00A9D603 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				525F0C6C25DA84BF00A9D603 /* PBXTargetDependency */,
 			);
 			name = Hyperion;
 			packageProductDependencies = (
@@ -311,10 +522,13 @@
 		52F16B9E2494E51600A69D01 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Hack, Thomas";
 				TargetAttributes = {
+					525F0B7725DA78B700A9D603 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					52F16BA52494E51600A69D01 = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -338,11 +552,19 @@
 			projectRoot = "";
 			targets = (
 				52F16BA52494E51600A69D01 /* Hyperion */,
+				525F0B7725DA78B700A9D603 /* HyperionApi */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		525F0B7625DA78B700A9D603 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52F16BA42494E51600A69D01 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +577,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		525F0B7425DA78B700A9D603 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525F0BD125DA7AC100A9D603 /* ClearData.swift in Sources */,
+				525F0C2525DA7DCA00A9D603 /* Component.swift in Sources */,
+				525F0B8E25DA78CC00A9D603 /* HyperionApi.swift in Sources */,
+				525F0BF525DA7C8300A9D603 /* AdjustmentUpdate.swift in Sources */,
+				525F0BD925DA7AE800A9D603 /* ComponentState.swift in Sources */,
+				525F0BC125DA7A6800A9D603 /* AdjustmentData.swift in Sources */,
+				525F0BFD25DA7CA500A9D603 /* HdrToneMappingUpdate.swift in Sources */,
+				525F0BE525DA7C2F00A9D603 /* Response.swift in Sources */,
+				525F0BCD25DA7AA900A9D603 /* EffectData.swift in Sources */,
+				525F0B8F25DA78CC00A9D603 /* RGB.swift in Sources */,
+				525F0BB525DA7A2E00A9D603 /* SubscribeType.swift in Sources */,
+				525F0C2D25DA7DF100A9D603 /* PriorityValue.swift in Sources */,
+				525F0C0125DA7CB800A9D603 /* PriorityUpdate.swift in Sources */,
+				525F0BED25DA7C5D00A9D603 /* InstanceUpdate.swift in Sources */,
+				525F0BF125DA7C7000A9D603 /* InstanceSwitchUpdate.swift in Sources */,
+				525F0B9925DA792000A9D603 /* Compose.swift in Sources */,
+				525F0BBD25DA7A5500A9D603 /* SubscribeData.swift in Sources */,
+				525F0C2125DA7DBA00A9D603 /* LightEffect.swift in Sources */,
+				525F0C1525DA7D1100A9D603 /* InfoData.swift in Sources */,
+				525F0C1125DA7D0200A9D603 /* HdrToneMapping.swift in Sources */,
+				525F0BE925DA7C4700A9D603 /* ServerInfoUpdate.swift in Sources */,
+				525F0C0525DA7CCD00A9D603 /* Success.swift in Sources */,
+				525F0BE125DA7C1B00A9D603 /* ResponseType.swift in Sources */,
+				525F0B9025DA78CC00A9D603 /* Color.swift in Sources */,
+				525F0BC525DA7A7A00A9D603 /* ComponentData.swift in Sources */,
+				525F0BB925DA7A4300A9D603 /* InstanceData.swift in Sources */,
+				525F0BB125DA7A1900A9D603 /* Request.swift in Sources */,
+				525F0BF925DA7C9400A9D603 /* ComponentUpdate.swift in Sources */,
+				525F0BC925DA7A9800A9D603 /* ColorData.swift in Sources */,
+				525F0BD525DA7AD300A9D603 /* HdrToneMappingData.swift in Sources */,
+				525F0BDD25DA7BFB00A9D603 /* ComponentType.swift in Sources */,
+				525F0C2925DA7DD900A9D603 /* Priority.swift in Sources */,
+				525F0BAD25DA79F100A9D603 /* SubCommandType.swift in Sources */,
+				525F0C0D25DA7CF000A9D603 /* PrioritiesData.swift in Sources */,
+				525F0BA925DA79C800A9D603 /* RequestType.swift in Sources */,
+				525F0C1925DA7D2400A9D603 /* Adjustment.swift in Sources */,
+				525F0C1D25DA7DA800A9D603 /* Instance.swift in Sources */,
+				525F0C0925DA7CDC00A9D603 /* InstanceInfo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52F16BA22494E51600A69D01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,27 +639,23 @@
 				52BC893F24ACF737005607DB /* BrightnessControl.swift in Sources */,
 				52BC893B24ACF6BF005607DB /* Home+HomeFeature.swift in Sources */,
 				52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */,
-				52C752D124EAD0B50011ABDB /* Color.swift in Sources */,
-				52A9306924A60D8D003BDCDC /* HyperionApi.swift in Sources */,
 				52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */,
-				52C752CD24EAC7980011ABDB /* RGB.swift in Sources */,
+				525F0B4C25DA772100A9D603 /* ApiClient.swift in Sources */,
 				52970CFF24E400F100B3B4E0 /* IntensityButton.swift in Sources */,
-				52B38EC924AE153D00A0DDC8 /* ApiClient.swift in Sources */,
 				52E3E80A24E5B84D00E77E1C /* NotConnected.swift in Sources */,
 				524F3C9724AA798100B4C345 /* ConnectionHeader.swift in Sources */,
 				525837D624AA2CF60084932D /* HomeView.swift in Sources */,
 				5283E27824EAE82D00713525 /* Helpers.swift in Sources */,
 				525837D524AA2B2D0084932D /* Home.swift in Sources */,
+				525F0B4F25DA775E00A9D603 /* ApiDelegate.swift in Sources */,
 				52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */,
-				52FEC34E24A74FFF000AF55F /* Compose.swift in Sources */,
 				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,
+				525F0B4925DA771200A9D603 /* Api.swift in Sources */,
 				52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */,
 				525837D724AA2D020084932D /* SettingsView.swift in Sources */,
 				52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */,
 				5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */,
-				52B38ECB24AE15BF00A0DDC8 /* ApiDelegate.swift in Sources */,
 				528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */,
-				52A9306324A5F801003BDCDC /* Api.swift in Sources */,
 				52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */,
 				520E65D124E6A386007E9D3D /* Favourites.swift in Sources */,
 				52BC893E24ACF737005607DB /* InstanceControl.swift in Sources */,
@@ -403,6 +666,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		525F0C6C25DA84BF00A9D603 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 525F0B7725DA78B700A9D603 /* HyperionApi */;
+			targetProxy = 525F0C6B25DA84BF00A9D603 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		52F16BB42494E51700A69D01 /* LaunchScreen.storyboard */ = {
@@ -416,6 +687,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		525F0B8225DA78B700A9D603 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N9C9UAVR87;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = HyperionApi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.deloittedigital.HyperionApi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		525F0B8325DA78B700A9D603 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N9C9UAVR87;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = HyperionApi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.deloittedigital.HyperionApi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		52F16BB82494E51700A69D01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -535,13 +864,15 @@
 		52F16BBB2494E51700A69D01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Hyperion/Hyperion.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Hyperion/Supporting Files/Hyperion.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Hyperion/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -550,20 +881,22 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
 		52F16BBC2494E51700A69D01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Hyperion/Hyperion.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Hyperion/Supporting Files/Hyperion.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Hyperion/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -572,13 +905,22 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		525F0B8125DA78B700A9D603 /* Build configuration list for PBXNativeTarget "HyperionApi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				525F0B8225DA78B700A9D603 /* Debug */,
+				525F0B8325DA78B700A9D603 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		52F16BA12494E51600A69D01 /* Build configuration list for PBXProject "Hyperion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

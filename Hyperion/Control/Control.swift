@@ -9,12 +9,13 @@
 import ComposableArchitecture
 import UIKit
 import SwiftUI
+import HyperionApi
 
 enum Control {
     struct State: Equatable {
         var showEffectPopover: Bool = false
         var selectedEffect: String = ""
-        var rgbColor: RGB = RGB(red: 255, green: 255, blue: 255)
+        var rgbColor: HyperionApi.RGB = HyperionApi.RGB(red: 255, green: 255, blue: 255)
         var color: Color = Color.red
         var brightness: CGFloat = 1
     }

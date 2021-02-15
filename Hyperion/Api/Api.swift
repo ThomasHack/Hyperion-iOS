@@ -11,6 +11,7 @@ import SwiftUI
 import ComposableArchitecture
 import Combine
 import Starscream
+import HyperionApi
 
 struct ApiId: Hashable {}
 
@@ -19,7 +20,7 @@ enum Api {
         var connectivityState: ConnectivityState = .disconnected
         var hostname: String = ""
         var instances: [HyperionApi.Instance] = []
-        var effects: [HyperionApi.Effect] = []
+        var effects: [HyperionApi.LightEffect] = []
         var components: [HyperionApi.Component] = []
         var priorities: [HyperionApi.Priority] = []
         var hdrToneMapping: Bool = false
@@ -73,8 +74,8 @@ enum Api {
         case selectInstance(Int)
         case updateInstance(Int, Bool)
         case updateBrightness(Double)
-        case updateColor(RGB)
-        case updateEffect(HyperionApi.Effect)
+        case updateColor(HyperionApi.RGB)
+        case updateEffect(HyperionApi.LightEffect)
         case turnOnSmoothing
         case turnOffSmoothing
         case turnOnBlackborderDetection
@@ -93,7 +94,7 @@ enum Api {
         case didReceiveWebSocketEvent(ApiClient.Event)
         case didUpdateBrightness(Double)
         case didUpdateInstances([HyperionApi.Instance])
-        case didUpdateEffects([HyperionApi.Effect])
+        case didUpdateEffects([HyperionApi.LightEffect])
         case didUpdateComponent(HyperionApi.Component)
         case didUpdateComponents([HyperionApi.Component])
         case didUpdateHostname(String)
@@ -273,18 +274,18 @@ enum Api {
             HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Play Lightbars")
         ],
         effects: [
-            HyperionApi.Effect(name: "Atomic swirl"),
-            HyperionApi.Effect(name: "Blue mood blobs"),
-            HyperionApi.Effect(name: "Breath"),
-            HyperionApi.Effect(name: "Cold mood blobs"),
-            HyperionApi.Effect(name: "Full color mood blobs"),
-            HyperionApi.Effect(name: "Knight rider"),
-            HyperionApi.Effect(name: "Light clock"),
-            HyperionApi.Effect(name: "Pac-Man"),
-            HyperionApi.Effect(name: "Police Lights Solid"),
-            HyperionApi.Effect(name: "Sea waves"),
-            HyperionApi.Effect(name: "Strobe red"),
-            HyperionApi.Effect(name: "Waves with Color"),
+            HyperionApi.LightEffect(name: "Atomic swirl"),
+            HyperionApi.LightEffect(name: "Blue mood blobs"),
+            HyperionApi.LightEffect(name: "Breath"),
+            HyperionApi.LightEffect(name: "Cold mood blobs"),
+            HyperionApi.LightEffect(name: "Full color mood blobs"),
+            HyperionApi.LightEffect(name: "Knight rider"),
+            HyperionApi.LightEffect(name: "Light clock"),
+            HyperionApi.LightEffect(name: "Pac-Man"),
+            HyperionApi.LightEffect(name: "Police Lights Solid"),
+            HyperionApi.LightEffect(name: "Sea waves"),
+            HyperionApi.LightEffect(name: "Strobe red"),
+            HyperionApi.LightEffect(name: "Waves with Color"),
         ],
         components: [
             HyperionApi.Component(name: .blackborder, enabled: true),

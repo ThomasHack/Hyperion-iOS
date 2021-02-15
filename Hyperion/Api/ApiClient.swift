@@ -10,6 +10,7 @@ import Foundation
 import ComposableArchitecture
 import Combine
 import Starscream
+import HyperionApi
 
 private var dependencies: [AnyHashable: Dependencies] = [:]
 private struct Dependencies {
@@ -39,8 +40,8 @@ struct ApiClient {
     var subscribe: (AnyHashable) -> Effect<Api.Action, Never>
     var updateBrightness: (AnyHashable, Double) -> Effect<Api.Action, Never>
     var updateInstance: (AnyHashable, Int, Bool) -> Effect<Api.Action, Never>
-    var updateColor: (AnyHashable, RGB) -> Effect<Api.Action, Never>
-    var updateEffect: (AnyHashable, HyperionApi.Effect) -> Effect<Api.Action, Never>
+    var updateColor: (AnyHashable, HyperionApi.RGB) -> Effect<Api.Action, Never>
+    var updateEffect: (AnyHashable, HyperionApi.LightEffect) -> Effect<Api.Action, Never>
     var toggleSmoothing: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var toggleBlackborderDetection: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var toggleLedHardware: (AnyHashable, Bool) -> Effect<Api.Action, Never>
@@ -71,7 +72,7 @@ extension ApiClient {
                         subscriber.send(.didUpdateInstances($0 as [HyperionApi.Instance]))
                     },
                     didUpdateEffects: {
-                        subscriber.send(.didUpdateEffects($0 as [HyperionApi.Effect]))
+                        subscriber.send(.didUpdateEffects($0 as [HyperionApi.LightEffect]))
                     },
                     didUpdateComponent: {
                         subscriber.send(.didUpdateComponent($0 as HyperionApi.Component))
@@ -127,7 +128,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.SubscribeRequest(
                     HyperionApi.Request(command: .serverinfo),
-                    HyperionApi.SubscribeRequestData(subscribe: [
+                    HyperionApi.SubscribeData(subscribe: [
                         .instanceUpdate,
                         .adjustmentUpdate,
                         .componentUpdate,
@@ -150,7 +151,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.AdjustmentRequest(
                     HyperionApi.Request(command: .adjustment),
-                    HyperionApi.AdjustmentRequestData(adjustment: HyperionApi.Adjustment(brightness: Int(brightness)))
+                    HyperionApi.AdjustmentData(adjustment: HyperionApi.Adjustment(brightness: Int(brightness)))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -167,7 +168,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.InstanceRequest(
                     HyperionApi.Request(command: .instance),
-                    HyperionApi.InstanceRequestData(subcommand: running ? .stopInstance : .startInstance, instance: instanceId)
+                    HyperionApi.InstanceData(subcommand: running ? .stopInstance : .startInstance, instance: instanceId)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -184,7 +185,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ColorRequest(
                     HyperionApi.Request(command: .color),
-                    HyperionApi.ColorRequestData(color: [Int(rgb.red * 255), Int(rgb.green * 255), Int(rgb.blue * 255)], priority: 1, origin: "HyperionApp")
+                    HyperionApi.ColorData(color: [Int(rgb.red * 255), Int(rgb.green * 255), Int(rgb.blue * 255)], priority: 1, origin: "HyperionApp")
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -201,7 +202,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.EffectRequest(
                     HyperionApi.Request(command: .instance),
-                    HyperionApi.EffectRequestData(effect: effect, priority: 50, origin: "HyperionApp")
+                    HyperionApi.EffectData(effect: effect, priority: 50, origin: "HyperionApp")
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -218,7 +219,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
-                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .smoothing, state: state))
+                    HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .smoothing, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -235,7 +236,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
-                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .blackborder, state: state))
+                    HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .blackborder, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -252,7 +253,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
-                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .led, state: state))
+                    HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .led, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -269,7 +270,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
-                    HyperionApi.ComponentRequestData(componentstate: HyperionApi.ComponentState(component: .v4l, state: state))
+                    HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .v4l, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -286,7 +287,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.HdrToneMappingRequest(
                     HyperionApi.Request(command: .hdr),
-                    HyperionApi.HdrToneMappingRequestData(hdr: state)
+                    HyperionApi.HdrToneMappingData(hdr: state)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -304,7 +305,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.InstanceRequest(
                     HyperionApi.Request(command: .instance),
-                    HyperionApi.InstanceRequestData(subcommand: .switchTo, instance: instanceId)
+                    HyperionApi.InstanceData(subcommand: .switchTo, instance: instanceId)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
@@ -321,7 +322,7 @@ extension ApiClient {
             .run { subscriber in
                 let message = HyperionApi.ClearRequest(
                     HyperionApi.Request(command: .clear),
-                    HyperionApi.ClearRequestData(priority: -1)
+                    HyperionApi.ClearData(priority: -1)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)

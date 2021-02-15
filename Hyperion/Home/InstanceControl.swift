@@ -13,7 +13,7 @@ struct InstanceControl: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
 
     let columns = [
-            GridItem(.adaptive(minimum: 100))
+            GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 200 : 100))
         ]
 
     var body: some View {

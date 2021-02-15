@@ -8,6 +8,7 @@
 
 import Foundation
 import Starscream
+import HyperionApi
 
 class ApiClientDelegate: WebSocketDelegate {
     let didConnect: () -> Void
@@ -15,7 +16,7 @@ class ApiClientDelegate: WebSocketDelegate {
     let didReceiveWebSocketEvent: (ApiClient.Event) -> Void
     let didUpdateBrightness: (Double) -> Void
     let didUpdateInstances: ([HyperionApi.Instance]) -> Void
-    let didUpdateEffects: ([HyperionApi.Effect]) -> Void
+    let didUpdateEffects: ([HyperionApi.LightEffect]) -> Void
     let didUpdateComponent: (HyperionApi.Component) -> Void
     let didUpdateComponents: ([HyperionApi.Component]) -> Void
     let didUpdateHostname: (String) -> Void
@@ -29,7 +30,7 @@ class ApiClientDelegate: WebSocketDelegate {
         didReceiveWebSocketEvent: @escaping (ApiClient.Event) -> Void,
         didUpdateBrightness: @escaping (Double) -> Void,
         didUpdateInstances: @escaping ([HyperionApi.Instance]) -> Void,
-        didUpdateEffects: @escaping ([HyperionApi.Effect]) -> Void,
+        didUpdateEffects: @escaping ([HyperionApi.LightEffect]) -> Void,
         didUpdateComponent: @escaping (HyperionApi.Component) -> Void,
         didUpdateComponents: @escaping ([HyperionApi.Component]) -> Void,
         didUpdateHostname: @escaping (String) -> Void,

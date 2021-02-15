@@ -8,6 +8,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import HyperionApi
 
 struct InstanceSelection: View {
     let store: Store<Home.HomeFeatureState, Home.Action>

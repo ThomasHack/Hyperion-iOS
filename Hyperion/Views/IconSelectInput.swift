@@ -8,6 +8,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import HyperionApi
 
 struct IconSelectInput: View {
     let store: Store<Settings.SettingsFeatureState, Settings.Action>

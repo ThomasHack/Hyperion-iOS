@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Color {
 
-    var rgbColor: RGB {
+    public var rgbColor: RGB {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
