@@ -1,6 +1,6 @@
 //
-//  Control_Widget.swift
-//  Control Widget
+//  ControlWidget.swift
+//  ControlWidget
 //
 //  Created by Hack, Thomas on 15.02.21.
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
@@ -8,25 +8,26 @@
 
 import WidgetKit
 import SwiftUI
+import Intents
 
-struct Provider: TimelineProvider {
+struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+        let entry = SimpleEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration)
             entries.append(entry)
         }
 
@@ -37,9 +38,10 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let configuration: ConfigurationIntent
 }
 
-struct Control_WidgetEntryView : View {
+struct ControlWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -48,21 +50,21 @@ struct Control_WidgetEntryView : View {
 }
 
 @main
-struct Control_Widget: Widget {
-    let kind: String = "Control_Widget"
+struct ControlWidget: Widget {
+    let kind: String = "ControlWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            Control_WidgetEntryView(entry: entry)
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+            ControlWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
     }
 }
 
-struct Control_Widget_Previews: PreviewProvider {
+struct ControlWidget_Previews: PreviewProvider {
     static var previews: some View {
-        Control_WidgetEntryView(entry: SimpleEntry(date: Date()))
+        ControlWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
