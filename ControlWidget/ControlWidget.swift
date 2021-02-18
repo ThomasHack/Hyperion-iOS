@@ -9,62 +9,96 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import HyperionApi
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+
+    @State var hasFetchedServerInfo: Bool = false
+    @State var serverInfo: InfoData?
+
+    func placeholder(in context: Context) -> WidgetEntry {
+        let entry = WidgetEntry(date: Date(), info: ApiClient.previewData, configuration: ConfigurationIntent())
+        return entry
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (WidgetEntry) -> ()) {
+        let date = Date()
+        let entry: WidgetEntry
+
+        if context.isPreview && !hasFetchedServerInfo {
+            entry = WidgetEntry(date: date, info: ApiClient.previewData, configuration: ConfigurationIntent())
+        } else {
+            entry = WidgetEntry(date: date, info: serverInfo!, configuration: ConfigurationIntent())
+        }
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<WidgetEntry>) -> ()) {
+        ApiClient.fetchServerInfo { response in
+            switch response {
+            case .success(let update):
+                self.serverInfo = update.info
+                self.hasFetchedServerInfo = true
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+                let date = Date()
+                let entry = WidgetEntry(date: Date(), info: update.info, configuration: configuration)
+                let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: date)!
+                let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                completion(timeline)
+            case .failure(let error):
+                print("error: \(error)")
+            }
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
-}
-
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationIntent
 }
 
 struct ControlWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        ZStack {
+            Color(UIColor.secondarySystemBackground)
+            VStack(spacing: 8) {
+                WidgetHeaderView(title: entry.info.hostname)
+                WidgetContentView(entry: entry)
+            }
+            .padding([.bottom], 8)
+        }
     }
 }
 
 @main
 struct ControlWidget: Widget {
-    let kind: String = "ControlWidget"
+    let kind: String = "de.hyperion-ng.ControlWidget"
+
+    static let previewData = WidgetEntry(date: Date(),
+                                            info: ApiClient.previewData,
+                                            configuration: ConfigurationIntent())
+
+    static let placeholderData = WidgetEntry(date: Date(),
+                                             info: ApiClient.placeholderData,
+                                             configuration: ConfigurationIntent())
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             ControlWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Hyperion Control Widget")
+        .description("View and control Hyperion-NG Components.")
     }
 }
 
 struct ControlWidget_Previews: PreviewProvider {
     static var previews: some View {
-        ControlWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        ControlWidgetEntryView(entry: ControlWidget.placeholderData)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .redacted(reason: .placeholder)
+
+        ControlWidgetEntryView(entry: ControlWidget.previewData)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .redacted(reason: .placeholder)
+
+        //ControlWidgetEntryView(entry: ControlWidget.previewData)
+        //    .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

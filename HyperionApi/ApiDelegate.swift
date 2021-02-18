@@ -76,7 +76,6 @@ public class ApiDelegate: WebSocketDelegate {
     }
 
     private func didReceiveText(_ string: String) {
-        print(string)
         guard let data = string.data(using: .utf8, allowLossyConversion: false) else { return }
         do {
             let response = try JSONDecoder().decode(HyperionApi.Response.self, from: data)

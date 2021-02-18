@@ -7,7 +7,8 @@
 //
 
 import ComposableArchitecture
-import Foundation
+import SwiftUI
+import HyperionApi
 
 enum ConnectivityState {
     case connected
@@ -17,6 +18,8 @@ enum ConnectivityState {
 
 enum Main {
     struct State: Equatable {
+
+        var urlContexts: Set<UIOpenURLContext>?
 
         var api: Api.State
         var shared: Shared.State
@@ -41,6 +44,9 @@ enum Main {
     }
 
     enum Action {
+        case openURLContexts(Set<UIOpenURLContext>)
+        case processURLContext(Set<UIOpenURLContext>)
+
         case api(Api.Action)
         case home(Home.Action)
         case shared(Shared.Action)
@@ -55,8 +61,45 @@ enum Main {
     }
 
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer<State, Action, Environment>{ _, _, _ in
-            return .none
+        Reducer { state, action, environment in
+            switch action {
+            case .api(.didConnect):
+                if let urlContexts = state.urlContexts {
+                    return Effect(value: Action.processURLContext(urlContexts))
+                }
+                return .none
+            case .openURLContexts(let URLContexts):
+                if state.api.connectivityState == .connected {
+                    return Effect(value: Action.processURLContext(URLContexts))
+                } else {
+                    state.urlContexts = URLContexts
+                    return .none
+                }
+            case .processURLContext(let URLContexts):
+                guard let context = URLContexts.first,
+                  let module = context.url.host,
+                  let toggle = context.url.query,
+                  let enable = Bool(toggle) else { return .none }
+
+                state.urlContexts = nil
+
+                switch HyperionApi.ComponentType(rawValue: module) {
+                case .blackborder:
+                    return Effect(value: Action.api(enable ? .turnOnBlackborderDetection : .turnOffBlackborderDetection))
+                case .led:
+                    return Effect(value: Action.api(enable ? .turnOnLedHardware : .turnOffLedHardware))
+                case .smoothing:
+                    return Effect(value: Action.api(enable ? .turnOnSmoothing : .turnOffSmoothing))
+                case .v4l:
+                    return Effect(value: Action.api(enable ? .turnOnSmoothing : .turnOffSmoothing))
+                case .videomodehdr:
+                    return Effect(value: Action.api(enable ? .turnOnHdrToneMapping : .turnOffHdrToneMapping))
+                default:
+                    return .none
+                }
+            case .api, .shared, .home, .settings, .control:
+                return .none
+            }
         },
         Api.reducer.pullback(
             state: \State.api,

@@ -11,6 +11,7 @@ import ComposableArchitecture
 import Combine
 import Starscream
 import HyperionApi
+import WidgetKit
 
 private var dependencies: [AnyHashable: Dependencies] = [:]
 private struct Dependencies {
@@ -38,6 +39,11 @@ struct ApiClient {
 }
 
 extension ApiClient {
+
+    static func reloadControlWidget() {
+        WidgetCenter.shared.reloadTimelines(ofKind: "de.hyperion-ng.ControlWidget")
+    }
+
     static let live = ApiClient(
         connect: { id, url in
             .run { subscriber in
@@ -105,7 +111,7 @@ extension ApiClient {
                 let data = try! JSONEncoder().encode(message)
                 let string = String(data: data, encoding: .utf8)!
                 dependencies[id]?.socket.write(string: string, completion: {
-                    subscriber.send(completion: .finished)
+                    return subscriber.send(completion: .finished)
                 })
                 return AnyCancellable {}
             }
@@ -142,7 +148,9 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -159,7 +167,9 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -176,7 +186,9 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -193,7 +205,9 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -210,7 +224,11 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    print("Request Smoothing")
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
+                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -227,7 +245,10 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
+                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -244,7 +265,10 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
+                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -261,7 +285,10 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
+                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -278,8 +305,10 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    print("\(string)")
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
+                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -296,7 +325,9 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -313,7 +344,9 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    dependencies[id]?.socket.write(string: string)
+                    dependencies[id]?.socket.write(string: string, completion: {
+                        subscriber.send(completion: .finished)
+                    })
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}

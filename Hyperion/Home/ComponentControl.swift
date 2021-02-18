@@ -30,17 +30,6 @@ struct ComponentControl: View {
                         callback: {
                             viewStore.send(viewStore.api.hdrToneMapping ? .turnOffHdrToneMapping : .turnOnHdrToneMapping)
                         })
-                    
-                    if let blackborderDetection = viewStore.api.blackborderComponent {
-                        InstanceButton(
-                            imageName: "blackborder",
-                            text: "Blackborder Detection",
-                            isDisabled: false,
-                            isRunning: blackborderDetection.enabled,
-                            callback: {
-                                viewStore.send(blackborderDetection.enabled ? .turnOffBlackborderDetection : .turnOnBlackborderDetection)
-                            })
-                    }
 
                     if let smoothing = viewStore.api.smoothingComponent {
                         InstanceButton(
@@ -50,6 +39,17 @@ struct ComponentControl: View {
                             isRunning: smoothing.enabled,
                             callback: {
                                 viewStore.send(smoothing.enabled ? .turnOffSmoothing : .turnOnSmoothing)
+                            })
+                    }
+
+                    if let blackborderDetection = viewStore.api.blackborderComponent {
+                        InstanceButton(
+                            imageName: "blackborder",
+                            text: "Blackborder Detection",
+                            isDisabled: false,
+                            isRunning: blackborderDetection.enabled,
+                            callback: {
+                                viewStore.send(blackborderDetection.enabled ? .turnOffBlackborderDetection : .turnOnBlackborderDetection)
                             })
                     }
 

@@ -39,7 +39,7 @@ struct HomeView: View {
 
                                 ComponentControl(store: store)
 
-                                Spacer().frame(height: 48)
+                                Spacer(minLength: 0)
                             }
                             .padding()
                         }

@@ -14,4 +14,8 @@ public struct ServerInfoUpdate: Decodable {
     public init(info: InfoData) {
         self.info = info
     }
+
+    enum CodingKeys: String, CodingKey {
+        case info = "info"
+    }
 }

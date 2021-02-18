@@ -18,4 +18,5 @@ public enum ComponentType: String, Equatable, Codable {
     case v4l = "V4L"
     case led = "LEDDEVICE"
     case color = "COLOR"
+    case videomodehdr = "VIDEMODEHDR"
 }

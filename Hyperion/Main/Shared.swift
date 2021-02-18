@@ -10,34 +10,37 @@ import ComposableArchitecture
 import Foundation
 
 enum Shared {
+    static let appGroupName = "group.hyperion-ng"
+    static let hostDefaultsKeyName = "hyperion.hostname"
+    static let iconsDefaultsKeyName = "hyperion.instanceIcons"
+    static let backgroundImageDefaultsKeyName = "hyperion.backgroundImage"
+
+    static let userDefaults = UserDefaults(suiteName: appGroupName)
+
     struct State: Equatable {
         var host: String? {
             didSet {
-                UserDefaults.standard.set(host, forKey: hostDefaultsKeyName)
+                userDefaults?.set(host, forKey: hostDefaultsKeyName)
             }
         }
         var icons: [String: String]? {
             didSet {
-                UserDefaults.standard.set(icons, forKey: iconsDefaultsKeyName)
+                userDefaults?.set(icons, forKey: iconsDefaultsKeyName)
             }
         }
 
         var backgroundImage: String? {
             didSet {
-                UserDefaults.standard.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
+                userDefaults?.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
             }
         }
         var showSettingsModal: Bool = false
     }
 
-    static let hostDefaultsKeyName = "hyperion.hostname"
-    static let iconsDefaultsKeyName = "hyperion.instanceIcons"
-    static let backgroundImageDefaultsKeyName = "hyperion.backgroundImage"
-
     static let initialState = State(
-        host: UserDefaults.standard.string(forKey: hostDefaultsKeyName),
-        icons: UserDefaults.standard.value(forKey: iconsDefaultsKeyName) as? [String: String] ?? [:],
-        backgroundImage: UserDefaults.standard.string(forKey: backgroundImageDefaultsKeyName)
+        host: userDefaults?.string(forKey: hostDefaultsKeyName),
+        icons: userDefaults?.value(forKey: iconsDefaultsKeyName) as? [String: String] ?? [:],
+        backgroundImage: userDefaults?.string(forKey: backgroundImageDefaultsKeyName)
     )
 
     enum Action {
