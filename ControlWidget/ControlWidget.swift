@@ -58,9 +58,10 @@ struct ControlWidgetEntryView : View {
     var body: some View {
         ZStack {
             Color(UIColor.secondarySystemBackground)
-            VStack(spacing: 8) {
+            VStack(spacing: 0) {
                 WidgetHeaderView(title: entry.info.hostname)
                 WidgetContentView(entry: entry)
+                Spacer(minLength: 0)
             }
             .padding([.bottom], 8)
         }
@@ -90,15 +91,16 @@ struct ControlWidget: Widget {
 
 struct ControlWidget_Previews: PreviewProvider {
     static var previews: some View {
-        ControlWidgetEntryView(entry: ControlWidget.placeholderData)
+        /*ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .redacted(reason: .placeholder)
-
+            //.redacted(reason: .placeholder)
+        */
         ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
-            .redacted(reason: .placeholder)
+            //.redacted(reason: .placeholder)
 
-        //ControlWidgetEntryView(entry: ControlWidget.previewData)
-        //    .previewContext(WidgetPreviewContext(family: .systemLarge))
+        /* ControlWidgetEntryView(entry: ControlWidget.previewData)
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
+         */
     }
 }

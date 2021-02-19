@@ -169,6 +169,7 @@ extension ApiClient {
                     let string = String(data: data, encoding: .utf8)!
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
+                        reloadControlWidget()
                     })
                 } catch {
                     print("error: \(error.localizedDescription)")
@@ -227,8 +228,8 @@ extension ApiClient {
                     print("Request Smoothing")
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
+                        reloadControlWidget()
                     })
-                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -247,8 +248,8 @@ extension ApiClient {
                     let string = String(data: data, encoding: .utf8)!
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
+                        reloadControlWidget()
                     })
-                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -267,8 +268,8 @@ extension ApiClient {
                     let string = String(data: data, encoding: .utf8)!
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
+                        reloadControlWidget()
                     })
-                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -287,8 +288,8 @@ extension ApiClient {
                     let string = String(data: data, encoding: .utf8)!
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
+                        reloadControlWidget()
                     })
-                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
@@ -307,8 +308,8 @@ extension ApiClient {
                     let string = String(data: data, encoding: .utf8)!
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
+                        reloadControlWidget()
                     })
-                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}

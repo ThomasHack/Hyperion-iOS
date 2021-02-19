@@ -25,12 +25,23 @@ struct WidgetHeaderView: View {
         }
     }
 
-    var spacing: CGFloat {
+    var topPadding: CGFloat {
+        switch family {
+        case .systemSmall:
+            return 6
+        case .systemMedium, .systemLarge:
+            return 10
+        @unknown default:
+            return 8
+        }
+    }
+
+    var bottomPadding: CGFloat {
         switch family {
         case .systemSmall:
             return 4
         case .systemMedium, .systemLarge:
-            return 12
+            return 6
         @unknown default:
             return 8
         }
@@ -43,7 +54,8 @@ struct WidgetHeaderView: View {
                 .foregroundColor(.white)
             Spacer()
         }
-        .padding([.top, .bottom], spacing)
+        .padding(.top, topPadding)
+        .padding(.bottom, bottomPadding)
         .padding([.leading, .trailing], 16)
         .frame(maxWidth: .infinity)
         .background(Color.black)
@@ -52,7 +64,10 @@ struct WidgetHeaderView: View {
 
 struct WidgetHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetHeaderView(title: "Hue Sync")
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        VStack {
+            WidgetHeaderView(title: "Hue Sync")
+            Spacer()
+        }
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

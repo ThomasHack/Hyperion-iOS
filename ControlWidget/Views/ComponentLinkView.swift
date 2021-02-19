@@ -13,10 +13,10 @@ import WidgetKit
 struct ComponentLinkView: View {
     @Environment(\.widgetFamily) var family
 
-    let component: Component
+    let component: HyperionApi.Component
 
     var url: String {
-        let string = "hyperion://\(component.name)?\(component.enabled ? "false" : "true")"
+        let string = "hyperion://control/component/\(component.name.rawValue)/\(component.enabled ? "false" : "true")"
         return string
     }
 
@@ -46,7 +46,9 @@ struct ComponentLinkView: View {
         switch family {
         case .systemSmall:
             return 7
-        case .systemMedium, .systemLarge:
+        case .systemMedium:
+            return 8
+        case .systemLarge:
             return 8
         @unknown default:
             return 8
@@ -113,7 +115,7 @@ struct ComponentLinkView: View {
 
 struct ComponentLinkView_Previews: PreviewProvider {
     static var previews: some View {
-        let component = Component(name: HyperionApi.ComponentType.blackborder.rawValue, label: "Blackborder Detection", image: "blackborder", enabled: true)
+        let component = HyperionApi.Component(name: .blackborder, enabled: true)
         
         ZStack {
             Color(UIColor.secondarySystemBackground)

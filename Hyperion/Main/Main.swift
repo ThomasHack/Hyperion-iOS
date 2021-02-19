@@ -17,6 +17,12 @@ enum ConnectivityState {
 }
 
 enum Main {
+
+    enum URLContextType: String, Equatable, Codable {
+        case component
+        case instance
+    }
+
     struct State: Equatable {
 
         var urlContexts: Set<UIOpenURLContext>?
@@ -46,6 +52,8 @@ enum Main {
     enum Action {
         case openURLContexts(Set<UIOpenURLContext>)
         case processURLContext(Set<UIOpenURLContext>)
+        case processComponentURLContext(Set<UIOpenURLContext>)
+        case processInstanceURLContext(Set<UIOpenURLContext>)
 
         case api(Api.Action)
         case home(Home.Action)
@@ -77,26 +85,47 @@ enum Main {
                 }
             case .processURLContext(let URLContexts):
                 guard let context = URLContexts.first,
-                  let module = context.url.host,
-                  let toggle = context.url.query,
-                  let enable = Bool(toggle) else { return .none }
+                      let host = context.url.host else { return .none }
+
+                let contextType = context.url.pathComponents[1]
+
+                switch URLContextType(rawValue: contextType){
+                case .component:
+                    return Effect(value: Action.processComponentURLContext(URLContexts))
+                case .instance:
+                    return Effect(value: Action.processInstanceURLContext(URLContexts))
+                case .none:
+                    return .none
+                }
+            case .processComponentURLContext(let URLContexts):
+                guard let context = URLContexts.first,
+                      let enable = Bool(context.url.pathComponents[3]) else { return .none }
+
+                let componentType = context.url.pathComponents[2]
 
                 state.urlContexts = nil
 
-                switch HyperionApi.ComponentType(rawValue: module) {
+                switch HyperionApi.ComponentType(rawValue: componentType) {
                 case .blackborder:
-                    return Effect(value: Action.api(enable ? .turnOnBlackborderDetection : .turnOffBlackborderDetection))
+                    return Effect(value: Action.api(.toggleBlackborderDetection(enable)))
                 case .led:
-                    return Effect(value: Action.api(enable ? .turnOnLedHardware : .turnOffLedHardware))
+                    return Effect(value: Action.api(.toggleLedHardware(enable)))
                 case .smoothing:
-                    return Effect(value: Action.api(enable ? .turnOnSmoothing : .turnOffSmoothing))
+                    return Effect(value: Action.api(.toggleSmoothing(enable)))
                 case .v4l:
-                    return Effect(value: Action.api(enable ? .turnOnSmoothing : .turnOffSmoothing))
+                    return Effect(value: Action.api(.toggleHdmiGrabber(enable)))
                 case .videomodehdr:
-                    return Effect(value: Action.api(enable ? .turnOnHdrToneMapping : .turnOffHdrToneMapping))
+                    return Effect(value: Action.api(.toggleHdrToneMapping(enable)))
                 default:
                     return .none
                 }
+            case .processInstanceURLContext(let URLContexts):
+                guard let context = URLContexts.first,
+                      let instanceId = Int(context.url.pathComponents[2]),
+                      let enable = Bool(context.url.pathComponents[3]) else { return .none }
+
+
+                return Effect(value: Action.api(.updateInstance(instanceId, enable)))
             case .api, .shared, .home, .settings, .control:
                 return .none
             }

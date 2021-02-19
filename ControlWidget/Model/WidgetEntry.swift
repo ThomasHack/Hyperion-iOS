@@ -15,38 +15,38 @@ struct WidgetEntry: TimelineEntry {
     let info: HyperionApi.InfoData
     let configuration: ConfigurationIntent
 
-    var smoothingComponent: Component? {
-        guard let component = info.components.first(where: { $0.name == HyperionApi.ComponentType.smoothing }) else { return nil }
-        return Component(name: component.name.rawValue, label: component.label, image: component.image, enabled: component.enabled)
+    var smoothingComponent: HyperionApi.Component? {
+        return info.components.first(where: { $0.name == HyperionApi.ComponentType.smoothing })
     }
-    var blackborderComponent: Component? {
-        guard let component = info.components.first(where: { $0.name == HyperionApi.ComponentType.blackborder}) else { return nil }
-        return Component(name: component.name.rawValue, label: component.label, image: component.image, enabled: component.enabled)
+    var blackborderComponent: HyperionApi.Component? {
+        return info.components.first(where: { $0.name == HyperionApi.ComponentType.blackborder})
     }
 
-    var ledComponent: Component? {
-        guard let component = info.components.first(where: { $0.name == HyperionApi.ComponentType.led}) else { return nil }
-        return Component(name: component.name.rawValue, label: component.label, image: component.image, enabled: component.enabled)
+    var ledComponent: HyperionApi.Component? {
+        return info.components.first(where: { $0.name == HyperionApi.ComponentType.led})
     }
 
-    var v4lComponent: Component? {
-        guard let component = info.components.first(where: { $0.name == HyperionApi.ComponentType.v4l}) else { return nil }
-        return Component(name: component.name.rawValue, label: component.label, image: component.image, enabled: component.enabled)
+    var v4lComponent: HyperionApi.Component? {
+        return info.components.first(where: { $0.name == HyperionApi.ComponentType.v4l})
     }
 
-    var hdrToneMapping: Component? {
-        return Component(name: "VIDEMODEHDR", label: "HDR Tone Mapping", image: "hdr-tone-mapping", enabled: info.hdrToneMapping != 0)
+    var hdrToneMapping: HyperionApi.Component? {
+        return HyperionApi.Component(name: .videomodehdr, enabled: info.hdrToneMapping != 0)
     }
 
-    var smallComponents: [Component?] {
+    var smallComponents: [HyperionApi.Component?] {
         return [hdrToneMapping, smoothingComponent, blackborderComponent, ledComponent]
     }
 
-    var mediumComponents: [Component?] {
+    var mediumComponents: [HyperionApi.Component?] {
         return [hdrToneMapping, smoothingComponent, blackborderComponent, ledComponent]
     }
 
-    var largeComponents: [Component?] {
+    var largeComponents: [HyperionApi.Component?] {
         return [hdrToneMapping, smoothingComponent, blackborderComponent, ledComponent, v4lComponent]
+    }
+
+    var instances: [HyperionApi.Instance] {
+        return info.instances
     }
 }

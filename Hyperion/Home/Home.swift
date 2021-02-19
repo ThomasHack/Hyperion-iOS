@@ -25,16 +25,11 @@ enum Home {
         case updateBrightness(Double)
         case updateColor(Color)
         case clearButtonTapped
-        case turnOnSmoothing
-        case turnOffSmoothing
-        case turnOnBlackborderDetection
-        case turnOffBlackborderDetection
-        case turnOnLedHardware
-        case turnOffLedHardware
-        case turnOnHdmiGrabber
-        case turnOffHdmiGrabber
-        case turnOnHdrToneMapping
-        case turnOffHdrToneMapping
+        case toggleSmoothing(Bool)
+        case toggleBlackborderDetection(Bool)
+        case toggleLedHardware(Bool)
+        case toggleHdmiGrabber(Bool)
+        case toggleHdrToneMapping(Bool)
 
         case api(Api.Action)
         case shared(Shared.Action)
@@ -82,35 +77,20 @@ enum Home {
             case .clearButtonTapped:
                 return Effect(value: Action.api(.clear))
                 
-            case .turnOnSmoothing:
-                return Effect(value: Action.api(.turnOnSmoothing))
+            case .toggleSmoothing(let enable):
+                return Effect(value: Action.api(.toggleSmoothing(enable)))
 
-            case .turnOffSmoothing:
-                return Effect(value: Action.api(.turnOffSmoothing))
+            case .toggleBlackborderDetection(let enable):
+                return Effect(value: Action.api(.toggleBlackborderDetection(enable)))
 
-            case .turnOnBlackborderDetection:
-                return Effect(value: Action.api(.turnOnBlackborderDetection))
+            case .toggleHdrToneMapping(let enable):
+                return Effect(value: Action.api(.toggleHdrToneMapping(enable)))
 
-            case .turnOffBlackborderDetection:
-                return Effect(value: Action.api(.turnOffBlackborderDetection))
+            case .toggleLedHardware(let enable):
+                return Effect(value: Action.api(.toggleLedHardware(enable)))
 
-            case .turnOnHdrToneMapping:
-                return Effect(value: Action.api(.turnOnHdrToneMapping))
-
-            case .turnOffHdrToneMapping:
-                return Effect(value: Action.api(.turnOffHdrToneMapping))
-
-            case .turnOnLedHardware:
-                return Effect(value: Action.api(.turnOnLedHardware))
-                
-            case .turnOffLedHardware:
-                return Effect(value: Action.api(.turnOffLedHardware))
-
-            case .turnOnHdmiGrabber:
-                return Effect(value: Action.api(.turnOnHdmiGrabber))
-
-            case .turnOffHdmiGrabber:
-                return Effect(value: Action.api(.turnOffHdmiGrabber))
+            case .toggleHdmiGrabber(let enable):
+                return Effect(value: Action.api(.toggleHdmiGrabber(enable)))
 
             case .api, .shared:
                 return .none

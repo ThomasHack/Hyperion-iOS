@@ -14,7 +14,6 @@
 		52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */; };
 		5238B26725DD401100004CF0 /* ComponentGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26625DD401100004CF0 /* ComponentGridView.swift */; };
 		5238B26A25DD401C00004CF0 /* WidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26925DD401C00004CF0 /* WidgetHeaderView.swift */; };
-		5238B26D25DD4A8900004CF0 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26C25DD4A8900004CF0 /* Component.swift */; };
 		5238B27025DD4C4700004CF0 /* WidgetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26F25DD4C4700004CF0 /* WidgetContentView.swift */; };
 		5238B27625DD6B1800004CF0 /* LastUpdated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B27525DD6B1800004CF0 /* LastUpdated.swift */; };
 		5238B27925DD6D1800004CF0 /* InstanceGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B27825DD6D1800004CF0 /* InstanceGridView.swift */; };
@@ -78,6 +77,7 @@
 		525F0D4A25DAADC600A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
 		525F0D4B25DAADC600A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263685924E6CB6700E13707 /* ColorControl.swift */; };
+		5270662225DFC68B008D2CF4 /* InstanceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */; };
 		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
 		5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */; };
@@ -180,7 +180,6 @@
 		52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Control+ControlFeature.swift"; sourceTree = "<group>"; };
 		5238B26625DD401100004CF0 /* ComponentGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentGridView.swift; sourceTree = "<group>"; };
 		5238B26925DD401C00004CF0 /* WidgetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetHeaderView.swift; sourceTree = "<group>"; };
-		5238B26C25DD4A8900004CF0 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		5238B26F25DD4C4700004CF0 /* WidgetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentView.swift; sourceTree = "<group>"; };
 		5238B27525DD6B1800004CF0 /* LastUpdated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastUpdated.swift; sourceTree = "<group>"; };
 		5238B27825DD6D1800004CF0 /* InstanceGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceGridView.swift; sourceTree = "<group>"; };
@@ -233,6 +232,7 @@
 		525F0D4425DAADAC00A9D603 /* ControlWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ControlWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
 		5263685924E6CB6700E13707 /* ColorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
+		5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceLinkView.swift; sourceTree = "<group>"; };
 		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		5283E27724EAE82D00713525 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectInput.swift; sourceTree = "<group>"; };
@@ -466,6 +466,7 @@
 				5238B26F25DD4C4700004CF0 /* WidgetContentView.swift */,
 				5238B27525DD6B1800004CF0 /* LastUpdated.swift */,
 				5238B27825DD6D1800004CF0 /* InstanceGridView.swift */,
+				5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -475,7 +476,6 @@
 			children = (
 				529AF68325DC277F00E70F24 /* ApiInfoRequest.swift */,
 				529AF68F25DC27B100E70F24 /* WidgetEntry.swift */,
-				5238B26C25DD4A8900004CF0 /* Component.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -789,9 +789,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				525F0D3F25DAADAC00A9D603 /* ControlWidget.intentdefinition in Sources */,
-				5238B26D25DD4A8900004CF0 /* Component.swift in Sources */,
 				529AF68825DC278800E70F24 /* ApiInfoRequest.swift in Sources */,
 				5238B27925DD6D1800004CF0 /* InstanceGridView.swift in Sources */,
+				5270662225DFC68B008D2CF4 /* InstanceLinkView.swift in Sources */,
 				5238B26A25DD401C00004CF0 /* WidgetHeaderView.swift in Sources */,
 				5238B27625DD6B1800004CF0 /* LastUpdated.swift in Sources */,
 				529AF69A25DC34D900E70F24 /* ComponentLinkView.swift in Sources */,

@@ -10,12 +10,15 @@ import Foundation
 import HyperionApi
 
 struct ApiClient {
+    static let appGroupName = "group.hyperion-ng"
     static let hostDefaultsKeyName = "hyperion.hostname"
+    static let iconsDefaultsKeyName = "hyperion.instanceIcons"
+
+    static let userDefaults = UserDefaults(suiteName: appGroupName)
 
     static func fetchServerInfo(completion: @escaping (Result<HyperionApi.ServerInfoUpdate, Error>) -> Void) {
 
-        guard let userDefaults = UserDefaults(suiteName: "group.hyperion-ng"),
-              let host = userDefaults.string(forKey: hostDefaultsKeyName) else {
+        guard let host = userDefaults?.string(forKey: hostDefaultsKeyName) else {
             //TODO: Add error
             return // completion(.failure(error))
         }
@@ -44,7 +47,11 @@ struct ApiClient {
     }
 
     static let previewData = HyperionApi.InfoData(adjustments: [],
-                                                  instances: [],
+                                                  instances: [
+                                                    HyperionApi.Instance(instance: 0, running: true, friendlyName: "LG OLED Ambilight"),
+                                                    HyperionApi.Instance(instance: 1, running: false, friendlyName: "Hue Sync"),
+                                                    HyperionApi.Instance(instance: 2, running: false, friendlyName: "Hue Play Lightbars")
+                                                  ],
                                                   hostname: "HyperHDR",
                                                   effects: [],
                                                   components: [

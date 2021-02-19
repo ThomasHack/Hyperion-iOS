@@ -6,6 +6,7 @@
 //  Copyright © 2020 Hack, Thomas. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SwiftUI
 import ComposableArchitecture
@@ -76,16 +77,11 @@ enum Api {
         case updateBrightness(Double)
         case updateColor(HyperionApi.RGB)
         case updateEffect(HyperionApi.LightEffect)
-        case turnOnSmoothing
-        case turnOffSmoothing
-        case turnOnBlackborderDetection
-        case turnOffBlackborderDetection
-        case turnOnLedHardware
-        case turnOffLedHardware
-        case turnOnHdmiGrabber
-        case turnOffHdmiGrabber
-        case turnOnHdrToneMapping
-        case turnOffHdrToneMapping
+        case toggleSmoothing(Bool)
+        case toggleBlackborderDetection(Bool)
+        case toggleLedHardware(Bool)
+        case toggleHdmiGrabber(Bool)
+        case toggleHdrToneMapping(Bool)
         case clear
 
         case didConnect
@@ -147,53 +143,28 @@ enum Api {
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
-        case .turnOnSmoothing:
-            return environment.apiClient.toggleSmoothing(ApiId(), true)
+        case .toggleSmoothing(let enable):
+            return environment.apiClient.toggleSmoothing(ApiId(), enable)
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
-        case .turnOffSmoothing:
-            return environment.apiClient.toggleSmoothing(ApiId(), false)
+        case .toggleBlackborderDetection(let enable):
+            return environment.apiClient.toggleBlackborderDetection(ApiId(), enable)
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
-        case .turnOnBlackborderDetection:
-            return environment.apiClient.toggleBlackborderDetection(ApiId(), true)
+        case .toggleLedHardware(let enable):
+            return environment.apiClient.toggleLedHardware(ApiId(), enable)
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
-        case .turnOffBlackborderDetection:
-            return environment.apiClient.toggleBlackborderDetection(ApiId(), false)
+        case .toggleHdmiGrabber(let enable):
+            return environment.apiClient.toggleHdmiGrabber(ApiId(), enable)
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 
-        case .turnOnLedHardware:
-            return environment.apiClient.toggleLedHardware(ApiId(), true)
-                .receive(on: environment.mainQueue)
-                .eraseToEffect()
-
-        case .turnOffLedHardware:
-            return environment.apiClient.toggleLedHardware(ApiId(), false)
-                .receive(on: environment.mainQueue)
-                .eraseToEffect()
-
-        case .turnOnHdmiGrabber:
-            return environment.apiClient.toggleHdmiGrabber(ApiId(), true)
-                .receive(on: environment.mainQueue)
-                .eraseToEffect()
-
-        case .turnOffHdmiGrabber:
-            return environment.apiClient.toggleHdmiGrabber(ApiId(), false)
-                .receive(on: environment.mainQueue)
-                .eraseToEffect()
-
-        case .turnOnHdrToneMapping:
-            return environment.apiClient.toggleHdrToneMapping(ApiId(), 1)
-                .receive(on: environment.mainQueue)
-                .eraseToEffect()
-
-        case .turnOffHdrToneMapping:
-            return environment.apiClient.toggleHdrToneMapping(ApiId(), 0)
+        case .toggleHdrToneMapping(let enable):
+            return environment.apiClient.toggleHdrToneMapping(ApiId(), enable ? 1 : 0)
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 

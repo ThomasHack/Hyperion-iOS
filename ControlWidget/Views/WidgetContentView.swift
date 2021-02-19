@@ -17,22 +17,26 @@ struct WidgetContentView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            ComponentGridView(components: entry.smallComponents)
+            VStack(spacing: 0) {
+                ComponentGridView(components: entry.smallComponents)
+            }
+            .padding([.top], 8)
         case .systemMedium:
-            VStack {
+            VStack(spacing: 8) {
                 ComponentGridView(components: entry.mediumComponents)
                 LastUpdated(date: entry.date)
             }
+            .padding([.top], 8)
         case .systemLarge:
             VStack(spacing: 8) {
                 ComponentGridView(components: entry.largeComponents)
-                InstanceGridView(instances: [])
+                InstanceGridView(instances: entry.instances)
                 LastUpdated(date: entry.date)
             }
+            .padding([.top], 8)
         @unknown default:
             ComponentGridView(components: entry.smallComponents)
         }
-
     }
 }
 
