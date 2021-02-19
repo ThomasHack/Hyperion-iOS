@@ -225,7 +225,6 @@ extension ApiClient {
                 do {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
-                    print("Request Smoothing")
                     dependencies[id]?.socket.write(string: string, completion: {
                         subscriber.send(completion: .finished)
                         reloadControlWidget()

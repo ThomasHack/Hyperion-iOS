@@ -29,8 +29,8 @@ struct WidgetContentView: View {
             .padding([.top], 8)
         case .systemLarge:
             VStack(spacing: 8) {
-                ComponentGridView(components: entry.largeComponents)
                 InstanceGridView(instances: entry.instances)
+                ComponentGridView(components: entry.largeComponents)
                 LastUpdated(date: entry.date)
             }
             .padding([.top], 8)

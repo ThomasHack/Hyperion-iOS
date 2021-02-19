@@ -28,7 +28,7 @@ struct ComponentControl: View {
                         isDisabled: false,
                         isRunning: viewStore.api.hdrToneMapping,
                         callback: {
-                            viewStore.send(.toggleHdrToneMapping(viewStore.api.hdrToneMapping))
+                            viewStore.send(.toggleHdrToneMapping(!viewStore.api.hdrToneMapping))
                         })
 
                     if let smoothing = viewStore.api.smoothingComponent {
@@ -38,7 +38,7 @@ struct ComponentControl: View {
                             isDisabled: false,
                             isRunning: smoothing.enabled,
                             callback: {
-                                viewStore.send(.toggleSmoothing(smoothing.enabled))
+                                viewStore.send(.toggleSmoothing(!smoothing.enabled))
                             })
                     }
 
@@ -49,7 +49,7 @@ struct ComponentControl: View {
                             isDisabled: false,
                             isRunning: blackborderDetection.enabled,
                             callback: {
-                                viewStore.send(.toggleBlackborderDetection(blackborderDetection.enabled))
+                                viewStore.send(.toggleBlackborderDetection(!blackborderDetection.enabled))
                             })
                     }
 
@@ -60,7 +60,7 @@ struct ComponentControl: View {
                             isDisabled: false,
                             isRunning: v4l.enabled,
                             callback: {
-                                viewStore.send(.toggleHdmiGrabber(v4l.enabled))
+                                viewStore.send(.toggleHdmiGrabber(!v4l.enabled))
                             })
                     }
 
@@ -71,7 +71,7 @@ struct ComponentControl: View {
                             isDisabled: false,
                             isRunning: led.enabled,
                             callback: {
-                                viewStore.send(.toggleLedHardware(led.enabled))
+                                viewStore.send(.toggleLedHardware(!led.enabled))
                             })
                     }
 

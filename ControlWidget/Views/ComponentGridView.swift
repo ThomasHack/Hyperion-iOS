@@ -29,7 +29,7 @@ struct ComponentGridView: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 0) {
             if family == .systemLarge {
                 HStack(spacing: 0) {
                     Text("Components")
@@ -37,6 +37,8 @@ struct ComponentGridView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 8)
+
+                Spacer(minLength: 4)
             }
             LazyVGrid(columns: columns, spacing: 4) {
                 ForEach(components, id: \.self) { component in

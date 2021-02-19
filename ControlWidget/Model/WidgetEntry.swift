@@ -43,7 +43,7 @@ struct WidgetEntry: TimelineEntry {
     }
 
     var largeComponents: [HyperionApi.Component?] {
-        return [hdrToneMapping, smoothingComponent, blackborderComponent, ledComponent, v4lComponent]
+        return [hdrToneMapping, smoothingComponent, blackborderComponent, v4lComponent, ledComponent]
     }
 
     var instances: [HyperionApi.Instance] {

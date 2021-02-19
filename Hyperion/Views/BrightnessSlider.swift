@@ -18,14 +18,13 @@ struct BrightnessSlider: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .foregroundColor(Color(UIColor.tertiarySystemBackground).opacity(0.1))
-                    .background(BlurView())
+                    .foregroundColor(Color(UIColor.systemBackground).opacity(0.3))
+                    .background(BlurView().opacity(0.2))
                 ZStack(alignment: .trailing) {
                     HStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .background(Color(UIColor.systemYellow)
-                                // LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemYellow).opacity(1.0), Color(UIColor.systemBackground).opacity(0.95)]), startPoint: .leading, endPoint: .trailing)
+                            .background(Color(UIColor.systemBackground)
                             )
                     }.cornerRadius(12)
                         .clipped()
@@ -49,6 +48,7 @@ struct BrightnessSlider: View {
                     .foregroundColor(Color(UIColor.secondaryLabel))
                 }.frame(maxWidth: .infinity, alignment: .center)
             }
+            .clipped()
             .cornerRadius(15)
             .shadow(color: Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
             .gesture(DragGesture(minimumDistance: 0)

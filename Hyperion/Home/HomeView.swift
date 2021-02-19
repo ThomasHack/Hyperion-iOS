@@ -23,8 +23,8 @@ struct HomeView: View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                 ZStack {
-                    Color(.secondarySystemBackground)
-
+                    Color("background")
+                    
                     if viewStore.connectivityState == .connected {
                         ScrollView {
                             VStack(alignment: .leading, spacing: 8) {
@@ -97,5 +97,6 @@ struct HomeView_Previews: PreviewProvider {
 
     static var previews: some View {
         HomeView(store: Main.previewStoreHome)
+            .preferredColorScheme(.light)
     }
 }

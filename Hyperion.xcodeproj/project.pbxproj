@@ -104,8 +104,6 @@
 		52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F224A7F2C900BA5A45 /* Main.swift */; };
 		52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F424A7F88000BA5A45 /* MainView.swift */; };
 		52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F924A8CEDE00BA5A45 /* Shared.swift */; };
-		52ECB62E25DED775007402B3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ECB62D25DED775007402B3 /* App.swift */; };
-		52ECB63125DED80D007402B3 /* App+AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ECB63025DED80D007402B3 /* App+AppFeature.swift */; };
 		52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BA92494E51600A69D01 /* AppDelegate.swift */; };
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
@@ -266,8 +264,6 @@
 		52EBA9F224A7F2C900BA5A45 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		52EBA9F424A7F88000BA5A45 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		52EBA9F924A8CEDE00BA5A45 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
-		52ECB62D25DED775007402B3 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		52ECB63025DED80D007402B3 /* App+AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+AppFeature.swift"; sourceTree = "<group>"; };
 		52F16BA62494E51600A69D01 /* Hyperion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hyperion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F16BA92494E51600A69D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F16BAB2494E51600A69D01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -345,10 +341,7 @@
 			children = (
 				52F16BA92494E51600A69D01 /* AppDelegate.swift */,
 				52E3E80D24E5BBB000E77E1C /* Appearance.swift */,
-				5283E27724EAE82D00713525 /* Helpers.swift */,
 				52F16BAB2494E51600A69D01 /* SceneDelegate.swift */,
-				52ECB62D25DED775007402B3 /* App.swift */,
-				52ECB63025DED80D007402B3 /* App+AppFeature.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -516,6 +509,7 @@
 		52C752CB24EAC7850011ABDB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5283E27724EAE82D00713525 /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -809,7 +803,6 @@
 			files = (
 				52E3E80C24E5B8DD00E77E1C /* PriorityPreview.swift in Sources */,
 				52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */,
-				52ECB63125DED80D007402B3 /* App+AppFeature.swift in Sources */,
 				5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */,
 				52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */,
 				52BC894124ACF74D005607DB /* Settings+SettingsFeature.swift in Sources */,
@@ -827,7 +820,6 @@
 				52E3E80A24E5B84D00E77E1C /* NotConnected.swift in Sources */,
 				524F3C9724AA798100B4C345 /* ConnectionHeader.swift in Sources */,
 				525837D624AA2CF60084932D /* HomeView.swift in Sources */,
-				52ECB62E25DED775007402B3 /* App.swift in Sources */,
 				5283E27824EAE82D00713525 /* Helpers.swift in Sources */,
 				525837D524AA2B2D0084932D /* Home.swift in Sources */,
 				52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */,

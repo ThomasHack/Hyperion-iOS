@@ -91,16 +91,14 @@ struct ControlWidget: Widget {
 
 struct ControlWidget_Previews: PreviewProvider {
     static var previews: some View {
-        /*ControlWidgetEntryView(entry: ControlWidget.previewData)
+        ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
             //.redacted(reason: .placeholder)
-        */
         ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             //.redacted(reason: .placeholder)
 
-        /* ControlWidgetEntryView(entry: ControlWidget.previewData)
+        ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
-         */
     }
 }

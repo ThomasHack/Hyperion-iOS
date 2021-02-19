@@ -15,14 +15,14 @@ struct CardButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         let background = disabled
             ? Color(UIColor.tertiarySystemFill)
-            : Color(UIColor.systemBackground).opacity(active ? 1.0 : 0.1)
+            : Color(UIColor.systemBackground).opacity(active ? 1.0 : 0.3)
 
         let foreground = disabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label)
 
         return configuration.label
             .foregroundColor(foreground)
-            .background(BlurView().opacity(active ? 0.0 : 1.0))
             .background(background)
+            .background(BlurView().opacity(active ? 1.0 : 0.2))
             .cornerRadius(15)
             .shadow(color: configuration.isPressed ? Color.black.opacity(0.15) : Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
             .animation(.easeInOut)

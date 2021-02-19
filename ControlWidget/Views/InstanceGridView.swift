@@ -18,13 +18,16 @@ struct InstanceGridView: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 0) {
             HStack(spacing: 0) {
                 Text("Instances")
                     .font(.system(size: 10, weight: .bold, design: .default))
                 Spacer()
             }
             .padding(.horizontal, 8)
+
+            Spacer(minLength: 4)
+
             LazyVGrid(columns: columns, spacing: 4) {
                 ForEach(instances, id: \.self) { instance in
                     InstanceLinkView(instance: instance)
