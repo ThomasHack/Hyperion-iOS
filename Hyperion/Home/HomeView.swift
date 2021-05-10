@@ -53,7 +53,7 @@ struct HomeView: View {
                 .navigationBarTitle(Text("Hue Sync"), displayMode: .automatic)
                 .navigationBarItems(
                     trailing:
-                        HStack(spacing: 24) {                           
+                        HStack(spacing: 24) {
 
                             Button(action: {
                                 viewStore.send(.connectButtonTapped)
