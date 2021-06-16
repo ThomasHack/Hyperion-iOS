@@ -69,11 +69,6 @@ struct HomeView: View {
                 ) {
                     SettingsView(store: Main.store.settings)
                 }
-                .onAppear {
-                    if viewStore.shared.host != nil && viewStore.connectivityState == .disconnected {
-                        viewStore.send(.connectButtonTapped)
-                    }
-                }
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }

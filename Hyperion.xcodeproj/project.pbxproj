@@ -63,7 +63,6 @@
 		525F0C2D25DA7DF100A9D603 /* PriorityValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0C2C25DA7DF100A9D603 /* PriorityValue.swift */; };
 		525F0C9F25DA984200A9D603 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */; };
 		525F0CA425DA989F00A9D603 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B38EC824AE153D00A0DDC8 /* ApiClient.swift */; };
-		525F0CA825DA9A7800A9D603 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 525F0CA725DA9A7800A9D603 /* Starscream */; };
 		525F0CBA25DA9C2000A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
 		525F0CBB25DA9C2000A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		525F0CC825DA9CED00A9D603 /* ApiEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F0CC725DA9CED00A9D603 /* ApiEvent.swift */; };
@@ -104,6 +103,8 @@
 		52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F224A7F2C900BA5A45 /* Main.swift */; };
 		52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F424A7F88000BA5A45 /* MainView.swift */; };
 		52EBA9FA24A8CEDE00BA5A45 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9F924A8CEDE00BA5A45 /* Shared.swift */; };
+		52F08DBA267A4DEC00873CDB /* NWWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 52F08DB9267A4DEC00873CDB /* NWWebSocket */; };
+		52F08DBC267A4E6C00873CDB /* NWWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 52F08DBB267A4E6C00873CDB /* NWWebSocket */; };
 		52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BA92494E51600A69D01 /* AppDelegate.swift */; };
 		52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F16BAB2494E51600A69D01 /* SceneDelegate.swift */; };
 		52F16BB02494E51700A69D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
@@ -289,7 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				525F0CA825DA9A7800A9D603 /* Starscream in Frameworks */,
+				52F08DBC267A4E6C00873CDB /* NWWebSocket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +310,7 @@
 			files = (
 				5247870D24960FEA00826DA5 /* ComposableArchitecture in Frameworks */,
 				525F0CBA25DA9C2000A9D603 /* HyperionApi.framework in Frameworks */,
+				52F08DBA267A4DEC00873CDB /* NWWebSocket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,7 +621,7 @@
 			);
 			name = HyperionApi;
 			packageProductDependencies = (
-				525F0CA725DA9A7800A9D603 /* Starscream */,
+				52F08DBB267A4E6C00873CDB /* NWWebSocket */,
 			);
 			productName = HyperionApi;
 			productReference = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */;
@@ -664,6 +666,7 @@
 			name = Hyperion;
 			packageProductDependencies = (
 				5247870C24960FEA00826DA5 /* ComposableArchitecture */,
+				52F08DB9267A4DEC00873CDB /* NWWebSocket */,
 			);
 			productName = Hyperion;
 			productReference = 52F16BA62494E51600A69D01 /* Hyperion.app */;
@@ -701,7 +704,7 @@
 			mainGroup = 52F16B9D2494E51600A69D01;
 			packageReferences = (
 				5247870B24960FEA00826DA5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				523203F624A7A0D100386EB2 /* XCRemoteSwiftPackageReference "Starscream" */,
+				52F08DB8267A4DEC00873CDB /* XCRemoteSwiftPackageReference "NWWebSocket" */,
 			);
 			productRefGroup = 52F16BA72494E51600A69D01 /* Products */;
 			projectDirPath = "";
@@ -1197,20 +1200,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		523203F624A7A0D100386EB2 /* XCRemoteSwiftPackageReference "Starscream" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ThomasHack/Starscream";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.4;
-			};
-		};
 		5247870B24960FEA00826DA5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.14.0;
+			};
+		};
+		52F08DB8267A4DEC00873CDB /* XCRemoteSwiftPackageReference "NWWebSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pusher/NWWebSocket.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1221,10 +1224,15 @@
 			package = 5247870B24960FEA00826DA5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		525F0CA725DA9A7800A9D603 /* Starscream */ = {
+		52F08DB9267A4DEC00873CDB /* NWWebSocket */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523203F624A7A0D100386EB2 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
+			package = 52F08DB8267A4DEC00873CDB /* XCRemoteSwiftPackageReference "NWWebSocket" */;
+			productName = NWWebSocket;
+		};
+		52F08DBB267A4E6C00873CDB /* NWWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52F08DB8267A4DEC00873CDB /* XCRemoteSwiftPackageReference "NWWebSocket" */;
+			productName = NWWebSocket;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

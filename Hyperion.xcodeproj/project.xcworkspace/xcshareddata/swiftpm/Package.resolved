@@ -11,12 +11,12 @@
         }
       },
       {
-        "package": "Starscream",
-        "repositoryURL": "https://github.com/ThomasHack/Starscream",
+        "package": "NWWebSocket",
+        "repositoryURL": "https://github.com/pusher/NWWebSocket.git",
         "state": {
           "branch": null,
-          "revision": "6a2e30c1899383c2bc1eaec1c8d94dd6534558be",
-          "version": "4.0.4"
+          "revision": "eed470bc3607bc4893046f461107ec463dbd1220",
+          "version": "0.5.2"
         }
       },
       {

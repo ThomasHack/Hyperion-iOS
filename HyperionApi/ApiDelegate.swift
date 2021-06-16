@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import Starscream
+import Network
+import NWWebSocket
 
-public class ApiDelegate: WebSocketDelegate {
+public class ApiDelegate: WebSocketConnectionDelegate {
 
     let didConnect: () -> Void
     let didDisconnect: () -> Void
@@ -52,27 +53,36 @@ public class ApiDelegate: WebSocketDelegate {
         self.didUpdateHdrToneMapping = didUpdateHdrToneMapping
     }
 
-    public func didReceive(event: WebSocketEvent, client: WebSocket) {
-        switch event {
-        case .connected:
-            self.didConnect()
-        case .disconnected, .cancelled:
-            self.didDisconnect()
-        case .text(let string):
-            self.didReceiveText(string)
-        case .binary(let data):
-            self.didReceiveWebSocketEvent(.binary(data))
-        case .ping(_):
-            self.didReceiveWebSocketEvent(.ping)
-        case .pong(_):
-            self.didReceiveWebSocketEvent(.pong)
-        case .viabilityChanged(_):
-            break
-        case .reconnectSuggested(_):
-            break
-        case .error(let error):
-            self.didReceiveWebSocketEvent(.error(error as NSError?))
-        }
+    public func webSocketDidConnect(connection: WebSocketConnection) {
+        self.didConnect()
+    }
+
+    public func webSocketDidDisconnect(connection: WebSocketConnection, closeCode: NWProtocolWebSocket.CloseCode, reason: Data?) {
+        self.didDisconnect()
+    }
+
+    public func webSocketViabilityDidChange(connection: WebSocketConnection, isViable: Bool) {
+
+    }
+
+    public func webSocketDidAttemptBetterPathMigration(result: Result<WebSocketConnection, NWError>) {
+
+    }
+
+    public func webSocketDidReceiveError(connection: WebSocketConnection, error: NWError) {
+        self.didReceiveWebSocketEvent(.error(error as NSError?))
+    }
+
+    public func webSocketDidReceivePong(connection: WebSocketConnection) {
+        self.didReceiveWebSocketEvent(.pong)
+    }
+
+    public func webSocketDidReceiveMessage(connection: WebSocketConnection, string: String) {
+        self.didReceiveText(string)
+    }
+
+    public func webSocketDidReceiveMessage(connection: WebSocketConnection, data: Data) {
+        self.didReceiveWebSocketEvent(.binary(data))
     }
 
     private func didReceiveText(_ string: String) {
