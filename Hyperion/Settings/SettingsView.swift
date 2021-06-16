@@ -59,6 +59,21 @@ struct SettingsView: View {
                             }
                             .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
                         }
+
+                        Button(action: {
+                            viewStore.send(.connectButtonTapped)
+                        }) {
+                            HStack(alignment: .center) {
+                                Spacer()
+                                if viewStore.api.connectivityState == .disconnected {
+                                    Text("Connect")
+                                } else {
+                                    Text("Disconnect")
+                                        .foregroundColor(.red)
+                                }
+                                Spacer()
+                            }
+                        }
                     }
                     .listStyle(InsetGroupedListStyle())
                 }

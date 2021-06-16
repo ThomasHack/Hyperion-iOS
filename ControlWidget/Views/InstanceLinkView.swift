@@ -39,7 +39,7 @@ struct InstanceLinkView: View {
                         }
                     }
                     .frame(width: 42, height: 42, alignment: .center)
-                    .background(Color(UIColor.secondarySystemBackground))
+                    .background(Color(UIColor.systemBackground))
                     .cornerRadius(42/2)
 
                     Spacer(minLength: 8)
@@ -70,7 +70,7 @@ struct InstanceLinkView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .foregroundColor(instance.running ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
-        .background(Color(UIColor.systemBackground))
+        .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
     }
 }

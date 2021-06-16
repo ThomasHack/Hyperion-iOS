@@ -157,6 +157,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5295F31325E033EF000FD4D3 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52CE4E6825431CF7000ADCD6 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -643,6 +653,7 @@
 				52F16BA42494E51600A69D01 /* Resources */,
 				52CE4E6825431CF7000ADCD6 /* Embed App Extensions */,
 				525F0CBE25DA9C2100A9D603 /* Embed Frameworks */,
+				5295F31325E033EF000FD4D3 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -875,6 +886,7 @@
 		525F0B8225DA78B700A9D603 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -890,7 +902,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.deloittedigital.HyperionApi;
+				PRODUCT_BUNDLE_IDENTIFIER = de.thomashack.HyperionApi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -904,6 +916,7 @@
 		525F0B8325DA78B700A9D603 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -919,7 +932,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.deloittedigital.HyperionApi;
+				PRODUCT_BUNDLE_IDENTIFIER = de.thomashack.HyperionApi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -1197,7 +1210,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
+				minimumVersion = 0.14.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

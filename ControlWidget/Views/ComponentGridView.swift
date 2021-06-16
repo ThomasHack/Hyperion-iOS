@@ -23,6 +23,8 @@ struct ComponentGridView: View {
             return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
         case .systemLarge:
             return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+        case .systemExtraLarge:
+            return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
         @unknown default:
             return [GridItem(.flexible())]
         }

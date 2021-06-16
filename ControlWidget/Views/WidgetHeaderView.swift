@@ -13,12 +13,15 @@ struct WidgetHeaderView: View {
     @Environment(\.widgetFamily) var family
 
     var title: String
+    var date: Date
 
     var fontSize: CGFloat {
         switch family {
         case .systemSmall:
             return 12
         case .systemMedium, .systemLarge:
+            return 14
+        case .systemExtraLarge:
             return 14
         @unknown default:
             return 12
@@ -28,8 +31,12 @@ struct WidgetHeaderView: View {
     var topPadding: CGFloat {
         switch family {
         case .systemSmall:
-            return 6
-        case .systemMedium, .systemLarge:
+            return 10
+        case .systemMedium:
+            return 16
+        case .systemLarge:
+            return 16
+        case .systemExtraLarge:
             return 10
         @unknown default:
             return 8
@@ -39,8 +46,12 @@ struct WidgetHeaderView: View {
     var bottomPadding: CGFloat {
         switch family {
         case .systemSmall:
-            return 4
-        case .systemMedium, .systemLarge:
+            return 8
+        case .systemMedium:
+            return 16
+        case .systemLarge:
+            return 8
+        case .systemExtraLarge:
             return 6
         @unknown default:
             return 8
@@ -51,21 +62,23 @@ struct WidgetHeaderView: View {
         HStack(spacing: 0) {
             Text(title)
                 .font(.system(size: fontSize, weight: .bold, design: .default))
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.label))
             Spacer()
+            if family != .systemSmall {
+                LastUpdated(date: date)
+            }
         }
         .padding(.top, topPadding)
         .padding(.bottom, bottomPadding)
         .padding([.leading, .trailing], 16)
         .frame(maxWidth: .infinity)
-        .background(Color.black)
     }
 }
 
 struct WidgetHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            WidgetHeaderView(title: "Hue Sync")
+            WidgetHeaderView(title: "Hue Sync", date: Date())
             Spacer()
         }
         .previewContext(WidgetPreviewContext(family: .systemMedium))

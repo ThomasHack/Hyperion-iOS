@@ -27,7 +27,6 @@ struct LastUpdated: View {
                 .font(.system(size: 8, weight: .regular))
                 .foregroundColor(Color(UIColor.secondaryLabel))
         }
-        .padding(.trailing, 16)
     }
 }
 

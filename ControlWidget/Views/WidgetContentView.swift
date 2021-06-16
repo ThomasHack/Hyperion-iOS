@@ -14,29 +14,43 @@ struct WidgetContentView: View {
     
     var entry: Provider.Entry
 
-    var body: some View {
+    var horizontalPadding: CGFloat {
         switch family {
         case .systemSmall:
-            VStack(spacing: 0) {
+            return 0
+        case .systemMedium, .systemLarge, .systemExtraLarge:
+            return 8
+        @unknown default:
+            return 8
+        }
+    }
+
+    var body: some View {
+        VStack {
+            switch family {
+            case .systemSmall:
+                VStack(spacing: 0) {
+                    ComponentGridView(components: entry.smallComponents)
+                }
+            case .systemMedium:
+                VStack(spacing: 8) {
+                    ComponentGridView(components: entry.mediumComponents)
+                }
+            case .systemLarge:
+                VStack(spacing: 8) {
+                    InstanceGridView(instances: entry.instances)
+                    ComponentGridView(components: entry.largeComponents)
+                }
+            case .systemExtraLarge:
+                VStack(spacing: 8) {
+                    InstanceGridView(instances: entry.instances)
+                    ComponentGridView(components: entry.largeComponents)
+                }
+            @unknown default:
                 ComponentGridView(components: entry.smallComponents)
             }
-            .padding([.top], 8)
-        case .systemMedium:
-            VStack(spacing: 8) {
-                ComponentGridView(components: entry.mediumComponents)
-                LastUpdated(date: entry.date)
-            }
-            .padding([.top], 8)
-        case .systemLarge:
-            VStack(spacing: 8) {
-                InstanceGridView(instances: entry.instances)
-                ComponentGridView(components: entry.largeComponents)
-                LastUpdated(date: entry.date)
-            }
-            .padding([.top], 8)
-        @unknown default:
-            ComponentGridView(components: entry.smallComponents)
         }
+        .padding(.horizontal, horizontalPadding)
     }
 }
 

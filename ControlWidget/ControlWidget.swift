@@ -57,9 +57,10 @@ struct ControlWidgetEntryView : View {
 
     var body: some View {
         ZStack {
-            Color(UIColor.secondarySystemBackground)
+            Color(UIColor.systemBackground)
+
             VStack(spacing: 0) {
-                WidgetHeaderView(title: entry.info.hostname)
+                WidgetHeaderView(title: entry.info.hostname, date: entry.date)
                 WidgetContentView(entry: entry)
                 Spacer(minLength: 0)
             }

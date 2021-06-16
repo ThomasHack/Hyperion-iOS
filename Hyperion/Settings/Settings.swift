@@ -20,6 +20,7 @@ enum Settings {
         case hostInputTextChanged(String)
         case iconNameChanged(instance: String, iconName: String)
         case backgroundImageChanged(String)
+        case connectButtonTapped
         case doneButtonTapped
         case hideSettingsModal
 
@@ -40,6 +41,15 @@ enum Settings {
             case .backgroundImageChanged(let text):
                 state.backgroundImage = text
                 return Effect(value: .shared(.updateBackgroundImage(state.backgroundImage)))
+            case .connectButtonTapped:
+                switch state.connectivityState {
+                case .connected, .connecting:
+                    return Effect(value: Action.api(.disconnect))
+
+                case .disconnected:
+                    guard let host = state.host, let url = URL(string: host) else { return .none }
+                    return Effect(value: Action.api(.connect(url)))
+                }
             case .hideSettingsModal:
                 state.showSettingsModal = false
             case .doneButtonTapped:

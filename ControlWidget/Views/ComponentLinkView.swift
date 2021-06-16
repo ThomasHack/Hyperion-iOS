@@ -26,6 +26,8 @@ struct ComponentLinkView: View {
             return CGSize(width: 24, height: 24)
         case .systemMedium, .systemLarge:
             return CGSize(width: 42, height: 42)
+        case .systemExtraLarge:
+            return CGSize(width: 42, height: 42)
         @unknown default:
             return CGSize(width: 42, height: 42)
         }
@@ -36,6 +38,8 @@ struct ComponentLinkView: View {
         case .systemSmall:
             return CGSize(width: 6, height: 6)
         case .systemMedium, .systemLarge:
+            return CGSize(width: 8, height: 8)
+        case .systemExtraLarge:
             return CGSize(width: 8, height: 8)
         @unknown default:
             return CGSize(width: 8, height: 8)
@@ -50,6 +54,8 @@ struct ComponentLinkView: View {
             return 8
         case .systemLarge:
             return 8
+        case .systemExtraLarge:
+            return 8
         @unknown default:
             return 8
         }
@@ -60,6 +66,8 @@ struct ComponentLinkView: View {
         case .systemSmall:
             return 4
         case .systemMedium, .systemLarge:
+            return 8
+        case .systemExtraLarge:
             return 8
         @unknown default:
             fatalError()
@@ -77,7 +85,7 @@ struct ComponentLinkView: View {
                             .padding(2)
                     }
                     .frame(width: imageSize.width, height: imageSize.height, alignment: .center)
-                    .background(Color(UIColor.secondarySystemBackground))
+                    .background(Color(UIColor.systemBackground))
                     .cornerRadius(imageSize.width/2)
 
                     Spacer(minLength: 8)
@@ -108,7 +116,7 @@ struct ComponentLinkView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .foregroundColor(component.enabled ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
-        .background(Color(UIColor.systemBackground))
+        .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
     }
 }

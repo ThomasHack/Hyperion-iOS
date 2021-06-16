@@ -11,21 +11,10 @@ import SwiftUI
 
 struct MainView: View {
     var store: Store<Main.State, Main.Action>
-
-    enum ViewKind: Hashable {
-        case home, control
-    }
-
-    @State var selectedView: ViewKind = .home
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
             HomeView(store: Main.store.home)
-                .tag(ViewKind.home)
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
-                }
         }
     }
 }

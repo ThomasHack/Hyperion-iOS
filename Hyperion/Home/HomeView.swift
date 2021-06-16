@@ -54,19 +54,6 @@ struct HomeView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 24) {                           
-
-                            Button(action: {
-                                viewStore.send(.connectButtonTapped)
-                            }) {
-                                Image(systemName: viewStore.connectivityState == .connected
-                                        ? "bolt.fill"
-                                        : viewStore.connectivityState == .disconnected
-                                        ? "bolt.slash.fill"
-                                        : "bolt")
-                                    .imageScale(.large)
-                            }
-                            .foregroundColor(viewStore.connectivityState == .connected ? Color(.label) : Color.red)
-
                             Button(action: {
                                 viewStore.send(.settingsButtonTapped)
                             }) {
