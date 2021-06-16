@@ -11,7 +11,6 @@ import UIKit
 import SwiftUI
 import ComposableArchitecture
 import Combine
-import Starscream
 import HyperionApi
 
 struct ApiId: Hashable {}
