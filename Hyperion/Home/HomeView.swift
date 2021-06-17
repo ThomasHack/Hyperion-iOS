@@ -23,7 +23,7 @@ struct HomeView: View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                 ZStack {
-                    Color("background")
+                    Color(UIColor.systemBackground)
                     
                     if viewStore.connectivityState == .connected {
                         ScrollView {
@@ -64,8 +64,8 @@ struct HomeView: View {
                         }
                 )
                 .sheet(isPresented: viewStore.binding(
-                        get: { $0.shared.showSettingsModal },
-                        send: Home.Action.toggleSettingsModal)
+                    get: \.showSettingsModal,
+                    send: Home.Action.toggleSettingsModal)
                 ) {
                     SettingsView(store: Main.store.settings)
                 }

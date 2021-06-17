@@ -86,7 +86,6 @@ struct SettingsView: View {
                         HStack(spacing: 16) {
                             Button(action: {
                                 viewStore.send(.doneButtonTapped)
-                                viewStore.send(.hideSettingsModal)
                             }) {
                                 Text("Done")
                                     .font(.system(size: 17, weight: .bold))

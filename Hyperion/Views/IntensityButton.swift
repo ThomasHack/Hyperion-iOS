@@ -34,7 +34,6 @@ struct IntensityButton: View {
                                 Circle()
                                     .foregroundColor(.green)
                                     .frame(width: 8, height: 8)
-                                    .offset(x: 0, y: 0)
                                 Spacer()
                             }
                         }
@@ -48,10 +47,6 @@ struct IntensityButton: View {
                     .foregroundColor(isDisabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
                     .font(.system(size: 13.0, weight: .semibold))
                     .lineLimit(2)
-
-                Text(isRunning ? "On" : "Off")
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                    .font(.system(size: 13.0, weight: .semibold))
             }
             .padding([.top, .bottom], 8)
             .padding([.leading, .trailing], 8)

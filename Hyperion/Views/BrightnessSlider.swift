@@ -16,41 +16,59 @@ struct BrightnessSlider: View {
 
     var body: some View {
         GeometryReader { geometry in
+
+            let horizontalPadding: CGFloat = 3
+            let verticalPadding: CGFloat = 3
+            let grabberWidth: CGFloat = 16
+            let percentageWidth: CGFloat = geometry.size.width * CGFloat(self.percentage/100)
+            let minWidth: CGFloat = CGFloat(grabberWidth * (100 - self.percentage)/100)
+            let maxWidth: CGFloat = CGFloat(2*horizontalPadding * (self.percentage)/100)
+            let barWidth: CGFloat = percentageWidth + minWidth - maxWidth
+            let barHeight: CGFloat = geometry.size.height - 2*verticalPadding
+            
             ZStack(alignment: .leading) {
+                // Background
                 Rectangle()
-                    .foregroundColor(Color(UIColor.systemBackground).opacity(0.3))
-                    .background(BlurView().opacity(0.2))
+                    .foregroundColor(Color(UIColor.secondarySystemBackground))
+
                 ZStack(alignment: .trailing) {
+                    // Progressbar
                     HStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .background(Color(UIColor.systemBackground)
-                            )
-                    }.cornerRadius(12)
-                        .clipped()
+                            .background(Color(UIColor.systemBackground))
+                    }
+                    .cornerRadius(12)
+                    .clipped()
+
+                    // Grabber
                     HStack {
                         Rectangle()
                             .frame(width: 4, height: 20, alignment: .trailing)
                             .foregroundColor(Color.secondary)
                             .cornerRadius(3)
                             .shadow(color: Color.black.opacity(0.1), radius: 2, x: -1, y: 1)
-                    }.padding([.trailing], 6)
+                    }
+                    .padding([.trailing], 6)
                 }
-                .frame(width: (geometry.size.width * CGFloat(self.percentage/100)) + CGFloat(16 * (100 - self.percentage)/100))
+                .offset(x: verticalPadding, y: 0)
+                .frame(width: barWidth, height: barHeight)
                 .animation(.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 0))
 
+                // Label
                 HStack(alignment: .bottom, spacing: 2) {
                     Text("\(Int(self.percentage))")
-                    .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: 15, weight: .bold))
                         .foregroundColor(Color(UIColor.secondaryLabel))
                     Text("%")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                }.frame(maxWidth: .infinity, alignment: .center)
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
             }
+
             .clipped()
             .cornerRadius(15)
-            .shadow(color: Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
             .gesture(DragGesture(minimumDistance: 0)
             .onChanged({ value in
                 self.percentage = Double(min(max(0, Float(value.location.x / geometry.size.width * 100)), 100))
@@ -73,7 +91,7 @@ extension BrightnessSlider {
 struct BrightnessControlSlider_Previews: PreviewProvider {
 
     struct BindingTestHolder: View {
-        @State var percentage: Double = 0
+        @State var percentage: Double = 100
         var body: some View {
             BrightnessSlider(percentage: $percentage)
         }

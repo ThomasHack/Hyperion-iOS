@@ -47,13 +47,14 @@ enum Settings {
                     return Effect(value: Action.api(.disconnect))
 
                 case .disconnected:
-                    guard let host = state.host, let url = URL(string: host) else { return .none }
+                    guard let url = URL(string: state.hostInput) else { return .none }
                     return Effect(value: Action.api(.connect(url)))
                 }
             case .hideSettingsModal:
                 state.showSettingsModal = false
             case .doneButtonTapped:
                 state.shared.host = state.hostInput
+                return Effect(value: .hideSettingsModal)
             case .shared, .api:
                 break
             }
@@ -72,7 +73,7 @@ enum Settings {
     )
     
     static let initialState = State(
-        hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? "",
-        iconNames: UserDefaults.standard.value(forKey: Shared.iconsDefaultsKeyName) as? [String: String] ?? [:]
+        hostInput: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.hostDefaultsKeyName) ?? "",
+        iconNames: UserDefaults(suiteName: Shared.appGroupName)?.value(forKey: Shared.iconsDefaultsKeyName) as? [String: String] ?? [:]
     )
 }

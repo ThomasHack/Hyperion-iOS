@@ -29,18 +29,15 @@ struct InstanceButton: View {
                         if let imageName = imageName, imageName.count > 0 {
                             Image(imageName)
                                 .resizable()
-                                .padding(2)
                                 .clipped()
                         } else {
                             Image(systemName: "rays")
                                 .resizable()
-                                .padding(10)
+                                .padding(6)
                                 .clipped()
                         }
                     }
-                    .frame(width: 36, height: 36)
-                    .background(BlurView())
-                    .cornerRadius(36)
+                    .frame(width: 42, height: 42)
 
                     Spacer()
 
@@ -48,7 +45,6 @@ struct InstanceButton: View {
                         Circle()
                             .foregroundColor(.green)
                             .frame(width: 8, height: 8)
-                            .offset(x: 0, y: 0)
                     }
                 }
 
@@ -59,10 +55,6 @@ struct InstanceButton: View {
                     .font(.system(size: 13.0, weight: .semibold))
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
-
-                Text(isRunning ? "On" : "Off")
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                    .font(.system(size: 13.0, weight: .semibold))
             }
             .padding(8)
         }
@@ -75,21 +67,21 @@ struct InstanceButton_Previews: PreviewProvider {
         VStack {
             HStack(spacing: 16) {
                 InstanceButton(
-                    imageName: "Ambilight",
+                    imageName: "ambilight",
                     text: "Very Long Button Title",
                     isDisabled: false,
                     isRunning: true,
                     callback: {}
                 )
                 InstanceButton(
-                    imageName: "Hue Sync",
+                    imageName: "hue-lightstrip",
                     text: "Button Title",
                     isDisabled: false,
                     isRunning: false,
                     callback: {}
                 )
                 InstanceButton(
-                    imageName: "Play Lightbars",
+                    imageName: "",
                     text: "Very Long Button Title",
                     isDisabled: false,
                     isRunning: false,
