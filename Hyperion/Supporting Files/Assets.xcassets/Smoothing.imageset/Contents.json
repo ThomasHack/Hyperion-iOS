@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Smoothing.pdf",
+      "filename" : "smoothing.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "smoothing-light.pdf",
       "idiom" : "universal"
     }
   ],
