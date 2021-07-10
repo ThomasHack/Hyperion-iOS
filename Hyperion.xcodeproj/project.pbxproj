@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		520E65D124E6A386007E9D3D /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E65D024E6A386007E9D3D /* Favourites.swift */; };
+		521FFD1D268329E00028929C /* IntensityControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */; };
 		523071A824E56EB8001BB98B /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523071A724E56EB8001BB98B /* BlurView.swift */; };
-		52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBA24AE53CA00317AC9 /* ControlView.swift */; };
-		52385DBD24AE53D100317AC9 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBC24AE53D100317AC9 /* Control.swift */; };
-		52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */; };
+		5230D11D2680926E00CDA265 /* InstanceEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5230D11C2680926E00CDA265 /* InstanceEdit.swift */; };
+		5230D11F2680A52200CDA265 /* InstanceEdit+InstanceEditFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5230D11E2680A52200CDA265 /* InstanceEdit+InstanceEditFeature.swift */; };
 		5238B26725DD401100004CF0 /* ComponentGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26625DD401100004CF0 /* ComponentGridView.swift */; };
 		5238B26A25DD401C00004CF0 /* WidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26925DD401C00004CF0 /* WidgetHeaderView.swift */; };
 		5238B27025DD4C4700004CF0 /* WidgetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238B26F25DD4C4700004CF0 /* WidgetContentView.swift */; };
@@ -75,7 +74,6 @@
 		525F0D4325DAADAC00A9D603 /* ControlWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 525F0D3525DAADA900A9D603 /* ControlWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		525F0D4A25DAADC600A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
 		525F0D4B25DAADC600A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263685924E6CB6700E13707 /* ColorControl.swift */; };
 		5270662225DFC68B008D2CF4 /* InstanceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */; };
 		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
@@ -88,6 +86,7 @@
 		529AF69225DC27C100E70F24 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529AF68F25DC27B100E70F24 /* WidgetEntry.swift */; };
 		529AF69A25DC34D900E70F24 /* ComponentLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529AF69625DC33A800E70F24 /* ComponentLinkView.swift */; };
 		529AF6A425DC572200E70F24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F16BAF2494E51700A69D01 /* Assets.xcassets */; };
+		52BC5A28267B995F007CB826 /* InstanceEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC5A27267B995F007CB826 /* InstanceEditView.swift */; };
 		52BC893B24ACF6BF005607DB /* Home+HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */; };
 		52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */; };
 		52BC893E24ACF737005607DB /* InstanceControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */; };
@@ -182,11 +181,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		520E65D024E6A386007E9D3D /* Favourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
 		523071A724E56EB8001BB98B /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
-		52385DBA24AE53CA00317AC9 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
-		52385DBC24AE53D100317AC9 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
-		52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Control+ControlFeature.swift"; sourceTree = "<group>"; };
+		5230D11C2680926E00CDA265 /* InstanceEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceEdit.swift; sourceTree = "<group>"; };
+		5230D11E2680A52200CDA265 /* InstanceEdit+InstanceEditFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InstanceEdit+InstanceEditFeature.swift"; sourceTree = "<group>"; };
 		5238B26625DD401100004CF0 /* ComponentGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentGridView.swift; sourceTree = "<group>"; };
 		5238B26925DD401C00004CF0 /* WidgetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetHeaderView.swift; sourceTree = "<group>"; };
 		5238B26F25DD4C4700004CF0 /* WidgetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentView.swift; sourceTree = "<group>"; };
@@ -240,7 +237,6 @@
 		525F0D3E25DAADAC00A9D603 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		525F0D4425DAADAC00A9D603 /* ControlWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ControlWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
-		5263685924E6CB6700E13707 /* ColorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
 		5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceLinkView.swift; sourceTree = "<group>"; };
 		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		5283E27724EAE82D00713525 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -257,6 +253,7 @@
 		52A9306224A5F801003BDCDC /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		52B38EC824AE153D00A0DDC8 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		52B38ECA24AE15BF00A0DDC8 /* ApiDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDelegate.swift; sourceTree = "<group>"; };
+		52BC5A27267B995F007CB826 /* InstanceEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceEditView.swift; sourceTree = "<group>"; };
 		52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+HomeFeature.swift"; sourceTree = "<group>"; };
 		52BC894024ACF74D005607DB /* Settings+SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+SettingsFeature.swift"; sourceTree = "<group>"; };
 		52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
@@ -317,16 +314,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52385DB824AE51FE00317AC9 /* Control */ = {
+		521FFD1C268329D20028929C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				52385DBC24AE53D100317AC9 /* Control.swift */,
-				52385DBA24AE53CA00317AC9 /* ControlView.swift */,
-				52385DBE24AE55E700317AC9 /* Control+ControlFeature.swift */,
-				520E65D024E6A386007E9D3D /* Favourites.swift */,
-				5263685924E6CB6700E13707 /* ColorControl.swift */,
+				52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */,
+				528E8E1324E2BE8200F4531B /* ComponentControl.swift */,
+				52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */,
+				52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */,
+				52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */,
+				52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */,
+				52E3E80924E5B84D00E77E1C /* NotConnected.swift */,
+				52E3E80B24E5B8DD00E77E1C /* PriorityPreview.swift */,
 			);
-			path = Control;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		5238B26425DD2ECD00004CF0 /* Api */ = {
@@ -485,6 +485,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		529FB0502680DAFF00DF3C0A /* InstanceEdit */ = {
+			isa = PBXGroup;
+			children = (
+				5230D11C2680926E00CDA265 /* InstanceEdit.swift */,
+				5230D11E2680A52200CDA265 /* InstanceEdit+InstanceEditFeature.swift */,
+				52BC5A27267B995F007CB826 /* InstanceEditView.swift */,
+			);
+			path = InstanceEdit;
+			sourceTree = "<group>";
+		};
 		52A9306A24A60DD5003BDCDC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,17 +513,10 @@
 		52A9306B24A60E06003BDCDC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				52EBA9E824A7E41600BA5A45 /* BrightnessControl.swift */,
-				528E8E1324E2BE8200F4531B /* ComponentControl.swift */,
-				52EBA9E424A7DEDC00BA5A45 /* ConnectionHeader.swift */,
+				521FFD1C268329D20028929C /* Views */,
 				52A9306024A5F7D9003BDCDC /* Home.swift */,
 				52BC893A24ACF6BF005607DB /* Home+HomeFeature.swift */,
 				52A9305C24A5CFD1003BDCDC /* HomeView.swift */,
-				52EBA9EA24A7E4A800BA5A45 /* InstanceControl.swift */,
-				52EBA9E624A7E30A00BA5A45 /* InstanceSelection.swift */,
-				52EBA9EC24A7E57E00BA5A45 /* IntensityControl.swift */,
-				52E3E80924E5B84D00E77E1C /* NotConnected.swift */,
-				52E3E80B24E5B8DD00E77E1C /* PriorityPreview.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -572,7 +575,6 @@
 				525F0C3025DA7E4400A9D603 /* Api */,
 				52C752CB24EAC7850011ABDB /* Helpers */,
 				52543D7824A1259900505054 /* App */,
-				52385DB824AE51FE00317AC9 /* Control */,
 				52A9306B24A60E06003BDCDC /* Home */,
 				52EBA9F124A7F24F00BA5A45 /* Main */,
 				52FEC34F24A797C7000AF55F /* Settings */,
@@ -588,6 +590,7 @@
 				52EBA9EE24A7EE4E00BA5A45 /* Settings.swift */,
 				52FEC35024A797D9000AF55F /* SettingsView.swift */,
 				52BC894024ACF74D005607DB /* Settings+SettingsFeature.swift */,
+				529FB0502680DAFF00DF3C0A /* InstanceEdit */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -817,14 +820,14 @@
 			files = (
 				52E3E80C24E5B8DD00E77E1C /* PriorityPreview.swift in Sources */,
 				52F16BAA2494E51600A69D01 /* AppDelegate.swift in Sources */,
-				5263685A24E6CB6700E13707 /* ColorControl.swift in Sources */,
 				52F16BAC2494E51600A69D01 /* SceneDelegate.swift in Sources */,
 				52BC894124ACF74D005607DB /* Settings+SettingsFeature.swift in Sources */,
 				52E3E80E24E5BBB000E77E1C /* Appearance.swift in Sources */,
 				52BC894224ACF772005607DB /* InstanceButton.swift in Sources */,
 				52BC894424ACF772005607DB /* SectionHeader.swift in Sources */,
-				52385DBD24AE53D100317AC9 /* Control.swift in Sources */,
+				521FFD1D268329E00028929C /* IntensityControl.swift in Sources */,
 				52BC894524ACF772005607DB /* NavigationButton.swift in Sources */,
+				5230D11F2680A52200CDA265 /* InstanceEdit+InstanceEditFeature.swift in Sources */,
 				52BC893F24ACF737005607DB /* BrightnessControl.swift in Sources */,
 				52BC893B24ACF6BF005607DB /* Home+HomeFeature.swift in Sources */,
 				52EBA9F324A7F2C900BA5A45 /* Main.swift in Sources */,
@@ -836,17 +839,16 @@
 				525837D624AA2CF60084932D /* HomeView.swift in Sources */,
 				5283E27824EAE82D00713525 /* Helpers.swift in Sources */,
 				525837D524AA2B2D0084932D /* Home.swift in Sources */,
-				52385DBF24AE55E700317AC9 /* Control+ControlFeature.swift in Sources */,
 				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,
 				525F0B4925DA771200A9D603 /* Api.swift in Sources */,
+				5230D11D2680926E00CDA265 /* InstanceEdit.swift in Sources */,
 				525F0D4025DAADAC00A9D603 /* ControlWidget.intentdefinition in Sources */,
 				52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */,
+				52BC5A28267B995F007CB826 /* InstanceEditView.swift in Sources */,
 				525837D724AA2D020084932D /* SettingsView.swift in Sources */,
 				52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */,
 				5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */,
 				528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */,
-				52385DBB24AE53CA00317AC9 /* ControlView.swift in Sources */,
-				520E65D124E6A386007E9D3D /* Favourites.swift in Sources */,
 				52BC893E24ACF737005607DB /* InstanceControl.swift in Sources */,
 				5288B79825D2E02700E9AF0C /* BrightnessSlider.swift in Sources */,
 				52EBA9EF24A7EE4E00BA5A45 /* Settings.swift in Sources */,

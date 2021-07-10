@@ -10,12 +10,6 @@ import ComposableArchitecture
 import SwiftUI
 import HyperionApi
 
-enum ConnectivityState {
-    case connected
-    case connecting
-    case disconnected
-}
-
 enum Main {
 
     enum URLContextType: String, Equatable, Codable {
@@ -31,7 +25,7 @@ enum Main {
         var shared: Shared.State
         var home: Home.State
         var settings: Settings.State
-        var control: Control.State
+        var instanceEdit: InstanceEdit.State
 
         var homeFeature: Home.HomeFeatureState {
             get { Home.HomeFeatureState(home: self.home, settings: self.settings, shared: self.shared, api: self.api) }
@@ -43,9 +37,9 @@ enum Main {
             set { self.settings = newValue.settings; self.shared = newValue.shared }
         }
 
-        var controlFeature: Control.ControlFeatureState {
-            get { Control.ControlFeatureState(control: self.control, api: self.api) }
-            set { self.control = newValue.control; self.api = newValue.api }
+        var instanceEditFeature: InstanceEdit.InstanceEditFeatureState {
+            get { InstanceEdit.InstanceEditFeatureState(instanceEdit: self.instanceEdit, shared: self.shared, settings: self.settings) }
+            set { self.instanceEdit = newValue.instanceEdit; self.shared = newValue.shared }
         }
     }
 
@@ -59,7 +53,7 @@ enum Main {
         case home(Home.Action)
         case shared(Shared.Action)
         case settings(Settings.Action)
-        case control(Control.Action)
+        case instanceEdit(InstanceEdit.Action)
     }
 
     struct Environment {
@@ -126,7 +120,7 @@ enum Main {
 
 
                 return Effect(value: Action.api(.updateInstance(instanceId, enable)))
-            case .api, .shared, .home, .settings, .control:
+            case .api, .shared, .home, .settings, .instanceEdit:
                 return .none
             }
         },
@@ -150,9 +144,9 @@ enum Main {
             action: /Action.settings,
             environment: { $0 }
         ),
-        Control.reducer.pullback(
-            state: \State.controlFeature,
-            action: /Action.control,
+        InstanceEdit.reducer.pullback(
+            state: \State.instanceEditFeature,
+            action: /Action.instanceEdit,
             environment: { $0 }
         )
     )
@@ -164,7 +158,7 @@ enum Main {
             shared: Shared.initialState,
             home: Home.initialState,
             settings: Settings.initialState,
-            control: Control.initialState
+            instanceEdit: InstanceEdit.initialState
         ),
         reducer: reducer,
         environment: initialEnvironment
@@ -190,9 +184,9 @@ enum Main {
         )
     )
 
-    static let previewStoreControl = Store(
-        initialState: Control.previewState,
-        reducer: Control.reducer,
+    static let previewStoreInstanceEdit = Store(
+        initialState: InstanceEdit.previewState,
+        reducer: InstanceEdit.reducer,
         environment: Main.Environment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
             apiClient: ApiClient.live,
@@ -216,7 +210,7 @@ extension Store where State == Main.State, Action == Main.Action {
         scope(state: \.settingsFeature, action: Main.Action.settings)
     }
 
-    var control: Store<Control.ControlFeatureState, Control.Action> {
-        scope(state: \.controlFeature, action: Main.Action.control)
+    var instanceEdit: Store<InstanceEdit.InstanceEditFeatureState, InstanceEdit.Action> {
+        scope(state: \.instanceEditFeature, action: Main.Action.instanceEdit)
     }
 }

@@ -30,34 +30,50 @@ struct SettingsView: View {
                                 .disableAutocorrection(true)
                                 .autocapitalization(.none)
                             }
-                            .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                         }
 
                         if viewStore.instances.count > 0 {
                             Section(header: Text("Icons")) {
-                                VStack(alignment: .leading, spacing: 16) {
-                                    ForEach(viewStore.instances, id: \HyperionApi.Instance.self) { instance in
+                                ForEach(viewStore.instances, id: \HyperionApi.Instance.self) { instance in
+
+                                    let store = store.scope(state: { state in
+                                        InstanceEdit.InstanceEditFeatureState(
+                                            instanceEdit: InstanceEdit.State(
+                                                instance: instance,
+                                                iconName: "",
+                                                instanceName: ""
+                                            ),
+                                            shared: state.shared,
+                                            settings: state.settings
+                                        )}, action: { action in
+                                            Settings.Action.instanceEdit(action)
+                                        })
+
+                                    let view = InstanceEditView(store: store)
+
+                                    NavigationLink(destination: view) {
                                         IconSelectInput(store: self.store, instance: instance)
                                     }
                                 }
-                                .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                             }
                         }
 
                         Section(header: Text("Background")) {
-                            VStack(alignment: .leading, spacing: 0) {
+                            VStack(alignment: .leading) {
                                 SectionHeader(text: "Background Image")
                                 TextField("Icon Name",
                                           text: viewStore.binding(
                                             get: { $0.backgroundImage },
                                             send: Settings.Action.backgroundImageChanged
                                           )
-                                    )
+                                )
                                     .keyboardType(.URL)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                             }
-                            .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                         }
 
                         Button(action: {
@@ -75,10 +91,11 @@ struct SettingsView: View {
                             }
                         }
                     }
-                    .listStyle(InsetGroupedListStyle())
+                    .listRowBackground(Color.green)
+                    // .listStyle(InsetGroupedListStyle())
                 }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
-                .background(Color(.secondarySystemBackground))
+                .background(Color(.systemBackground))
                 .edgesIgnoringSafeArea(.all)
                 .padding([.top], 10)
                 .navigationBarItems(

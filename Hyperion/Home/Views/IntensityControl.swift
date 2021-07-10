@@ -25,7 +25,7 @@ struct IntensityControl: View {
                             isDisabled: false, //smoothing.enabled,
                             isRunning: smoothing.enabled,
                             callback: {
-                                viewStore.send(.turnOnSmoothing)
+                                viewStore.send(.toggleSmoothing(true))
                             })
 
                         IntensityButton(
@@ -34,7 +34,7 @@ struct IntensityControl: View {
                             isDisabled: false, //!smoothing.enabled,
                             isRunning: !smoothing.enabled,
                             callback: {
-                                viewStore.send(.turnOffSmoothing)
+                                viewStore.send(.toggleSmoothing(false))
                             })
                     } else {
                         Text("Smoothing unavailable")

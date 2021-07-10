@@ -15,6 +15,12 @@ import HyperionApi
 
 struct ApiId: Hashable {}
 
+enum ConnectivityState {
+    case connected
+    case connecting
+    case disconnected
+}
+
 enum Api {
     struct State: Equatable {
         var connectivityState: ConnectivityState = .disconnected

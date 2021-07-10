@@ -13,6 +13,7 @@ enum Shared {
     static let appGroupName = "group.hyperion-ng"
     static let hostDefaultsKeyName = "hyperion.hostname"
     static let iconsDefaultsKeyName = "hyperion.instanceIcons"
+    static let instanceNamesDefaultsKeyName = "hyperion.instanceNames"
     static let backgroundImageDefaultsKeyName = "hyperion.backgroundImage"
 
     static let userDefaults = UserDefaults(suiteName: appGroupName)
@@ -29,6 +30,12 @@ enum Shared {
             }
         }
 
+        var instanceNames: [String: String]? {
+            didSet {
+                userDefaults?.set(instanceNames, forKey: instanceNamesDefaultsKeyName)
+            }
+        }
+
         var backgroundImage: String? {
             didSet {
                 userDefaults?.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
@@ -40,12 +47,14 @@ enum Shared {
     static let initialState = State(
         host: userDefaults?.string(forKey: hostDefaultsKeyName),
         icons: userDefaults?.value(forKey: iconsDefaultsKeyName) as? [String: String] ?? [:],
+        instanceNames: userDefaults?.value(forKey: instanceNamesDefaultsKeyName) as? [String: String] ?? [:],
         backgroundImage: userDefaults?.string(forKey: backgroundImageDefaultsKeyName)
     )
 
     enum Action {
         case updateHost(String)
         case updateIcons([String: String])
+        case updateInstanceNames([String: String])
         case updateBackgroundImage(String)
         case showSettingsModal
         case hideSettingsModal
@@ -60,6 +69,8 @@ enum Shared {
             state.host = string
         case .updateIcons(let icons):
             state.icons = icons
+        case .updateInstanceNames(let instanceNames):
+            state.instanceNames = instanceNames
         case .updateBackgroundImage(let string):
             state.backgroundImage = string
         case .showSettingsModal:

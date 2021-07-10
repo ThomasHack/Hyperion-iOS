@@ -7,6 +7,7 @@
 //
 
 import ComposableArchitecture
+import HyperionApi
 import Foundation
 
 enum Settings {
@@ -17,6 +18,7 @@ enum Settings {
     }
 
     enum Action {
+        case selectInstance(HyperionApi.Instance)
         case hostInputTextChanged(String)
         case iconNameChanged(instance: String, iconName: String)
         case backgroundImageChanged(String)
@@ -26,6 +28,7 @@ enum Settings {
 
         case api(Api.Action)
         case shared(Shared.Action)
+        case instanceEdit(InstanceEdit.Action)
     }
 
     typealias Environment = Main.Environment
@@ -33,6 +36,10 @@ enum Settings {
     static let reducer = Reducer<SettingsFeatureState, Action, Environment>.combine(
         Reducer { state, action, environment in
             switch action {
+            case .selectInstance(let instance):
+                let iconName = ""
+                let instanceName = ""
+                let instanceEditState = InstanceEdit.State(instance: instance, iconName: iconName, instanceName: instanceName)
             case .hostInputTextChanged(let text):
                 state.hostInput = text
             case .iconNameChanged(let instance, let text):
@@ -56,6 +63,8 @@ enum Settings {
                 state.shared.host = state.hostInput
                 return Effect(value: .hideSettingsModal)
             case .shared, .api:
+                break
+            case .instanceEdit:
                 break
             }
             return .none
