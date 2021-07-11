@@ -23,11 +23,12 @@ struct InstanceControl: View {
 
                 if viewStore.api.instances.count > 0 {
                     LazyVGrid(columns: columns, spacing: 8  ) {
-                        ForEach(viewStore.api.instances, id: \.self) {instance in
+                        ForEach(viewStore.api.instances, id: \.self) { instance in
                             let imageName = viewStore.icons[instance.id]
+                            let instanceName = viewStore.state.instanceNames[instance.id]
                             InstanceButton(
                                 imageName: imageName,
-                                text: instance.friendlyName,
+                                text: ((instanceName ?? "").isEmpty ? instance.friendlyName : instanceName)!,
                                 isRunning: instance.running,
                                 callback: {
                                     viewStore.send(.instanceButtonTapped(instance.id, instance.running))
