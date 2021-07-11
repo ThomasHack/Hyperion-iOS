@@ -25,7 +25,6 @@ enum Main {
         var shared: Shared.State
         var home: Home.State
         var settings: Settings.State
-        var instanceEdit: InstanceEdit.State
 
         var homeFeature: Home.HomeFeatureState {
             get { Home.HomeFeatureState(home: self.home, settings: self.settings, shared: self.shared, api: self.api) }
@@ -35,11 +34,6 @@ enum Main {
         var settingsFeature: Settings.SettingsFeatureState {
             get { Settings.SettingsFeatureState(settings: self.settings, shared: self.shared, api: self.api) }
             set { self.settings = newValue.settings; self.shared = newValue.shared }
-        }
-
-        var instanceEditFeature: InstanceEdit.InstanceEditFeatureState {
-            get { InstanceEdit.InstanceEditFeatureState(instanceEdit: self.instanceEdit, shared: self.shared, settings: self.settings) }
-            set { self.instanceEdit = newValue.instanceEdit; self.shared = newValue.shared }
         }
     }
 
@@ -53,7 +47,6 @@ enum Main {
         case home(Home.Action)
         case shared(Shared.Action)
         case settings(Settings.Action)
-        case instanceEdit(InstanceEdit.Action)
     }
 
     struct Environment {
@@ -120,7 +113,7 @@ enum Main {
 
 
                 return Effect(value: Action.api(.updateInstance(instanceId, enable)))
-            case .api, .shared, .home, .settings, .instanceEdit:
+            case .api, .shared, .home, .settings:
                 return .none
             }
         },
@@ -143,11 +136,6 @@ enum Main {
             state: \State.settingsFeature,
             action: /Action.settings,
             environment: { $0 }
-        ),
-        InstanceEdit.reducer.pullback(
-            state: \State.instanceEditFeature,
-            action: /Action.instanceEdit,
-            environment: { $0 }
         )
     )
     // .debug()
@@ -157,8 +145,7 @@ enum Main {
             api: Api.initialState,
             shared: Shared.initialState,
             home: Home.initialState,
-            settings: Settings.initialState,
-            instanceEdit: InstanceEdit.initialState
+            settings: Settings.initialState
         ),
         reducer: reducer,
         environment: initialEnvironment
@@ -185,7 +172,7 @@ enum Main {
     )
 
     static let previewStoreInstanceEdit = Store(
-        initialState: InstanceEdit.previewState,
+        initialState: InstanceEdit.initialState,
         reducer: InstanceEdit.reducer,
         environment: Main.Environment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
@@ -208,9 +195,5 @@ extension Store where State == Main.State, Action == Main.Action {
 
     var settings: Store<Settings.SettingsFeatureState, Settings.Action> {
         scope(state: \.settingsFeature, action: Main.Action.settings)
-    }
-
-    var instanceEdit: Store<InstanceEdit.InstanceEditFeatureState, InstanceEdit.Action> {
-        scope(state: \.instanceEditFeature, action: Main.Action.instanceEdit)
     }
 }

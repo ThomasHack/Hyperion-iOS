@@ -8,19 +8,20 @@
 
 import ComposableArchitecture
 import HyperionApi
-import Foundation
+import SwiftUI
+import Network
 
 enum Settings {
     struct State: Equatable {
         var hostInput: String = ""
-        var iconNames: [String: String] = [:]
         var backgroundImage: String = ""
+        var selection: Identified<Int, InstanceEdit.State?>?
     }
 
     enum Action {
-        case selectInstance(HyperionApi.Instance)
+        case setSelection(Int?)
+        
         case hostInputTextChanged(String)
-        case iconNameChanged(instance: String, iconName: String)
         case backgroundImageChanged(String)
         case connectButtonTapped
         case doneButtonTapped
@@ -36,18 +37,34 @@ enum Settings {
     static let reducer = Reducer<SettingsFeatureState, Action, Environment>.combine(
         Reducer { state, action, environment in
             switch action {
-            case .selectInstance(let instance):
-                let iconName = ""
-                let instanceName = ""
+            case .setSelection(let instanceId):
+                guard let instanceId = instanceId else {
+                    guard let instance = state.selection?.value?.instance,
+                          let instanceName = state.selection?.value?.instanceName,
+                          let iconName = state.selection?.value?.iconName else {
+                        state.selection = nil
+                        return .none
+                    }
+                    state.selection = nil
+                    return .merge(
+                        Effect(value: .shared(.updateInstanceName(instance.id, instanceName))),
+                        Effect(value: .shared(.updateIcon(instance.id, iconName)))
+                    )
+                }
+                let instance = state.api.instances.first(where: { $0.id == instanceId }) ?? HyperionApi.Instance(instance: 0, running: false, friendlyName: "")
+                let iconName = state.shared.icons[instance.id] ?? ""
+                let instanceName = state.shared.instanceNames[instance.id] ?? ""
                 let instanceEditState = InstanceEdit.State(instance: instance, iconName: iconName, instanceName: instanceName)
+                state.selection = Identified(instanceEditState, id: instanceId)
+                return .none
+                
             case .hostInputTextChanged(let text):
                 state.hostInput = text
-            case .iconNameChanged(let instance, let text):
-                state.iconNames[instance] = text
-                return Effect(value: .shared(.updateIcons(state.iconNames)))
+                
             case .backgroundImageChanged(let text):
                 state.backgroundImage = text
                 return Effect(value: .shared(.updateBackgroundImage(state.backgroundImage)))
+                
             case .connectButtonTapped:
                 switch state.connectivityState {
                 case .connected, .connecting:
@@ -57,14 +74,20 @@ enum Settings {
                     guard let url = URL(string: state.hostInput) else { return .none }
                     return Effect(value: Action.api(.connect(url)))
                 }
+                
             case .hideSettingsModal:
                 state.showSettingsModal = false
+                
             case .doneButtonTapped:
                 state.shared.host = state.hostInput
                 return Effect(value: .hideSettingsModal)
-            case .shared, .api:
-                break
-            case .instanceEdit:
+                
+            case .instanceEdit(.iconNameChanged(let iconName)):
+                guard let id = state.selection?.id, let instance = state.api.instances.first(where: { $0.id == id }) else { return .none }
+                state.shared.icons[instance.id] = iconName
+                return Effect(value: .shared(.updateIcons(state.shared.icons)))
+                
+            case .shared, .api, .instanceEdit:
                 break
             }
             return .none
@@ -78,11 +101,21 @@ enum Settings {
             state: \SettingsFeatureState.api,
             action: /Action.api,
             environment: { $0 }
-        )
+        ),
+        InstanceEdit.reducer
+            .optional()
+            .pullback(state: \Identified.value, action: .self, environment: { $0 })
+            .optional()
+            .pullback(
+                state: \Settings.SettingsFeatureState.selection,
+                action: /Action.instanceEdit,
+                environment: { $0 }
+            )
     )
     
     static let initialState = State(
         hostInput: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.hostDefaultsKeyName) ?? "",
-        iconNames: UserDefaults(suiteName: Shared.appGroupName)?.value(forKey: Shared.iconsDefaultsKeyName) as? [String: String] ?? [:]
+        backgroundImage: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.backgroundDefaultsKeyName) ?? "",
+        selection: nil
     )
 }

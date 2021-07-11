@@ -42,6 +42,8 @@ extension Home {
         settings: Settings.State(),
         shared: Shared.State(
             host: "http://preview.host",
+            icons: [:],
+            instanceNames: [:],
             showSettingsModal: false
         ),
         api: Api.previewState

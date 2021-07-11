@@ -11,46 +11,34 @@ import HyperionApi
 import Foundation
 
 enum InstanceEdit {
-
-    struct State: Equatable {
-        var instance: HyperionApi.Instance?
-        var iconName: String = ""
-        var instanceName: String = ""
+    
+    struct State: Equatable {        
+        var instance: HyperionApi.Instance
+        var iconName: String
+        var instanceName: String
     }
 
-    indirect enum Action {
+    enum Action {
         case iconNameChanged(String)
         case instanceNameChanged(String)
-        case shared(Shared.Action)
-        case settings(Settings.Action)
     }
 
     typealias Environment = Main.Environment
 
-    static let reducer = Reducer<InstanceEditFeatureState, Action, Environment>.combine(
+    static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, environment in
             switch action {
-            case .iconNameChanged(let text):
-                return Effect(value: .settings(.iconNameChanged(instance: state.instanceName, iconName: text)))
+            case .iconNameChanged(let iconName):
+                state.iconName = iconName
+                return .none
+                // return Effect(value: .settings(.iconNameChanged(instance: friendlyName, iconName: text)))
             case .instanceNameChanged(let instanceName):
-                break
-            case .shared, .settings:
-                break
+                state.instanceName = instanceName
+                return .none
+                // return Effect(value: .settings(.instanceNameChanged(instance: friendlyName, instanceName: instanceName)))
             }
-            return .none
-        },
-        Shared.reducer.pullback(
-            state: \InstanceEditFeatureState.shared,
-            action: /Action.shared,
-            environment: { $0 }
-        )
+        }
     )
 
-    static let initialState = State(
-        instance: nil,
-        iconName: "",
-        instanceName: ""
-    )
-
-    // viewStore.icons?[instance.friendlyName]
+    static let initialState = State(instance: HyperionApi.Instance(instance: 0, running: false, friendlyName: ""), iconName: "", instanceName: "")
 }

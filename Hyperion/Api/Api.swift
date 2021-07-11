@@ -199,7 +199,7 @@ enum Api {
 
         case .didUpdateInstances(let instances):
             state.instances = instances
-            if let instance = state.instances.first(where: { $0.instance == state.selectedInstance }), !instance.running {
+            if let instance = state.instances.first(where: { $0.id == state.selectedInstance }), !instance.running {
                 return environment.apiClient.selectInstance(ApiId(), 0)
                     .receive(on: environment.mainQueue)
                     .eraseToEffect()

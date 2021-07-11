@@ -8,19 +8,19 @@
 
 import Foundation
 
-public struct Instance: Equatable, Decodable, Hashable {
-    public let instance: Int
+public struct Instance: Equatable, Decodable, Hashable {    
+    public let id: Int
     public let running: Bool
     public let friendlyName: String
 
     enum CodingKeys: String, CodingKey {
-        case instance = "instance"
+        case id = "instance"
         case running = "running"
         case friendlyName = "friendly_name"
     }
 
     public init(instance: Int, running: Bool, friendlyName: String) {
-        self.instance = instance
+        self.id = instance
         self.running = running
         self.friendlyName = friendlyName
     }

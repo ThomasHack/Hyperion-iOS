@@ -23,14 +23,20 @@ struct IconSelectInput: View {
         WithViewStore(self.store) { viewStore in
             HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
-                    SectionHeader(text: "\(instance.friendlyName)")
+                    if let name = viewStore.instanceNames[instance.id] {
+                        if name.isEmpty {
+                            SectionHeader(text: "\(instance.friendlyName)")
+                        } else {
+                            SectionHeader(text: "\(name)")
+                        }
+                    }
                 }
                 .padding(8)
 
                 Spacer()
 
                 VStack(alignment: .center, spacing: 0) {
-                    if let image = viewStore.icons?[instance.friendlyName] {
+                    if let image = viewStore.icons[instance.id] {
                         Image(image)
                             .resizable()
                             .padding(2)

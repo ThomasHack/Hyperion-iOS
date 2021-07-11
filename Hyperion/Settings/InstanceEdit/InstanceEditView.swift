@@ -13,7 +13,7 @@ import HyperionApi
 struct InstanceEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    let store: Store<InstanceEdit.InstanceEditFeatureState, InstanceEdit.Action>
+    let store: Store<InstanceEdit.State, InstanceEdit.Action>
 
     private let columns = [
         GridItem(.adaptive(minimum: 50)),
@@ -64,24 +64,21 @@ struct InstanceEditView: View {
 
                         LazyVGrid(columns: columns, spacing: 8) {
                             ForEach(iconNames, id: \.self) { icon in
-                                if let instance = viewStore.instance {
-                                    VStack {
-                                        Button(action: {
-                                            viewStore.send(InstanceEdit.Action.iconNameChanged(icon))
-                                            presentationMode.wrappedValue.dismiss()
-                                        }) {
-                                            let selected = viewStore.icons?[instance.friendlyName] == icon
-                                            Image(icon)
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .clipped()
-                                                .background(selected ? Color(.secondarySystemBackground) : Color(.systemBackground))
-                                                .cornerRadius(5)
-
-                                        }
+                                VStack {
+                                    Button(action: {
+                                        viewStore.send(InstanceEdit.Action.iconNameChanged(icon))
+                                        presentationMode.wrappedValue.dismiss()
+                                    }) {
+                                        let selected = viewStore.state.iconName == icon
+                                        Image(icon)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .clipped()
+                                            .background(selected ? Color(.secondarySystemBackground) : Color(.systemBackground))
+                                            .cornerRadius(5)
                                     }
-                                    .padding()
                                 }
+                                .padding()
                             }
                         }
                     }

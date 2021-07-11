@@ -22,7 +22,7 @@ struct InstanceSelection: View {
 
                     Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: Home.Action.selectInstance)) {
                         ForEach(runningInstances, id: \HyperionApi.Instance.self) { instance in
-                            Text("\(instance.friendlyName)").tag(instance.instance)
+                            Text("\(instance.friendlyName)").tag(instance.id)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())

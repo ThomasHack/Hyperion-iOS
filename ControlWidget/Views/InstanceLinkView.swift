@@ -22,7 +22,7 @@ struct InstanceLinkView: View {
     }
 
     var url: String {
-        let string = "hyperion://control/instance/\(instance.instance)/\(instance.running ? "false" : "true")"
+        let string = "hyperion://control/instance/\(instance.id)/\(instance.running ? "false" : "true")"
         return string
     }
 

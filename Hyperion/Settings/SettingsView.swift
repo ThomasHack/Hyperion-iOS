@@ -12,84 +12,35 @@ import HyperionApi
 
 struct SettingsView: View {
     let store: Store<Settings.SettingsFeatureState, Settings.Action>
-
+    
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                 VStack {
                     List {
-                        Section(header: Text("Host")) {
-                            VStack(alignment: .leading) {
-                                SectionHeader(text: "Host")
-                                TextField("https://hyperion.home:8090",
-                                          text: viewStore.binding(
-                                            get: { $0.hostInput },
-                                            send: Settings.Action.hostInputTextChanged)
-                                )
-                                .keyboardType(.URL)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                            }
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                        }
-
+                        HostSetting(store: self.store)
+                        
+                        Section(header: Text("Icons")) {
                         if viewStore.instances.count > 0 {
-                            Section(header: Text("Icons")) {
-                                ForEach(viewStore.instances, id: \HyperionApi.Instance.self) { instance in
-
-                                    let store = store.scope(state: { state in
-                                        InstanceEdit.InstanceEditFeatureState(
-                                            instanceEdit: InstanceEdit.State(
-                                                instance: instance,
-                                                iconName: "",
-                                                instanceName: ""
-                                            ),
-                                            shared: state.shared,
-                                            settings: state.settings
-                                        )}, action: { action in
-                                            Settings.Action.instanceEdit(action)
-                                        })
-
-                                    let view = InstanceEditView(store: store)
-
-                                    NavigationLink(destination: view) {
+                            ForEach(viewStore.api.instances, id: \.self) { instance in
+                                    NavigationLink(
+                                        destination:
+                                            IfLetStore(self.store.scope(state: { $0.selection?.value }, action: Settings.Action.instanceEdit)) { childStore in
+                                                InstanceEditView(store: childStore)
+                                            },
+                                            tag: instance.id,
+                                            selection: viewStore.binding(get: { $0.selection?.id }, send: Settings.Action.setSelection)
+                                    ) {
                                         IconSelectInput(store: self.store, instance: instance)
                                     }
                                 }
                                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                             }
                         }
-
-                        Section(header: Text("Background")) {
-                            VStack(alignment: .leading) {
-                                SectionHeader(text: "Background Image")
-                                TextField("Icon Name",
-                                          text: viewStore.binding(
-                                            get: { $0.backgroundImage },
-                                            send: Settings.Action.backgroundImageChanged
-                                          )
-                                )
-                                    .keyboardType(.URL)
-                                    .disableAutocorrection(true)
-                                    .autocapitalization(.none)
-                            }
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                        }
-
-                        Button(action: {
-                            viewStore.send(.connectButtonTapped)
-                        }) {
-                            HStack(alignment: .center) {
-                                Spacer()
-                                if viewStore.api.connectivityState == .disconnected {
-                                    Text("Connect")
-                                } else {
-                                    Text("Disconnect")
-                                        .foregroundColor(.red)
-                                }
-                                Spacer()
-                            }
-                        }
+                        
+                        BackgroundSetting(store: self.store)
+                        
+                        ConnectButton(store: self.store)
                     }
                     .listRowBackground(Color.green)
                     // .listStyle(InsetGroupedListStyle())
@@ -101,13 +52,13 @@ struct SettingsView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 16) {
-                            Button(action: {
-                                viewStore.send(.doneButtonTapped)
-                            }) {
-                                Text("Done")
-                                    .font(.system(size: 17, weight: .bold))
-                            }
-                        }
+                    Button(action: {
+                        viewStore.send(.doneButtonTapped)
+                    }) {
+                        Text("Done")
+                            .font(.system(size: 17, weight: .bold))
+                    }
+                }
                 )
             }
         }
