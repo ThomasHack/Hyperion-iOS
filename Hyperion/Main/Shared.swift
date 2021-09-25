@@ -47,10 +47,18 @@ enum Shared {
         var showSettingsModal: Bool = false
     }
 
+    static func userDefaultsDictionary(for key: String) -> [Int: String] {
+        if let data = userDefaults?.data(forKey: key),
+           let dict = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSDictionary.self, from: data) as? [Int : String] {
+            return dict
+        }
+        return [:]
+    }
+
     static let initialState = State(
         host: userDefaults?.string(forKey: hostDefaultsKeyName),
-        icons: NSKeyedUnarchiver.unarchiveObject(with: userDefaults?.value(forKey: iconNamesDefaultsKeyName) as! Data) as? [Int: String] ?? [:],
-        instanceNames: NSKeyedUnarchiver.unarchiveObject(with: userDefaults?.value(forKey: instanceNamesDefaultsKeyName) as! Data) as? [Int: String] ?? [:],
+        icons: userDefaultsDictionary(for: iconNamesDefaultsKeyName),
+        instanceNames: userDefaultsDictionary(for: instanceNamesDefaultsKeyName),
         backgroundImage: userDefaults?.string(forKey: backgroundImageDefaultsKeyName)
     )
 

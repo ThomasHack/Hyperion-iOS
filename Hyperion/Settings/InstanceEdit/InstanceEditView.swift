@@ -48,9 +48,6 @@ struct InstanceEditView: View {
                                     send: InstanceEdit.Action.instanceNameChanged
                                   )
                             )
-                            .keyboardType(.URL)
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 8)
                             .background(Color(.secondarySystemBackground))
