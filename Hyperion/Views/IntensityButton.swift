@@ -43,10 +43,11 @@ struct IntensityButton: View {
                 Spacer().frame(minHeight: 8)
 
                 Text(text)
-                    .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(isDisabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
                     .font(.system(size: 13.0, weight: .semibold))
+                    .frame(minHeight: 30)
                     .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding([.top, .bottom], 8)
             .padding([.leading, .trailing], 8)
