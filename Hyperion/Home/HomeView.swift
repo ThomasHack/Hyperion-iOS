@@ -10,94 +10,75 @@ import ComposableArchitecture
 import SwiftUI
 
 struct HomeView: View {
-    let store: Store<AppState, AppAction>
+    let store: Store<Home.HomeFeatureState, Home.Action>
 
-    @State var settingsModal = false
+    init(store: Store<Home.HomeFeatureState, Home.Action>) {
+        self.store = store
+
+        UINavigationBar.appearance().scrollEdgeAppearance = Appearance.transparentAppearance
+        UINavigationBar.appearance().standardAppearance = Appearance.transparentAppearance
+    }
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            NavigationView() {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 8) {
+            NavigationView {
+                ZStack {
+                    Color(UIColor.systemBackground)
+                    
+                    if viewStore.connectivityState == .connected {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 8) {
+                                
+                                ConnectionHeader(store: store)
 
-                        ConnectionHeader(store: store)
+                                InstanceSelection(store: store)
 
-                        Spacer()
-                            .frame(height: 16.0)
+                                BrightnessControl(store: store)
 
-                        InstanceSelection(store: store)
+                                InstanceControl(store: store)
 
-                        Spacer()
-                            .frame(height: 16.0)
+                                ComponentControl(store: store)
 
-                        BrightnessControl(store: store)
-
-                        Spacer()
-                            .frame(height: 16.0)
-
-                        InstanceControl(store: store)
-
-                        Spacer()
-                            .frame(height: 16.0)
-
-                        IntensityControl(store: store)
-
-                        Spacer()
+                                Spacer(minLength: 0)
+                            }
+                            .padding()
+                        }
                     }
-                    .padding()
+                    else {
+                        NotConnected(store: store)
+                    }
                 }
-                .sheet(isPresented: self.$settingsModal) { SettingsView() }
-                .navigationBarTitle(Text("Hue Sync"), displayMode: .automatic)
-                .background(Color(.secondarySystemBackground))
                 .edgesIgnoringSafeArea(.all)
                 .padding([.top], 10)
+                .navigationBarTitle(Text("Hue Sync"), displayMode: .automatic)
                 .navigationBarItems(
                     trailing:
-                        HStack(spacing: 16) {
-                            Button(action: { viewStore.send(.connectButtonTapped) }) {
-                                Image(systemName: viewStore.connectivityState == .connected
-                                        ? "bolt.fill"
-                                        : viewStore.connectivityState == .disconnected
-                                        ? "bolt.slash.fill"
-                                        : "bolt")
-                                    .imageScale(.large)
-                            }
-                            Button(action: { self.settingsModal.toggle() }) {
+                        HStack(spacing: 24) {                           
+                            Button(action: {
+                                viewStore.send(.settingsButtonTapped)
+                            }) {
                                 Image(systemName: "gear")
                                     .imageScale(.large)
                             }
+                            .foregroundColor(Color(.label))
                         }
                 )
+                .sheet(isPresented: viewStore.binding(
+                    get: \.showSettingsModal,
+                    send: Home.Action.toggleSettingsModal)
+                ) {
+                    SettingsView(store: Main.store.settings)
+                }
             }
-            .onAppear { viewStore.send(.connectButtonTapped) }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
 
-    static var store = Store(
-        initialState: AppState(
-            connectivityState: .connected,
-            receivedMessages: [],
-            brightness: 55,
-            hostname: "Preview",
-            instances: [
-                Instance(instance: 0, running: true, friendlyName: "LG OLED TV"),
-                Instance(instance: 1, running: false, friendlyName: "Hue Sync")
-            ]
-        ),
-        reducer: appReducer,
-        environment: AppEnvironment(
-            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-            apiClient: .live
-        )
-    )
-
     static var previews: some View {
-        HomeView(
-            store: store,
-            settingsModal: false
-        )
+        HomeView(store: Main.previewStoreHome)
+            .preferredColorScheme(.light)
     }
 }

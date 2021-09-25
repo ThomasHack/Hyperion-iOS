@@ -12,43 +12,101 @@ struct IntensityButton: View {
 
     var imageName: String
     var text: String
-    var running: Bool = true
+
+    var isDisabled = false
+    var isRunning = false
+
     var callback: (() -> Void)
 
     var body: some View {
-        VStack {
-            Button(action: { self.callback() }) {
-                Image(systemName: imageName).font(.title)
+        Button(action: {
+            if isDisabled { return }
+            self.callback()
+        }) {
+            VStack(alignment: .leading, spacing: 0) {
+                ZStack(alignment: .topLeading) {
+                    Image(systemName: imageName).font(.title)
+
+                    if isRunning {
+                        HStack(alignment: .top) {
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Circle()
+                                    .foregroundColor(.green)
+                                    .frame(width: 8, height: 8)
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+
+                Spacer().frame(minHeight: 8)
+
+                Text(text)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .foregroundColor(isDisabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
+                    .font(.system(size: 13.0, weight: .semibold))
+                    .lineLimit(2)
             }
-            .buttonStyle(DefaultButtonStyle())
-            // .background(Color(running ? UIColor.systemBackground : UIColor.secondarySystemBackground))
-
-            Text(text)
-                .foregroundColor(Color(UIColor.label))
-                .font(.system(size: 13.0, weight: .semibold))
-        }
-    }
-}
-
-struct DefaultButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .padding([.top, .bottom], 14)
-            .foregroundColor(Color(UIColor.label))
-            .background(Color(UIColor.systemBackground))
-            .cornerRadius(5)
-            .shadow(color: configuration.isPressed ? Color.black.opacity(0.15) : Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
-            .animation(.easeInOut)
-            .scaleEffect(configuration.isPressed ? CGSize(width: 0.975, height: 0.975) : CGSize(width: 1.0, height: 1.0), anchor: .center)
-            .animation(.spring(response: 0.1, dampingFraction: 0.55, blendDuration: 0))
+            .padding([.top, .bottom], 8)
+            .padding([.leading, .trailing], 8)
+        }.buttonStyle(CardButtonStyle(disabled: isDisabled))
     }
 }
 
 struct IntensityButton_Previews: PreviewProvider {
     static var previews: some View {
-        IntensityButton(imageName: "rays", text: "Subtle", callback: {})
-            .frame(width: 84, height: 64, alignment: .center)
+        VStack {
+            HStack(spacing: 16) {
+                IntensityButton(
+                    imageName: "rays",
+                    text: "Very Long Button Title",
+                    isDisabled: false,
+                    isRunning: false,
+                    callback: {}
+                )
+                IntensityButton(
+                    imageName: "rays",
+                    text: "Button Title",
+                    isDisabled: false,
+                    isRunning: false,
+                    callback: {}
+                )
+                IntensityButton(
+                    imageName: "rays",
+                    text: "Very Long Button Title",
+                    isDisabled: false,
+                    isRunning: true,
+                    callback: {}
+                )
+            }
+            .padding(16)
+            Spacer().frame(height: 16)
+            HStack(spacing: 16) {
+                IntensityButton(
+                    imageName: "rays",
+                    text: "Standard",
+                    isDisabled: false,
+                    isRunning: false,
+                    callback: {}
+                )
+                IntensityButton(
+                    imageName: "rays",
+                    text: "Disabled",
+                    isDisabled: true,
+                    isRunning: false,
+                    callback: {}
+                )
+                IntensityButton(
+                    imageName: "rays",
+                    text: "Running",
+                    isDisabled: false,
+                    isRunning: true,
+                    callback: {}
+                )
+            }
+            .padding(16)
+        }
+        .frame(width: 375, height: 280, alignment: .center)
     }
 }
