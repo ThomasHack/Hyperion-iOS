@@ -1223,7 +1223,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.14.0;
+				minimumVersion = 0.28.1;
 			};
 		};
 		52F08DB8267A4DEC00873CDB /* XCRemoteSwiftPackageReference "NWWebSocket" */ = {
