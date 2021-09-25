@@ -14,9 +14,10 @@ public enum ComponentType: String, Equatable, Codable {
     case blackborder = "BLACKBORDER"
     case forwarder = "FORWARDER"
     case boblight = "BOBLIGHTSERVER"
-    case grabber = "GRABBER"
+    case videograbber = "VIDEOGRABBER"
+    case systemgrabber = "SYSTEMGRABBER"
     case v4l = "V4L"
     case led = "LEDDEVICE"
     case color = "COLOR"
-    case videomodehdr = "VIDEMODEHDR"
+    case videomodehdr = "HDR"
 }
