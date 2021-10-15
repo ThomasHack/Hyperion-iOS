@@ -8,7 +8,6 @@
 
 import Foundation
 
-//TODO: ENUM implementation
 public struct PriorityUpdate: Decodable {
     public let data: PrioritiesData
 

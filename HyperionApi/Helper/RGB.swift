@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct RGB: Equatable{
+public struct RGB: Equatable {
     public var red: CGFloat
     public var green: CGFloat
     public var blue: CGFloat

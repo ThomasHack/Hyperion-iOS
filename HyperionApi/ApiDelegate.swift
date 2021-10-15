@@ -89,40 +89,52 @@ public class ApiDelegate: WebSocketConnectionDelegate {
         guard let data = string.data(using: .utf8, allowLossyConversion: false) else { return }
         do {
             let response = try JSONDecoder().decode(HyperionApi.Response.self, from: data)
-            switch response {
-            case .serverInfo(let serverInfo):
-                self.didUpdateInstances(serverInfo.info.instances)
-                self.didUpdateHostname(serverInfo.info.hostname)
-                self.didUpdateEffects(serverInfo.info.effects)
-                self.didUpdateComponents(serverInfo.info.components)
-                self.didUpdatePriorities(serverInfo.info.priorities)
-                self.didUpdateHdrToneMapping((serverInfo.info.hdrToneMapping != 0))
-
-                if let adjustments = serverInfo.info.adjustments.first {
-                    self.didUpdateBrightness(Double(adjustments.brightness))
-                }
-            case .adjustmentUpdate(let adjustmentUpdate):
-                guard let adjustment = adjustmentUpdate.data.first else { return }
-                self.didUpdateBrightness(Double(adjustment.brightness))
-            case .instanceUpdate(let instanceUpdate):
-                self.didUpdateInstances(instanceUpdate.data)
-            case .componentUpdate(let componentUpdate):
-                self.didUpdateComponent(componentUpdate.data)
-            case .hdrToneMappingUpdate(let hdrToneMapping):
-                self.didUpdateHdrToneMapping(hdrToneMapping.data.videomodehdr != 0)
-            case .unknown:
-                print("unknown")
-            case .adjustmentResponse(let response), .instanceStart(let response), .instanceStop(let response), .component(let response), .hdrToneMapping(let response):
-                if !response.success {
-                    print("Something went wrong")
-                }
-            case .instanceSwitch(let instance):
-                self.didUpdateSelectedInstance(instance.info.instance)
-            case .priorityUpdate(let priorityUpdate):
-                self.didUpdatePriorities(priorityUpdate.data.priorities)
-            }
+            self.didReceiveResponse(response)
         } catch {
             print("error: \(error.localizedDescription)")
+        }
+    }
+
+    private func didReceiveResponse(_ response: HyperionApi.Response) {
+        switch response {
+        case .serverInfo(let serverInfo):
+            self.didReceiveServerInfo(serverInfo)
+        case .adjustmentUpdate(let adjustmentUpdate):
+            guard let adjustment = adjustmentUpdate.data.first else { return }
+            self.didUpdateBrightness(Double(adjustment.brightness))
+        case .instanceUpdate(let instanceUpdate):
+            self.didUpdateInstances(instanceUpdate.data)
+        case .componentUpdate(let componentUpdate):
+            self.didUpdateComponent(componentUpdate.data)
+        case .hdrToneMappingUpdate(let hdrToneMapping):
+            self.didUpdateHdrToneMapping(hdrToneMapping.data.videomodehdr != 0)
+        case .adjustmentResponse(let response), .instanceStart(let response), .instanceStop(let response), .component(let response), .hdrToneMapping(let response):
+            self.didReceiveSuccessResponse(response)
+        case .instanceSwitch(let instance):
+            self.didUpdateSelectedInstance(instance.info.instance)
+        case .priorityUpdate(let priorityUpdate):
+            self.didUpdatePriorities(priorityUpdate.data.priorities)
+        case .unknown:
+            print("unknown")
+        }
+    }
+
+    private func didReceiveSuccessResponse(_ response: Success) {
+        if !response.success {
+            print("Something went wrong")
+        }
+    }
+
+    private func didReceiveServerInfo(_ serverInfo: HyperionApi.ServerInfoUpdate) {
+        self.didUpdateInstances(serverInfo.info.instances)
+        self.didUpdateHostname(serverInfo.info.hostname)
+        self.didUpdateEffects(serverInfo.info.effects)
+        self.didUpdateComponents(serverInfo.info.components)
+        self.didUpdatePriorities(serverInfo.info.priorities)
+        self.didUpdateHdrToneMapping((serverInfo.info.hdrToneMapping != 0))
+
+        if let adjustments = serverInfo.info.adjustments.first {
+            self.didUpdateBrightness(Double(adjustments.brightness))
         }
     }
 }

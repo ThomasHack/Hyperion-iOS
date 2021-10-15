@@ -6,8 +6,8 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
-import SwiftUI
 import HyperionApi
+import SwiftUI
 import WidgetKit
 
 struct ComponentLinkView: View {
@@ -15,7 +15,7 @@ struct ComponentLinkView: View {
 
     let component: HyperionApi.Component
 
-    var url: String {
+    var urlString: String {
         let string = "hyperion://control/component/\(component.name.rawValue)/\(component.enabled ? "false" : "true")"
         return string
     }
@@ -75,56 +75,58 @@ struct ComponentLinkView: View {
     }
 
     var body: some View {
-        Link(destination: URL(string: url)!) {
-            ZStack() {
-                VStack(spacing: 0) {
+        if let url = URL(string: urlString) {
+            Link(destination: url) {
+                ZStack {
                     VStack(spacing: 0) {
-                        Image(component.image)
-                            .resizable()
-                            .clipped()
-                            .padding(2)
-                    }
-                    .frame(width: imageSize.width, height: imageSize.height, alignment: .center)
-                    .background(Color(UIColor.systemBackground))
-                    .cornerRadius(imageSize.width/2)
-
-                    Spacer(minLength: 8)
-
-                    Text(component.label)
-                        .font(.system(size: fontSize, weight: .bold, design: Font.Design.default))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-
-                    Spacer(minLength: 0)
-                }
-                .padding(.vertical, spacing)
-                .padding(.horizontal, spacing)
-
-                if component.enabled {
-                    VStack() {
-                        HStack() {
-                            Spacer()
-                            Circle()
-                                .foregroundColor(.green)
-                                .frame(width: circleSize.width, height: circleSize.height)
+                        VStack(spacing: 0) {
+                            Image(component.image)
+                                .resizable()
+                                .clipped()
+                                .padding(2)
                         }
-                        Spacer()
+                        .frame(width: imageSize.width, height: imageSize.height, alignment: .center)
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(imageSize.width / 2)
+
+                        Spacer(minLength: 8)
+
+                        Text(component.label)
+                            .font(.system(size: fontSize, weight: .bold, design: Font.Design.default))
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+
+                        Spacer(minLength: 0)
                     }
-                    .padding(4)
+                    .padding(.vertical, spacing)
+                    .padding(.horizontal, spacing)
+
+                    if component.enabled {
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Circle()
+                                    .foregroundColor(.green)
+                                    .frame(width: circleSize.width, height: circleSize.height)
+                            }
+                            Spacer()
+                        }
+                        .padding(4)
+                    }
                 }
             }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .foregroundColor(component.enabled ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(10)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .foregroundColor(component.enabled ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(10)
     }
 }
 
 struct ComponentLinkView_Previews: PreviewProvider {
     static var previews: some View {
         let component = HyperionApi.Component(name: .blackborder, enabled: true)
-        
+
         ZStack {
             Color(UIColor.secondarySystemBackground)
             VStack(spacing: 0) {

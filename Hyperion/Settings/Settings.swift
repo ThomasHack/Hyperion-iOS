@@ -8,8 +8,8 @@
 
 import ComposableArchitecture
 import HyperionApi
-import SwiftUI
 import Network
+import SwiftUI
 
 enum Settings {
     struct State: Equatable {
@@ -20,7 +20,7 @@ enum Settings {
 
     enum Action {
         case setSelection(Int?)
-        
+
         case hostInputTextChanged(String)
         case backgroundImageChanged(String)
         case connectButtonTapped
@@ -35,7 +35,7 @@ enum Settings {
     typealias Environment = Main.Environment
 
     static let reducer = Reducer<SettingsFeatureState, Action, Environment>.combine(
-        Reducer { state, action, environment in
+        Reducer { state, action, _ in
             switch action {
             case .setSelection(let instanceId):
                 guard let instanceId = instanceId else {
@@ -51,20 +51,24 @@ enum Settings {
                         Effect(value: .shared(.updateIcon(instance.id, iconName)))
                     )
                 }
-                let instance = state.api.instances.first(where: { $0.id == instanceId }) ?? HyperionApi.Instance(instance: 0, running: false, friendlyName: "")
+                guard let instance = state.api.instances.first(where: { $0.id == instanceId }) else { return .none }
                 let iconName = state.shared.icons[instance.id] ?? ""
                 let instanceName = state.shared.instanceNames[instance.id] ?? ""
-                let instanceEditState = InstanceEdit.State(instance: instance, iconName: iconName, instanceName: instanceName)
+                let instanceEditState = InstanceEdit.State(
+                    instance: instance,
+                    iconName: iconName,
+                    instanceName: instanceName
+                )
                 state.selection = Identified(instanceEditState, id: instanceId)
                 return .none
-                
+
             case .hostInputTextChanged(let text):
                 state.hostInput = text
-                
+
             case .backgroundImageChanged(let text):
                 state.backgroundImage = text
                 return Effect(value: .shared(.updateBackgroundImage(state.backgroundImage)))
-                
+
             case .connectButtonTapped:
                 switch state.connectivityState {
                 case .connected, .connecting:
@@ -74,19 +78,20 @@ enum Settings {
                     guard let url = URL(string: state.hostInput) else { return .none }
                     return Effect(value: Action.api(.connect(url)))
                 }
-                
+
             case .hideSettingsModal:
                 state.showSettingsModal = false
-                
+
             case .doneButtonTapped:
                 state.shared.host = state.hostInput
                 return Effect(value: .hideSettingsModal)
-                
+
             case .instanceEdit(.iconNameChanged(let iconName)):
-                guard let id = state.selection?.id, let instance = state.api.instances.first(where: { $0.id == id }) else { return .none }
+                guard let uid = state.selection?.id,
+                      let instance = state.api.instances.first(where: { $0.id == uid }) else { return .none }
                 state.shared.icons[instance.id] = iconName
                 return Effect(value: .shared(.updateIcons(state.shared.icons)))
-                
+
             case .shared, .api, .instanceEdit:
                 break
             }
@@ -112,7 +117,7 @@ enum Settings {
                 environment: { $0 }
             )
     )
-    
+
     static let initialState = State(
         hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? "",
         backgroundImage: UserDefaults.standard.string(forKey: Shared.backgroundDefaultsKeyName) ?? "",

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct NavigationButton<Destination:View>: View {
+struct NavigationButton<Destination: View>: View {
 
     var destination: Destination
     var imageName: String

@@ -74,7 +74,7 @@
 		525F0D4A25DAADC600A9D603 /* HyperionApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; };
 		525F0D4B25DAADC600A9D603 /* HyperionApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525F0B7825DA78B700A9D603 /* HyperionApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5270662225DFC68B008D2CF4 /* InstanceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */; };
-		52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* ButtonStyles.swift */; };
+		52739D1324E31B7C00A69B0C /* CardButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* CardButtonStyle.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
 		5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */; };
 		5288B79825D2E02700E9AF0C /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */; };
@@ -94,6 +94,10 @@
 		52BC894224ACF772005607DB /* InstanceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871024961DCA00826DA5 /* InstanceButton.swift */; };
 		52BC894424ACF772005607DB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247871224961FBD00826DA5 /* SectionHeader.swift */; };
 		52BC894524ACF772005607DB /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */; };
+		52C9807C2719B91D0079235F /* Api+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C9807B2719B91D0079235F /* Api+Action.swift */; };
+		52C9807E2719B91F0079235F /* Api+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C9807D2719B91F0079235F /* Api+Reducer.swift */; };
+		52C980802719B9250079235F /* Api+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C9807F2719B9240079235F /* Api+State.swift */; };
+		52C980822719B93C0079235F /* ConnectivityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C980812719B93C0079235F /* ConnectivityState.swift */; };
 		52E3E80A24E5B84D00E77E1C /* NotConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3E80924E5B84D00E77E1C /* NotConnected.swift */; };
 		52E3E80C24E5B8DD00E77E1C /* PriorityPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3E80B24E5B8DD00E77E1C /* PriorityPreview.swift */; };
 		52E3E80E24E5BBB000E77E1C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3E80D24E5BBB000E77E1C /* Appearance.swift */; };
@@ -239,7 +243,7 @@
 		525F0D4425DAADAC00A9D603 /* ControlWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ControlWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5261749F24A9071B00FE831D /* Hyperion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyperion.entitlements; sourceTree = "<group>"; };
 		5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceLinkView.swift; sourceTree = "<group>"; };
-		52739D1224E31B7C00A69B0C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		52739D1224E31B7C00A69B0C /* CardButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButtonStyle.swift; sourceTree = "<group>"; };
 		5283E27724EAE82D00713525 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		5288B78C25D2CD7100E9AF0C /* IconSelectInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectInput.swift; sourceTree = "<group>"; };
 		5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
@@ -260,6 +264,11 @@
 		52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 		52C752CC24EAC7980011ABDB /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		52C752D024EAD0B50011ABDB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		52C9807B2719B91D0079235F /* Api+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Api+Action.swift"; sourceTree = "<group>"; };
+		52C9807D2719B91F0079235F /* Api+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Api+Reducer.swift"; sourceTree = "<group>"; };
+		52C9807F2719B9240079235F /* Api+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Api+State.swift"; sourceTree = "<group>"; };
+		52C980812719B93C0079235F /* ConnectivityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityState.swift; sourceTree = "<group>"; };
+		52C980832719BA0F0079235F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		52CE4E5925431CF4000ADCD6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		52E3E80924E5B84D00E77E1C /* NotConnected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotConnected.swift; sourceTree = "<group>"; };
 		52E3E80B24E5B8DD00E77E1C /* PriorityPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityPreview.swift; sourceTree = "<group>"; };
@@ -382,6 +391,10 @@
 			children = (
 				52B38EC824AE153D00A0DDC8 /* ApiClient.swift */,
 				52A9306224A5F801003BDCDC /* Api.swift */,
+				52C9807F2719B9240079235F /* Api+State.swift */,
+				52C9807D2719B91F0079235F /* Api+Reducer.swift */,
+				52C9807B2719B91D0079235F /* Api+Action.swift */,
+				52C980812719B93C0079235F /* ConnectivityState.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -503,7 +516,7 @@
 			children = (
 				523071A724E56EB8001BB98B /* BlurView.swift */,
 				5288B79725D2E02700E9AF0C /* BrightnessSlider.swift */,
-				52739D1224E31B7C00A69B0C /* ButtonStyles.swift */,
+				52739D1224E31B7C00A69B0C /* CardButtonStyle.swift */,
 				5247871024961DCA00826DA5 /* InstanceButton.swift */,
 				52970CFE24E400F100B3B4E0 /* IntensityButton.swift */,
 				52C591FB24A7B9DA007CDAE3 /* NavigationButton.swift */,
@@ -553,6 +566,7 @@
 		52F16B9D2494E51600A69D01 = {
 			isa = PBXGroup;
 			children = (
+				52C980832719BA0F0079235F /* .swiftlint.yml */,
 				52F16BA82494E51600A69D01 /* Hyperion */,
 				525F0B7925DA78B700A9D603 /* HyperionApi */,
 				525F0D3825DAADA900A9D603 /* ControlWidget */,
@@ -667,6 +681,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52F16BBA2494E51700A69D01 /* Build configuration list for PBXNativeTarget "Hyperion" */;
 			buildPhases = (
+				52C9807A2719B51D0079235F /* ShellScript */,
 				52F16BA22494E51600A69D01 /* Sources */,
 				52F16BA32494E51600A69D01 /* Frameworks */,
 				52F16BA42494E51600A69D01 /* Resources */,
@@ -762,6 +777,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		52C9807A2719B51D0079235F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		525F0B7425DA78B700A9D603 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -854,14 +889,18 @@
 				65C21F4E2699F75400D4149E /* HostSetting.swift in Sources */,
 				525837D524AA2B2D0084932D /* Home.swift in Sources */,
 				52EBA9F524A7F88000BA5A45 /* MainView.swift in Sources */,
+				52C980802719B9250079235F /* Api+State.swift in Sources */,
 				525F0B4925DA771200A9D603 /* Api.swift in Sources */,
 				5230D11D2680926E00CDA265 /* InstanceEdit.swift in Sources */,
 				525F0D4025DAADAC00A9D603 /* ControlWidget.intentdefinition in Sources */,
 				65C21F4C2699F71F00D4149E /* BackgroundSetting.swift in Sources */,
-				52739D1324E31B7C00A69B0C /* ButtonStyles.swift in Sources */,
+				52739D1324E31B7C00A69B0C /* CardButtonStyle.swift in Sources */,
 				52BC5A28267B995F007CB826 /* InstanceEditView.swift in Sources */,
+				52C9807E2719B91F0079235F /* Api+Reducer.swift in Sources */,
+				52C980822719B93C0079235F /* ConnectivityState.swift in Sources */,
 				525837D724AA2D020084932D /* SettingsView.swift in Sources */,
 				52BC893C24ACF737005607DB /* InstanceSelection.swift in Sources */,
+				52C9807C2719B91D0079235F /* Api+Action.swift in Sources */,
 				5288B78D25D2CD7100E9AF0C /* IconSelectInput.swift in Sources */,
 				528E8E1424E2BE8200F4531B /* ComponentControl.swift in Sources */,
 				65C21F492699F6DE00D4149E /* ConnectButton.swift in Sources */,
@@ -909,7 +948,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 20211015;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -939,7 +978,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 20211015;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -971,6 +1010,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ControlWidget/ControlWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20211015;
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				INFOPLIST_FILE = ControlWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -995,6 +1035,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ControlWidget/ControlWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20211015;
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				INFOPLIST_FILE = ControlWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -1136,7 +1177,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hyperion/Supporting Files/Hyperion.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20210925;
+				CURRENT_PROJECT_VERSION = 20211015;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				ENABLE_PREVIEWS = YES;
@@ -1163,7 +1204,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hyperion/Supporting Files/Hyperion.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20210925;
+				CURRENT_PROJECT_VERSION = 20211015;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				ENABLE_PREVIEWS = YES;

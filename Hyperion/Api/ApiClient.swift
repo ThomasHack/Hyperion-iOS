@@ -4,14 +4,14 @@
 //
 //  Created by Hack, Thomas on 02.07.20.
 //  Copyright © 2020 Hack, Thomas. All rights reserved.
-//
+//  swiftlint:disable weak_delegate
 
-import Foundation
-import ComposableArchitecture
 import Combine
+import ComposableArchitecture
+import Foundation
+import HyperionApi
 import Network
 import NWWebSocket
-import HyperionApi
 import WidgetKit
 
 private var dependencies: [AnyHashable: Dependencies] = [:]
@@ -109,15 +109,20 @@ extension ApiClient {
             }
         },
         sendMessage: { id, message in
-            .run { subscriber in
-                let data = try! JSONEncoder().encode(message)
-                let string = String(data: data, encoding: .utf8)!
-                dependencies[id]?.socket.send(string: string)
+            .run { _ in
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
+                    dependencies[id]?.socket.send(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable {}
+                }
                 return AnyCancellable {}
             }
         },
         subscribe: { id in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.SubscribeRequest(
                     HyperionApi.Request(command: .serverinfo),
                     HyperionApi.SubscribeData(subscribe: [
@@ -130,224 +135,224 @@ extension ApiClient {
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         updateBrightness: { id, brightness in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.AdjustmentRequest(
                     HyperionApi.Request(command: .adjustment),
                     HyperionApi.AdjustmentData(adjustment: HyperionApi.Adjustment(brightness: Int(brightness)))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         updateInstance: { id, instanceId, running in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.InstanceRequest(
                     HyperionApi.Request(command: .instance),
                     HyperionApi.InstanceData(subcommand: running ? .stopInstance : .startInstance, instance: instanceId)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         updateColor: { id, rgb in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ColorRequest(
                     HyperionApi.Request(command: .color),
                     HyperionApi.ColorData(color: [Int(rgb.red * 255), Int(rgb.green * 255), Int(rgb.blue * 255)], priority: 1, origin: "HyperionApp")
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         updateEffect: { id, effect in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.EffectRequest(
                     HyperionApi.Request(command: .instance),
                     HyperionApi.EffectData(effect: effect, priority: 50, origin: "HyperionApp")
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         toggleAll: { id, state in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
                     HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .all, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         toggleSmoothing: { id, state in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
                     HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .smoothing, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         toggleBlackborderDetection: { id, state in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
                     HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .blackborder, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         toggleLedHardware: { id, state in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
                     HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .led, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         toggleHdmiGrabber: { id, state in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ComponentRequest(
                     HyperionApi.Request(command: .component),
                     HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .v4l, state: state))
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         toggleHdrToneMapping: { id, state in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.HdrToneMappingRequest(
                     HyperionApi.Request(command: .hdr),
                     HyperionApi.HdrToneMappingData(hdr: state)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                     reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         selectInstance: { id, instanceId in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.InstanceRequest(
                     HyperionApi.Request(command: .instance),
                     HyperionApi.InstanceData(subcommand: .switchTo, instance: instanceId)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         },
         clear: { id in
-            .run { subscriber in
+            .run { _ in
                 let message = HyperionApi.ClearRequest(
                     HyperionApi.Request(command: .clear),
                     HyperionApi.ClearData(priority: -1)
                 )
                 do {
                     let data = try JSONEncoder().encode(message)
-                    let string = String(data: data, encoding: .utf8)!
+                    guard let string = String(data: data, encoding: .utf8) else { fatalError("Error encoding data") }
                     dependencies[id]?.socket.send(string: string)
                 } catch {
                     print("error: \(error.localizedDescription)")
-                    return AnyCancellable{}
+                    return AnyCancellable {}
                 }
-                return AnyCancellable{}
+                return AnyCancellable {}
             }
         }
     )

@@ -11,9 +11,9 @@ import SwiftUI
 
 struct MainView: View {
     var store: Store<Main.State, Main.Action>
-    
+
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store) { _ in
             HomeView(store: Main.store.home)
         }
     }

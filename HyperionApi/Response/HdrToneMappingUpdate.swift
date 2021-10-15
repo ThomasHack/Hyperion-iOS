@@ -8,7 +8,6 @@
 
 import Foundation
 
-//TODO: ENUM implementation
 public struct HdrToneMappingUpdate: Decodable {
     public let data: HdrToneMapping
 

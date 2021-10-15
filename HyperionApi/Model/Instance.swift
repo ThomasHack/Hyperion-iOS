@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Instance: Equatable, Decodable, Hashable {    
+public struct Instance: Equatable, Decodable, Hashable {
     public let id: Int
     public let running: Bool
     public let friendlyName: String

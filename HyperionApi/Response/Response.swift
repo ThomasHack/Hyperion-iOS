@@ -12,15 +12,15 @@ public enum Response: Decodable {
     case serverInfo(ServerInfoUpdate)
     case instanceUpdate(InstanceUpdate)
     case adjustmentUpdate(AdjustmentUpdate)
-    case adjustmentResponse(Sucess)
+    case adjustmentResponse(Success)
     case priorityUpdate(PriorityUpdate)
     case componentUpdate(ComponentUpdate)
     case hdrToneMappingUpdate(HdrToneMappingUpdate)
     case instanceSwitch(InstanceSwitchUpdate)
-    case instanceStop(Sucess)
-    case instanceStart(Sucess)
-    case component(Sucess)
-    case hdrToneMapping(Sucess)
+    case instanceStop(Success)
+    case instanceStart(Success)
+    case component(Success)
+    case hdrToneMapping(Success)
     case unknown
 
     enum CodingKeys: String, CodingKey {
@@ -58,7 +58,7 @@ public enum Response: Decodable {
             let update = try data.decode(InstanceSwitchUpdate.self)
             self = .instanceSwitch(update)
         case .adjustmentResponse, .instanceStart, .instanceStop, .component, .hdrToneMapping:
-            let update = try data.decode(Sucess.self)
+            let update = try data.decode(Success.self)
             self = .adjustmentResponse(update)
         case .unknown:
             self = .unknown

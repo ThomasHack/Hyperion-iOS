@@ -6,14 +6,14 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
-import WidgetKit
-import SwiftUI
-import Intents
 import HyperionApi
+import Intents
+import SwiftUI
+import WidgetKit
 
 struct Provider: IntentTimelineProvider {
 
-    @State var hasFetchedServerInfo: Bool = false
+    @State var hasFetchedServerInfo = false
     @State var serverInfo: InfoData?
 
     func placeholder(in context: Context) -> WidgetEntry {
@@ -21,19 +21,20 @@ struct Provider: IntentTimelineProvider {
         return entry
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (WidgetEntry) -> ()) {
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (WidgetEntry) -> Void) {
         let date = Date()
         let entry: WidgetEntry
 
         if context.isPreview && !hasFetchedServerInfo {
             entry = WidgetEntry(date: date, info: ApiClient.previewData, configuration: ConfigurationIntent())
         } else {
-            entry = WidgetEntry(date: date, info: serverInfo!, configuration: ConfigurationIntent())
+            guard let serverInfo = serverInfo else { return }
+            entry = WidgetEntry(date: date, info: serverInfo, configuration: ConfigurationIntent())
         }
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<WidgetEntry>) -> ()) {
+    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<WidgetEntry>) -> Void) {
         ApiClient.fetchServerInfo { response in
             switch response {
             case .success(let update):
@@ -42,7 +43,7 @@ struct Provider: IntentTimelineProvider {
 
                 let date = Date()
                 let entry = WidgetEntry(date: Date(), info: update.info, configuration: configuration)
-                let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: date)!
+                guard let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: date) else { return }
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
             case .failure(let error):
@@ -52,7 +53,7 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct ControlWidgetEntryView : View {
+struct ControlWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -73,13 +74,17 @@ struct ControlWidgetEntryView : View {
 struct ControlWidget: Widget {
     let kind: String = "de.hyperion-ng.ControlWidget"
 
-    static let previewData = WidgetEntry(date: Date(),
-                                            info: ApiClient.previewData,
-                                            configuration: ConfigurationIntent())
+    static let previewData = WidgetEntry(
+        date: Date(),
+        info: ApiClient.previewData,
+        configuration: ConfigurationIntent()
+    )
 
-    static let placeholderData = WidgetEntry(date: Date(),
-                                             info: ApiClient.placeholderData,
-                                             configuration: ConfigurationIntent())
+    static let placeholderData = WidgetEntry(
+        date: Date(),
+        info: ApiClient.placeholderData,
+        configuration: ConfigurationIntent()
+    )
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
@@ -94,10 +99,9 @@ struct ControlWidget_Previews: PreviewProvider {
     static var previews: some View {
         ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-            //.redacted(reason: .placeholder)
+
         ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
-            //.redacted(reason: .placeholder)
 
         ControlWidgetEntryView(entry: ControlWidget.previewData)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

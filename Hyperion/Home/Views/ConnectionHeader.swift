@@ -21,30 +21,36 @@ struct ConnectionHeader: View {
                         .foregroundColor(Color(viewStore.api.connectionColor))
                     Text(
                         viewStore.connectivityState == .connected
-                            ? "Status: Connected to \(viewStore.hostname)"
-                            : viewStore.connectivityState == .disconnected
-                            ? "Status: Disconnected"
-                            : "Status: Connecting...")
+                        ? "Status: Connected to \(viewStore.hostname)"
+                        : viewStore.connectivityState == .disconnected
+                        ? "Status: Disconnected"
+                        : "Status: Connecting...")
                         .font(.system(size: 13))
                         .lineLimit(1)
 
                     Spacer()
 
-                    ColorPicker("", selection: viewStore.binding(get: { $0.api.currentColor }, send: Home.Action.updateColor), supportsOpacity: false)
+                    ColorPicker("",
+                                selection: viewStore.binding(
+                                    get: { $0.api.currentColor },
+                                    send: Home.Action.updateColor
+                                ),
+                                supportsOpacity: false
+                    )
                         .frame(maxWidth: 50)
 
                     if viewStore.api.currentColor != Color.clear {
-                        Button(action: {
+                        Button {
                             viewStore.send(.clearButtonTapped)
-                        }) {
+                        } label: {
                             HStack {
-                                    Image(systemName: "clear.fill")
-                                        .font(.body)
-                                }
+                                Image(systemName: "clear.fill")
+                                    .font(.body)
+                            }
                             .padding(.all, 8)
-                                .foregroundColor(.primary)
-                                .background(Color(UIColor.systemBackground))
-                                .cornerRadius(20)
+                            .foregroundColor(.primary)
+                            .background(Color(UIColor.systemBackground))
+                            .cornerRadius(20)
                         }
                     }
 
@@ -61,6 +67,6 @@ struct ConnectionHeader: View {
 struct ConnectionHeader_Previews: PreviewProvider {
     static var previews: some View {
         ConnectionHeader(store: Main.store.home)
-        .previewLayout(.fixed(width: 500, height: 40))
+            .previewLayout(.fixed(width: 500, height: 40))
     }
 }

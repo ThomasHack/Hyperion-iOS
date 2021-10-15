@@ -11,7 +11,7 @@ import WidgetKit
 
 struct WidgetContentView: View {
     @Environment(\.widgetFamily) var family
-    
+
     var entry: Provider.Entry
 
     var horizontalPadding: CGFloat {

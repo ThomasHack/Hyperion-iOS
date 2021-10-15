@@ -20,12 +20,12 @@ struct BrightnessSlider: View {
             let horizontalPadding: CGFloat = 3
             let verticalPadding: CGFloat = 3
             let grabberWidth: CGFloat = 16
-            let percentageWidth: CGFloat = geometry.size.width * CGFloat(self.percentage/100)
-            let minWidth: CGFloat = CGFloat(grabberWidth * (100 - self.percentage)/100)
-            let maxWidth: CGFloat = CGFloat(2*horizontalPadding * (self.percentage)/100)
+            let percentageWidth: CGFloat = geometry.size.width * CGFloat(self.percentage / 100)
+            let minWidth = CGFloat(grabberWidth * (100 - self.percentage) / 100)
+            let maxWidth = CGFloat(2 * horizontalPadding * (self.percentage) / 100)
             let barWidth: CGFloat = percentageWidth + minWidth - maxWidth
-            let barHeight: CGFloat = geometry.size.height - 2*verticalPadding
-            
+            let barHeight: CGFloat = geometry.size.height - 2 * verticalPadding
+
             ZStack(alignment: .leading) {
                 // Background
                 Rectangle()

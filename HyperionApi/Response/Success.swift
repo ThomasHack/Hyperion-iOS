@@ -1,5 +1,5 @@
 //
-//  ResponseSucess.swift
+//  Success.swift
 //  HyperionApi
 //
 //  Created by Hack, Thomas on 15.02.21.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Sucess: Decodable {
+public struct Success: Decodable {
     public let success: Bool
 
     public init(success: Bool) {

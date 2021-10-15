@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hack, Thomas. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 extension Color {
 

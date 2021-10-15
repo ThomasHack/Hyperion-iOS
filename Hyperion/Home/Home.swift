@@ -39,7 +39,7 @@ enum Home {
     typealias Environment = Main.Environment
 
     static let reducer = Reducer<HomeFeatureState, Action, Environment>.combine(
-        Reducer { state, action, environment in
+        Reducer { state, action, _ in
             switch action {
             case .connectButtonTapped:
                 switch state.connectivityState {
@@ -60,7 +60,7 @@ enum Home {
             case .toggleSettingsModal(let toggle):
                 return Effect(value: Action.shared(.toggleSettingsModal(toggle)))
 
-            case .instanceButtonTapped(let instanceId, let running):
+            case let .instanceButtonTapped(instanceId, running):
                 return Effect(value: Action.api(.updateInstance(instanceId, !running)))
 
             case .selectInstance(let instanceId):
@@ -68,13 +68,13 @@ enum Home {
 
             case .updateColor(let color):
                 return Effect(value: Action.api(.updateColor(color.rgbColor)))
-                
+
             case .updateBrightness(let brightness):
                 return Effect(value: Action.api(.updateBrightness(brightness)))
 
             case .clearButtonTapped:
                 return Effect(value: Action.api(.clear))
-                
+
             case .toggleAll(let enable):
                 return Effect(value: Action.api(.toggleAll(enable)))
 
@@ -108,7 +108,6 @@ enum Home {
             environment: { $0 }
         )
     )
-    //.debug()
 
     static let initialState = State()
 }

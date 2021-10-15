@@ -6,9 +6,9 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
+import HyperionApi
 import SwiftUI
 import WidgetKit
-import HyperionApi
 
 struct ComponentGridView: View {
     @Environment(\.widgetFamily) var family
@@ -66,4 +66,3 @@ struct ComponentGridView_Previews: PreviewProvider {
         .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
-

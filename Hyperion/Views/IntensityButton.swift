@@ -19,10 +19,10 @@ struct IntensityButton: View {
     var callback: (() -> Void)
 
     var body: some View {
-        Button(action: {
+        Button {
             if isDisabled { return }
             self.callback()
-        }) {
+        } label: {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topLeading) {
                     Image(systemName: imageName).font(.title)

@@ -18,17 +18,17 @@ struct NotConnected: View {
                 Color(.secondarySystemBackground)
                 HStack(alignment: .center) {
                     VStack(alignment: .center, spacing: 8) {
-                        HStack() {
+                        HStack {
                             Image(systemName: "bolt.slash.fill")
                             Text("Not Connected")
                         }.foregroundColor(.secondary)
-                        Button(action: {
+                        Button {
                             if viewStore.shared.host != nil {
                                 viewStore.send(.connectButtonTapped)
                             } else {
                                 viewStore.send(.settingsButtonTapped)
                             }
-                        }) {
+                        } label: {
                             Text(viewStore.shared.host != nil ? "Connect" : "Set Host")
                         }
                     }

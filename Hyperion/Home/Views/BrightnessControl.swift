@@ -36,4 +36,3 @@ struct BrightnessControl_Previews: PreviewProvider {
         .previewLayout(.fixed(width: 375, height: 120))
     }
 }
-

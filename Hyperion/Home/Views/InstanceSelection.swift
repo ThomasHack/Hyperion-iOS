@@ -7,8 +7,8 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
 import HyperionApi
+import SwiftUI
 
 struct InstanceSelection: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
@@ -20,12 +20,16 @@ struct InstanceSelection: View {
                 VStack(alignment: .leading, spacing: 8) {
                     SectionHeader(text: "Selected Instance")
 
-                    Picker("", selection: viewStore.binding( get: { $0.selectedInstance }, send: Home.Action.selectInstance)) {
-                        ForEach(runningInstances, id: \HyperionApi.Instance.self) { instance in
-                            Text("\(instance.friendlyName)").tag(instance.id)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
+                    Picker("",
+                           selection: viewStore.binding(
+                            get: { $0.selectedInstance },
+                            send: Home.Action.selectInstance
+                           )) {
+                               ForEach(runningInstances, id: \HyperionApi.Instance.self) { instance in
+                                   Text("\(instance.friendlyName)").tag(instance.id)
+                               }
+                           }
+                           .pickerStyle(SegmentedPickerStyle())
 
                     Spacer()
                         .frame(height: 16.0)
@@ -39,6 +43,6 @@ struct InstanceSelection: View {
 struct InstanceSelection_Previews: PreviewProvider {
     static var previews: some View {
         InstanceSelection(store: Main.store.home)
-        .previewLayout(.fixed(width: 375, height: 80))
+            .previewLayout(.fixed(width: 375, height: 80))
     }
 }

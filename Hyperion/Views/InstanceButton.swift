@@ -19,14 +19,14 @@ struct InstanceButton: View {
     var callback: (() -> Void)
 
     var body: some View {
-        Button(action: {
+        Button {
             if isDisabled { return }
             self.callback()
-        }) {
+        } label: {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top, spacing: 0) {
                     VStack(spacing: 0) {
-                        if let imageName = imageName, imageName.count > 0 {
+                        if let imageName = imageName, !imageName.isEmpty {
                             Image(imageName)
                                 .resizable()
                                 .clipped()

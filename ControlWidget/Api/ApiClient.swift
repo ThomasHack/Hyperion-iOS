@@ -4,10 +4,15 @@
 //
 //  Created by Hack, Thomas on 16.02.21.
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
-//
+//  swiftlint:disable convenience_type
 
 import Foundation
 import HyperionApi
+
+enum ApiClientError: Error, Equatable {
+    case hostKeyMissing
+    case invalidUrl
+}
 
 struct ApiClient {
     static let appGroupName = "group.hyperion-ng"
@@ -19,31 +24,42 @@ struct ApiClient {
     static func fetchServerInfo(completion: @escaping (Result<HyperionApi.ServerInfoUpdate, Error>) -> Void) {
 
         guard let host = userDefaults?.string(forKey: hostDefaultsKeyName) else {
-            //TODO: Add error
-            return // completion(.failure(error))
+            return completion(.failure(ApiClientError.hostKeyMissing))
         }
 
         guard let url = URL(string: "\(host)/json-rpc") else {
-            //TODO: Add error
-            return // completion(.failure(error))
+            return completion(.failure(ApiClientError.invalidUrl))
         }
-        let message = ApiInfoRequest(command: "serverinfo")
-        let data = try! JSONEncoder().encode(message)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = data
-        URLSession.shared.dataTask(with: request) { (data, _, _) in
-            do {
-                let response = try JSONDecoder().decode(HyperionApi.ServerInfoUpdate.self, from: data!)
-                DispatchQueue.main.async {
-                    completion(.success(response))
+
+        do {
+            let message = ApiInfoRequest(command: "serverinfo")
+            let data = try JSONEncoder().encode(message)
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = data
+
+            URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
                 }
-            } catch {
-                completion(.failure(error))
-                print("error: \(error.localizedDescription)")
+                if let data = data {
+                    do {
+                        let response = try JSONDecoder().decode(HyperionApi.ServerInfoUpdate.self, from: data)
+                        DispatchQueue.main.async {
+                            completion(.success(response))
+                        }
+                    } catch {
+                        completion(.failure(error))
+                        print("error: \(error.localizedDescription)")
+                    }
+                }
             }
+            .resume()
+        } catch {
+            assertionFailure("")
         }
-        .resume()
     }
 
     static let previewData = HyperionApi.InfoData(adjustments: [],
@@ -59,14 +75,18 @@ struct ApiClient {
                                                       HyperionApi.Component(name: .smoothing, enabled: true),
                                                       HyperionApi.Component(name: .blackborder, enabled: false),
                                                       HyperionApi.Component(name: .v4l, enabled: false),
-                                                      HyperionApi.Component(name: .led, enabled: true),
+                                                      HyperionApi.Component(name: .led, enabled: true)
                                                   ],
-                                                  priorities: [], hdrToneMapping: 0)
+                                                  priorities: [],
+                                                  hdrToneMapping: 0
+    )
 
     static let placeholderData = HyperionApi.InfoData(adjustments: [],
                                                       instances: [],
                                                       hostname: "",
                                                       effects: [],
                                                       components: [],
-                                                      priorities: [], hdrToneMapping: 0)
+                                                      priorities: [],
+                                                      hdrToneMapping: 0
+    )
 }

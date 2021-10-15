@@ -7,8 +7,8 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
 import HyperionApi
+import SwiftUI
 
 enum Main {
 
@@ -56,7 +56,7 @@ enum Main {
     }
 
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer { state, action, environment in
+        Reducer { state, action, _ in
             switch action {
             case .api(.didConnect):
                 if let urlContexts = state.urlContexts {
@@ -76,7 +76,7 @@ enum Main {
 
                 let contextType = context.url.pathComponents[1]
 
-                switch URLContextType(rawValue: contextType){
+                switch URLContextType(rawValue: contextType) {
                 case .component:
                     return Effect(value: Action.processComponentURLContext(URLContexts))
                 case .instance:
@@ -110,7 +110,6 @@ enum Main {
                 guard let context = URLContexts.first,
                       let instanceId = Int(context.url.pathComponents[2]),
                       let enable = Bool(context.url.pathComponents[3]) else { return .none }
-
 
                 return Effect(value: Action.api(.updateInstance(instanceId, enable)))
             case .api, .shared, .home, .settings:

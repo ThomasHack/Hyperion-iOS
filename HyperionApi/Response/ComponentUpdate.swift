@@ -8,7 +8,6 @@
 
 import Foundation
 
-//TODO: ENUM implementation
 public struct ComponentUpdate: Decodable {
     public let data: Component
 

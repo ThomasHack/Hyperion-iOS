@@ -24,7 +24,7 @@ struct HomeView: View {
             NavigationView {
                 ZStack {
                     Color(UIColor.systemBackground)
-                    
+
                     if viewStore.connectivityState == .connected {
                         ScrollView {
                             VStack(alignment: .leading, spacing: 8) {
@@ -43,8 +43,7 @@ struct HomeView: View {
                             }
                             .padding()
                         }
-                    }
-                    else {
+                    } else {
                         NotConnected(store: store)
                     }
                 }
@@ -54,19 +53,19 @@ struct HomeView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 24) {
-                            Button(action: {
+                            Button {
                                 if let all = viewStore.api.allComponent {
                                     viewStore.send(.powerButtonTapped(!all.enabled))
                                 }
-                            }) {
+                            } label: {
                                 Image(systemName: viewStore.api.allEnabled ? "power.circle" : "power.circle.fill")
                                     .imageScale(.large)
                             }
                             .foregroundColor(Color(.label))
 
-                            Button(action: {
+                            Button {
                                 viewStore.send(.settingsButtonTapped)
-                            }) {
+                            } label: {
                                 Image(systemName: "gear")
                                     .imageScale(.large)
                             }

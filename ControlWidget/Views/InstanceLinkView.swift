@@ -6,72 +6,74 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
+import HyperionApi
 import SwiftUI
 import WidgetKit
-import HyperionApi
 
 struct InstanceLinkView: View {
     var instance: HyperionApi.Instance
 
     var icons: [String: String]? {
-        return ApiClient.userDefaults?.value(forKey: ApiClient.iconsDefaultsKeyName) as? [String: String] ?? [:]
+        ApiClient.userDefaults?.value(forKey: ApiClient.iconsDefaultsKeyName) as? [String: String] ?? [:]
     }
 
     var image: String? {
-        return icons?[instance.friendlyName]
+        icons?[instance.friendlyName]
     }
 
-    var url: String {
+    var urlString: String {
         let string = "hyperion://control/instance/\(instance.id)/\(instance.running ? "false" : "true")"
         return string
     }
 
     var body: some View {
-        Link(destination: URL(string: url)!) {
-            ZStack() {
-                VStack(spacing: 0) {
+        if let url = URL(string: urlString) {
+            Link(destination: url) {
+                ZStack {
                     VStack(spacing: 0) {
-                        if let image = image {
-                            Image(image)
-                                .resizable()
-                                .clipped()
-                                .padding(2)
+                        VStack(spacing: 0) {
+                            if let image = image {
+                                Image(image)
+                                    .resizable()
+                                    .clipped()
+                                    .padding(2)
+                            }
                         }
+                        .frame(width: 42, height: 42, alignment: .center)
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(42 / 2)
+
+                        Spacer(minLength: 8)
+
+                        Text(instance.friendlyName)
+                            .font(.system(size: 8, weight: .bold, design: Font.Design.default))
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+
+                        Spacer(minLength: 0)
                     }
-                    .frame(width: 42, height: 42, alignment: .center)
-                    .background(Color(UIColor.systemBackground))
-                    .cornerRadius(42/2)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 8)
 
-                    Spacer(minLength: 8)
-
-                    Text(instance.friendlyName)
-                        .font(.system(size: 8, weight: .bold, design: Font.Design.default))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-
-                    Spacer(minLength: 0)
-                }
-                .padding(.vertical, 8)
-                .padding(.horizontal, 8)
-
-                if instance.running {
-                    VStack() {
-                        HStack() {
+                    if instance.running {
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Circle()
+                                    .foregroundColor(.green)
+                                    .frame(width: 8, height: 8)
+                            }
                             Spacer()
-                            Circle()
-                                .foregroundColor(.green)
-                                .frame(width: 8, height: 8)
                         }
-                        Spacer()
+                        .padding(4)
                     }
-                    .padding(4)
                 }
             }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .foregroundColor(instance.running ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(10)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .foregroundColor(instance.running ? Color(UIColor.label) : Color(UIColor.secondaryLabel))
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(10)
     }
 }
 

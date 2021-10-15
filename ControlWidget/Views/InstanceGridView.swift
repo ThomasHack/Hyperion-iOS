@@ -6,15 +6,15 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
+import HyperionApi
 import SwiftUI
 import WidgetKit
-import HyperionApi
 
 struct InstanceGridView: View {
     let instances: [HyperionApi.Instance]
 
     var columns: [GridItem] {
-        return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+        [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     }
 
     var body: some View {

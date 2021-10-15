@@ -9,7 +9,7 @@
 import Foundation
 
 public enum SubCommandType: String, Codable {
-    case startInstance = "startInstance"
-    case stopInstance = "stopInstance"
-    case switchTo = "switchTo"
+    case startInstance
+    case stopInstance
+    case switchTo
 }

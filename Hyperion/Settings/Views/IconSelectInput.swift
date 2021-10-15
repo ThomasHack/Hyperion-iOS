@@ -7,8 +7,8 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
 import HyperionApi
+import SwiftUI
 
 struct IconSelectInput: View {
     let store: Store<Settings.SettingsFeatureState, Settings.Action>
@@ -18,7 +18,7 @@ struct IconSelectInput: View {
     let availableImages = ["ambilight", "hue-bulb", "hue-playbars", "hue-lightstrip"]
 
     @State var expanded = false
-    
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             HStack(spacing: 0) {

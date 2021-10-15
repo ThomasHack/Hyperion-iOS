@@ -22,7 +22,7 @@ struct IntensityControl: View {
                         IntensityButton(
                             imageName: "rays",
                             text: "Subtle",
-                            isDisabled: false, //smoothing.enabled,
+                            isDisabled: false,
                             isRunning: smoothing.enabled,
                             callback: {
                                 viewStore.send(.toggleSmoothing(true))
@@ -31,7 +31,7 @@ struct IntensityControl: View {
                         IntensityButton(
                             imageName: "tornado",
                             text: "Extreme",
-                            isDisabled: false, //!smoothing.enabled,
+                            isDisabled: false,
                             isRunning: !smoothing.enabled,
                             callback: {
                                 viewStore.send(.toggleSmoothing(false))

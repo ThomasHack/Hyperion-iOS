@@ -6,12 +6,12 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
-import SwiftUI
 import ComposableArchitecture
+import SwiftUI
 
 struct HostSetting: View {
     let store: Store<Settings.SettingsFeatureState, Settings.Action>
-    
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             Section(header: Text("Host")) {

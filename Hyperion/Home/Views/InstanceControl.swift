@@ -13,22 +13,22 @@ struct InstanceControl: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
 
     let columns = [
-            GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 200 : 100))
-        ]
+        GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 200 : 100))
+    ]
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
                 SectionHeader(text: "Instances")
 
-                if viewStore.api.instances.count > 0 {
+                if !viewStore.api.instances.isEmpty {
                     LazyVGrid(columns: columns, spacing: 8  ) {
                         ForEach(viewStore.api.instances, id: \.self) { instance in
                             let imageName = viewStore.icons[instance.id]
-                            let instanceName = viewStore.state.instanceNames[instance.id]
+                            let instanceName = viewStore.state.instanceNames[instance.id] ?? instance.friendlyName
                             InstanceButton(
                                 imageName: imageName,
-                                text: ((instanceName ?? "").isEmpty ? instance.friendlyName : instanceName)!,
+                                text: instanceName.isEmpty ? instance.friendlyName : instanceName,
                                 isDisabled: !viewStore.api.allEnabled,
                                 isRunning: instance.running && viewStore.api.allEnabled,
                                 callback: {

@@ -7,29 +7,34 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
 import HyperionApi
+import SwiftUI
 
 struct SettingsView: View {
     let store: Store<Settings.SettingsFeatureState, Settings.Action>
-    
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                 VStack {
                     List {
                         HostSetting(store: self.store)
-                        
+
                         Section(header: Text("Icons")) {
-                        if viewStore.instances.count > 0 {
-                            ForEach(viewStore.api.instances, id: \.self) { instance in
+                            if !viewStore.instances.isEmpty {
+                                ForEach(viewStore.api.instances, id: \.self) { instance in
                                     NavigationLink(
                                         destination:
-                                            IfLetStore(self.store.scope(state: { $0.selection?.value }, action: Settings.Action.instanceEdit)) { childStore in
-                                                InstanceEditView(store: childStore)
-                                            },
-                                            tag: instance.id,
-                                            selection: viewStore.binding(get: { $0.selection?.id }, send: Settings.Action.setSelection)
+                                            IfLetStore(self.store.scope(
+                                                state: { $0.selection?.value },
+                                                action: Settings.Action.instanceEdit)) { childStore in
+                                                    InstanceEditView(store: childStore)
+                                                },
+                                        tag: instance.id,
+                                        selection: viewStore.binding(
+                                            get: { $0.selection?.id },
+                                            send: Settings.Action.setSelection
+                                        )
                                     ) {
                                         IconSelectInput(store: self.store, instance: instance)
                                     }
@@ -37,13 +42,12 @@ struct SettingsView: View {
                                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                             }
                         }
-                        
+
                         BackgroundSetting(store: self.store)
-                        
+
                         ConnectButton(store: self.store)
                     }
                     .listRowBackground(Color.green)
-                    // .listStyle(InsetGroupedListStyle())
                 }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .background(Color(.systemBackground))
@@ -52,13 +56,13 @@ struct SettingsView: View {
                 .navigationBarItems(
                     trailing:
                         HStack(spacing: 16) {
-                    Button(action: {
-                        viewStore.send(.doneButtonTapped)
-                    }) {
-                        Text("Done")
-                            .font(.system(size: 17, weight: .bold))
-                    }
-                }
+                            Button {
+                                viewStore.send(.doneButtonTapped)
+                            } label: {
+                                Text("Done")
+                                    .font(.system(size: 17, weight: .bold))
+                            }
+                        }
                 )
             }
         }

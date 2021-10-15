@@ -15,7 +15,7 @@ struct ComponentControl: View {
     let columns = [
         GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 200 : 100))
     ]
-    
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {

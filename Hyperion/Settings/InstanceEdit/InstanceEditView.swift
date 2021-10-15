@@ -6,9 +6,9 @@
 //  Copyright © 2021 Hack, Thomas. All rights reserved.
 //
 
-import SwiftUI
 import ComposableArchitecture
 import HyperionApi
+import SwiftUI
 
 struct InstanceEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -21,7 +21,7 @@ struct InstanceEditView: View {
         GridItem(.adaptive(minimum: 50)),
         GridItem(.adaptive(minimum: 50))
     ]
-    
+
     private let iconNames = [
         "ambilight",
         "hdr-tone-mapping",
@@ -30,7 +30,7 @@ struct InstanceEditView: View {
         "hue-lightstrip",
         "hue-playbars",
         "smoothing",
-        "v4l-hardware",
+        "v4l-hardware"
     ]
 
     var body: some View {
@@ -62,16 +62,19 @@ struct InstanceEditView: View {
                         LazyVGrid(columns: columns, spacing: 8) {
                             ForEach(iconNames, id: \.self) { icon in
                                 VStack {
-                                    Button(action: {
+                                    Button {
                                         viewStore.send(InstanceEdit.Action.iconNameChanged(icon))
                                         presentationMode.wrappedValue.dismiss()
-                                    }) {
+                                    } label: {
                                         let selected = viewStore.state.iconName == icon
                                         Image(icon)
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .clipped()
-                                            .background(selected ? Color(.secondarySystemBackground) : Color(.systemBackground))
+                                            .background(Color(selected
+                                                              ? .secondarySystemBackground
+                                                              : .systemBackground)
+                                            )
                                             .cornerRadius(5)
                                     }
                                 }
