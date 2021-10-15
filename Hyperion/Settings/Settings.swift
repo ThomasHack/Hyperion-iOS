@@ -114,8 +114,8 @@ enum Settings {
     )
     
     static let initialState = State(
-        hostInput: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.hostDefaultsKeyName) ?? "",
-        backgroundImage: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.backgroundDefaultsKeyName) ?? "",
+        hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? "",
+        backgroundImage: UserDefaults.standard.string(forKey: Shared.backgroundDefaultsKeyName) ?? "",
         selection: nil
     )
 }

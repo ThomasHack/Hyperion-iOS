@@ -10,48 +10,60 @@ import ComposableArchitecture
 import Foundation
 
 enum Shared {
-    static let appGroupName = "group.hyperion-ng"
     static let hostDefaultsKeyName = "hyperion.hostname"
     static let backgroundDefaultsKeyName = "hyperion.background"
     static let iconNamesDefaultsKeyName = "hyperion.instanceIcons"
     static let instanceNamesDefaultsKeyName = "hyperion.instanceNames"
     static let backgroundImageDefaultsKeyName = "hyperion.backgroundImage"
 
-    static let userDefaults = UserDefaults(suiteName: appGroupName)
+    static let userDefaults = UserDefaults.standard
 
     struct State: Equatable {
         var host: String? {
             didSet {
-                userDefaults?.set(host, forKey: hostDefaultsKeyName)
+                userDefaults.set(host, forKey: hostDefaultsKeyName)
             }
         }
         var icons: [Int: String] {
             didSet {
                 guard let data = try? NSKeyedArchiver.archivedData(withRootObject: icons, requiringSecureCoding: false) else { return }
-                userDefaults?.set(data, forKey: iconNamesDefaultsKeyName)
+                userDefaults.set(data, forKey: iconNamesDefaultsKeyName)
             }
         }
 
         var instanceNames: [Int: String] {
             didSet {
                 guard let data = try? NSKeyedArchiver.archivedData(withRootObject: instanceNames, requiringSecureCoding: false) else { return }
-                userDefaults?.set(data, forKey: instanceNamesDefaultsKeyName)
+                userDefaults.set(data, forKey: instanceNamesDefaultsKeyName)
             }
         }
 
         var backgroundImage: String? {
             didSet {
-                userDefaults?.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
+                userDefaults.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
             }
         }
         var showSettingsModal: Bool = false
     }
 
+    static func fetchDictionaryUserDefaults(for key: String) -> [Int: String] {
+        guard let unarchivedObject = userDefaults.data(forKey: key) else { return [:] }
+        do {
+            guard let dictionary = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(unarchivedObject) as? [Int: String] else {
+                return [:]
+            }
+            return dictionary
+        } catch {
+            assertionFailure("fetchDictionaryUserDefaults")
+        }
+        return [:]
+    }
+
     static let initialState = State(
-        host: userDefaults?.string(forKey: hostDefaultsKeyName),
-        icons: NSKeyedUnarchiver.unarchiveObject(with: userDefaults?.value(forKey: iconNamesDefaultsKeyName) as! Data) as? [Int: String] ?? [:],
-        instanceNames: NSKeyedUnarchiver.unarchiveObject(with: userDefaults?.value(forKey: instanceNamesDefaultsKeyName) as! Data) as? [Int: String] ?? [:],
-        backgroundImage: userDefaults?.string(forKey: backgroundImageDefaultsKeyName)
+        host: userDefaults.string(forKey: hostDefaultsKeyName),
+        icons: fetchDictionaryUserDefaults(for: iconNamesDefaultsKeyName),
+        instanceNames: fetchDictionaryUserDefaults(for: instanceNamesDefaultsKeyName),
+        backgroundImage: userDefaults.string(forKey: backgroundImageDefaultsKeyName)
     )
 
     enum Action {
@@ -91,5 +103,4 @@ enum Shared {
         }
         return .none
     }
-    // .debug()
 }

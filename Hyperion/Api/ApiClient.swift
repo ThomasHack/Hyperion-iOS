@@ -31,6 +31,7 @@ struct ApiClient {
     var updateInstance: (AnyHashable, Int, Bool) -> Effect<Api.Action, Never>
     var updateColor: (AnyHashable, HyperionApi.RGB) -> Effect<Api.Action, Never>
     var updateEffect: (AnyHashable, HyperionApi.LightEffect) -> Effect<Api.Action, Never>
+    var toggleAll: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var toggleSmoothing: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var toggleBlackborderDetection: (AnyHashable, Bool) -> Effect<Api.Action, Never>
     var toggleLedHardware: (AnyHashable, Bool) -> Effect<Api.Action, Never>
@@ -200,6 +201,24 @@ extension ApiClient {
                     let data = try JSONEncoder().encode(message)
                     let string = String(data: data, encoding: .utf8)!
                     dependencies[id]?.socket.send(string: string)
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    return AnyCancellable{}
+                }
+                return AnyCancellable{}
+            }
+        },
+        toggleAll: { id, state in
+            .run { subscriber in
+                let message = HyperionApi.ComponentRequest(
+                    HyperionApi.Request(command: .component),
+                    HyperionApi.ComponentData(componentstate: HyperionApi.ComponentState(component: .all, state: state))
+                )
+                do {
+                    let data = try JSONEncoder().encode(message)
+                    let string = String(data: data, encoding: .utf8)!
+                    dependencies[id]?.socket.send(string: string)
+                    reloadControlWidget()
                 } catch {
                     print("error: \(error.localizedDescription)")
                     return AnyCancellable{}
