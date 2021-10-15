@@ -84,8 +84,10 @@ struct InstanceEditView: View {
                     Spacer()
                 }
                 .navigationBarTitle(Text("Settings"), displayMode: .inline)
+
                 .padding()
             }
+            .navigationViewStyle(.stack)
         }
     }
 }

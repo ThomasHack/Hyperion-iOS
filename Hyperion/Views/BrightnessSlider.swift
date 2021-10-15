@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BrightnessSlider: View {
-
+    @Environment(\.isEnabled) var isEnabled
     @Binding var percentage: Double
 
     var callback: (() -> Void)?
@@ -29,14 +29,16 @@ struct BrightnessSlider: View {
             ZStack(alignment: .leading) {
                 // Background
                 Rectangle()
-                    .foregroundColor(Color(UIColor.secondarySystemBackground))
+                    .foregroundColor(Color(.secondarySystemBackground))
+                    .opacity(isEnabled ? 1.0 : 0.6)
 
                 ZStack(alignment: .trailing) {
                     // Progressbar
                     HStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .background(Color(UIColor.systemBackground))
+                            .background(Color(.systemBackground))
+                            .opacity(isEnabled ? 1.0 : 0.8)
                     }
                     .cornerRadius(12)
                     .clipped()
@@ -46,6 +48,7 @@ struct BrightnessSlider: View {
                         Rectangle()
                             .frame(width: 4, height: 20, alignment: .trailing)
                             .foregroundColor(Color.secondary)
+                            .opacity(isEnabled ? 1.0 : 0.6)
                             .cornerRadius(3)
                             .shadow(color: Color.black.opacity(0.1), radius: 2, x: -1, y: 1)
                     }
@@ -71,6 +74,7 @@ struct BrightnessSlider: View {
             .cornerRadius(15)
             .gesture(DragGesture(minimumDistance: 0)
             .onChanged({ value in
+                guard isEnabled else { return }
                 self.percentage = Double(min(max(0, Float(value.location.x / geometry.size.width * 100)), 100))
                 if let callback = self.callback {
                     callback()

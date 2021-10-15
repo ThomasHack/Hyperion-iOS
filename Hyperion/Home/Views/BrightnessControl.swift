@@ -11,7 +11,7 @@ import SwiftUI
 
 struct BrightnessControl: View {
     let store: Store<Home.HomeFeatureState, Home.Action>
-    
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(alignment: .leading, spacing: 8) {
@@ -20,6 +20,7 @@ struct BrightnessControl: View {
                 BrightnessSlider(
                     percentage: viewStore.binding( get: { $0.api.brightness }, send: Home.Action.updateBrightness)
                 )
+                    .disabled(!viewStore.api.allEnabled)
                     .frame(height: 72)
 
                 Spacer()
@@ -35,3 +36,4 @@ struct BrightnessControl_Previews: PreviewProvider {
         .previewLayout(.fixed(width: 375, height: 120))
     }
 }
+

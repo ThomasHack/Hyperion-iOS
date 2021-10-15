@@ -28,7 +28,7 @@ struct HomeView: View {
                     if viewStore.connectivityState == .connected {
                         ScrollView {
                             VStack(alignment: .leading, spacing: 8) {
-                                
+
                                 ConnectionHeader(store: store)
 
                                 InstanceSelection(store: store)
@@ -53,7 +53,17 @@ struct HomeView: View {
                 .navigationBarTitle(Text("Hue Sync"), displayMode: .automatic)
                 .navigationBarItems(
                     trailing:
-                        HStack(spacing: 24) {                           
+                        HStack(spacing: 24) {
+                            Button(action: {
+                                if let all = viewStore.api.allComponent {
+                                    viewStore.send(.powerButtonTapped(!all.enabled))
+                                }
+                            }) {
+                                Image(systemName: viewStore.api.allEnabled ? "power.circle" : "power.circle.fill")
+                                    .imageScale(.large)
+                            }
+                            .foregroundColor(Color(.label))
+
                             Button(action: {
                                 viewStore.send(.settingsButtonTapped)
                             }) {

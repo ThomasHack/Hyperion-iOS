@@ -61,7 +61,8 @@ struct InstanceButton: View {
             }
             .padding(8)
         }
-        .buttonStyle(CardButtonStyle(active: isRunning, disabled: isDisabled))
+        .disabled(isDisabled)
+        .buttonStyle(CardButtonStyle(active: isRunning))
     }
 }
 

@@ -18,13 +18,7 @@ struct ConnectionHeader: View {
                 HStack(alignment: .center, spacing: 8) {
                     Circle()
                         .frame(width: 10, height: 10)
-                        .foregroundColor(
-                            Color(viewStore.connectivityState == .connected
-                                    ? UIColor.systemGreen
-                                    : viewStore.connectivityState == .disconnected
-                                    ? UIColor.systemRed
-                                    : UIColor.systemOrange)
-                        )
+                        .foregroundColor(Color(viewStore.api.connectionColor))
                     Text(
                         viewStore.connectivityState == .connected
                             ? "Status: Connected to \(viewStore.hostname)"

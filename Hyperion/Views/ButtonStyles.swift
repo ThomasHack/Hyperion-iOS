@@ -9,40 +9,25 @@
 import SwiftUI
 
 struct CardButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) var isEnabled
+
     var active = false
-    var disabled = false
 
     func makeBody(configuration: Self.Configuration) -> some View {
-        let background = disabled
-            ? Color(UIColor.tertiarySystemBackground)
-        : Color(UIColor.secondarySystemBackground).opacity(active ? 1.0 : 0.6)
+        let background = Color(UIColor.secondarySystemBackground).opacity(isEnabled && active ? 1.0 : 0.6)
 
-        let foreground = disabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label)
+        let foreground = isEnabled ? Color(UIColor.label) : Color(UIColor.secondaryLabel)
+
+        var size: CGSize {
+            configuration.isPressed && isEnabled ? CGSize(width: 0.975, height: 0.975) : CGSize(width: 1.0, height: 1.0)
+        }
 
         return configuration.label
             .foregroundColor(foreground)
             .background(background)
             .cornerRadius(15)
             .animation(.easeInOut)
-            .scaleEffect(configuration.isPressed ? CGSize(width: 0.975, height: 0.975) : CGSize(width: 1.0, height: 1.0), anchor: .center)
-            .animation(.spring(response: 0.1, dampingFraction: 0.55, blendDuration: 0))
-    }
-}
-
-struct PrimaryButtonStyle: ButtonStyle {
-    var disabled = false
-
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 8)
-            .foregroundColor(disabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
-            .background(disabled ? Color(UIColor.tertiarySystemFill) : Color(UIColor.systemBackground))
-            .cornerRadius(5)
-            .shadow(color: configuration.isPressed ? Color.black.opacity(0.15) : Color.black.opacity(0.2), radius: 2.0, x: 1, y: 1)
-            .animation(.easeInOut)
-            .scaleEffect(configuration.isPressed ? CGSize(width: 0.975, height: 0.975) : CGSize(width: 1.0, height: 1.0), anchor: .center)
+            .scaleEffect(size, anchor: .center)
             .animation(.spring(response: 0.1, dampingFraction: 0.55, blendDuration: 0))
     }
 }

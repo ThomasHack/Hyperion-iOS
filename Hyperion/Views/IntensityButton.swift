@@ -51,7 +51,9 @@ struct IntensityButton: View {
             }
             .padding([.top, .bottom], 8)
             .padding([.leading, .trailing], 8)
-        }.buttonStyle(CardButtonStyle(disabled: isDisabled))
+        }
+        .disabled(isDisabled)
+        .buttonStyle(CardButtonStyle())
     }
 }
 

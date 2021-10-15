@@ -22,10 +22,11 @@ struct ComponentControl: View {
                 SectionHeader(text: "Settings")
 
                 LazyVGrid(columns: columns, spacing: 8) {
+
                     InstanceButton(
                         imageName: "hdr-tone-mapping",
                         text: "HDR Tone Mapping",
-                        isDisabled: false,
+                        isDisabled: !viewStore.api.allEnabled,
                         isRunning: viewStore.api.hdrToneMapping,
                         callback: {
                             viewStore.send(.toggleHdrToneMapping(!viewStore.api.hdrToneMapping))
@@ -35,7 +36,7 @@ struct ComponentControl: View {
                         InstanceButton(
                             imageName: "smoothing",
                             text: "Smoothing",
-                            isDisabled: false,
+                            isDisabled: !viewStore.api.allEnabled,
                             isRunning: smoothing.enabled,
                             callback: {
                                 viewStore.send(.toggleSmoothing(!smoothing.enabled))
@@ -46,7 +47,7 @@ struct ComponentControl: View {
                         InstanceButton(
                             imageName: "blackborder",
                             text: "Blackborder Detection",
-                            isDisabled: false,
+                            isDisabled: !viewStore.api.allEnabled,
                             isRunning: blackborderDetection.enabled,
                             callback: {
                                 viewStore.send(.toggleBlackborderDetection(!blackborderDetection.enabled))
@@ -57,7 +58,7 @@ struct ComponentControl: View {
                         InstanceButton(
                             imageName: "v4l-hardware",
                             text: "HDMI Grabber",
-                            isDisabled: false,
+                            isDisabled: !viewStore.api.allEnabled,
                             isRunning: v4l.enabled,
                             callback: {
                                 viewStore.send(.toggleHdmiGrabber(!v4l.enabled))
@@ -68,7 +69,7 @@ struct ComponentControl: View {
                         InstanceButton(
                             imageName: "led-hardware",
                             text: "LED Hardware",
-                            isDisabled: false,
+                            isDisabled: !viewStore.api.allEnabled,
                             isRunning: led.enabled,
                             callback: {
                                 viewStore.send(.toggleLedHardware(!led.enabled))

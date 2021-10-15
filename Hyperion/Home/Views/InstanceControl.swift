@@ -29,7 +29,8 @@ struct InstanceControl: View {
                             InstanceButton(
                                 imageName: imageName,
                                 text: ((instanceName ?? "").isEmpty ? instance.friendlyName : instanceName)!,
-                                isRunning: instance.running,
+                                isDisabled: !viewStore.api.allEnabled,
+                                isRunning: instance.running && viewStore.api.allEnabled,
                                 callback: {
                                     viewStore.send(.instanceButtonTapped(instance.id, instance.running))
                                 }

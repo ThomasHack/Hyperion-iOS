@@ -31,9 +31,29 @@ enum Api {
         var priorities: [HyperionApi.Priority] = []
         var hdrToneMapping: Bool = false
 
+        var connectionColor: UIColor {
+            switch connectivityState {
+            case .connected:
+                return allEnabled ? UIColor.systemGreen : .systemOrange
+            case .connecting:
+                return UIColor.systemBlue
+            case .disconnected:
+                return UIColor.systemRed
+            }
+        }
+
+        var allEnabled: Bool {
+            allComponent?.enabled ?? false
+        }
+
+        var allComponent: HyperionApi.Component? {
+            components.first(where: { $0.name == HyperionApi.ComponentType.all })
+        }
+
         var smoothingComponent: HyperionApi.Component? {
             components.first(where: { $0.name == HyperionApi.ComponentType.smoothing })
         }
+
         var blackborderComponent: HyperionApi.Component? {
             components.first(where: { $0.name == HyperionApi.ComponentType.blackborder})
         }
@@ -82,6 +102,7 @@ enum Api {
         case updateBrightness(Double)
         case updateColor(HyperionApi.RGB)
         case updateEffect(HyperionApi.LightEffect)
+        case toggleAll(Bool)
         case toggleSmoothing(Bool)
         case toggleBlackborderDetection(Bool)
         case toggleLedHardware(Bool)
@@ -145,6 +166,11 @@ enum Api {
 
         case .updateEffect(let effect):
             return environment.apiClient.updateEffect(ApiId(), effect)
+                .receive(on: environment.mainQueue)
+                .eraseToEffect()
+
+        case .toggleAll(let enable):
+            return environment.apiClient.toggleAll(ApiId(), enable)
                 .receive(on: environment.mainQueue)
                 .eraseToEffect()
 

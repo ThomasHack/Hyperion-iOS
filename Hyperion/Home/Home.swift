@@ -17,7 +17,7 @@ enum Home {
     enum Action {
         case connectButtonTapped
         case settingsButtonTapped
-        case powerButtonTapped
+        case powerButtonTapped(Bool)
         case instanceButtonTapped(Int, Bool)
         case toggleSettingsModal(Bool)
 
@@ -25,6 +25,7 @@ enum Home {
         case updateBrightness(Double)
         case updateColor(Color)
         case clearButtonTapped
+        case toggleAll(Bool)
         case toggleSmoothing(Bool)
         case toggleBlackborderDetection(Bool)
         case toggleLedHardware(Bool)
@@ -53,11 +54,8 @@ enum Home {
             case .settingsButtonTapped:
                 return Effect(value: Action.shared(.showSettingsModal))
 
-            case .powerButtonTapped:
-                if state.api.highestPriority?.componentId == HyperionApi.ComponentType.color {
-                    return Effect(value: Action.api(.clear))
-                }
-                return Effect(value: Action.api(.updateColor(HyperionApi.RGB(red: 0, green: 0, blue: 0))))
+            case .powerButtonTapped(let toggle):
+                return Effect(value: Action.api(.toggleAll(toggle)))
 
             case .toggleSettingsModal(let toggle):
                 return Effect(value: Action.shared(.toggleSettingsModal(toggle)))
@@ -77,6 +75,9 @@ enum Home {
             case .clearButtonTapped:
                 return Effect(value: Action.api(.clear))
                 
+            case .toggleAll(let enable):
+                return Effect(value: Action.api(.toggleAll(enable)))
+
             case .toggleSmoothing(let enable):
                 return Effect(value: Action.api(.toggleSmoothing(enable)))
 
