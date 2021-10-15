@@ -22,8 +22,10 @@ public struct Component: Equatable, Decodable, Hashable {
             return "Color"
         case .forwarder:
             return "Forwarder"
-        case .grabber:
+        case .videograbber:
             return "Internal Grabber"
+        case .systemgrabber:
+            return "System Grabber"
         case .led:
             return "LED Hardware"
         case .smoothing:
@@ -47,7 +49,9 @@ public struct Component: Equatable, Decodable, Hashable {
             return "color"
         case .forwarder:
             return "forwarder"
-        case .grabber:
+        case .videograbber:
+            return "grabber"
+        case .systemgrabber:
             return "grabber"
         case .led:
             return "led-hardware"

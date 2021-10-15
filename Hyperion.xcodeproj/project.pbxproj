@@ -1136,6 +1136,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hyperion/Supporting Files/Hyperion.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20210925;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				ENABLE_PREVIEWS = YES;
@@ -1162,6 +1163,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hyperion/Supporting Files/Hyperion.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20210925;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
 				ENABLE_PREVIEWS = YES;

@@ -50,11 +50,14 @@ struct InstanceButton: View {
 
                 Spacer(minLength: 8)
 
-                Text(text)
-                    .foregroundColor(isDisabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
-                    .font(.system(size: 13.0, weight: .semibold))
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                VStack(spacing: 0) {
+                    Text(text)
+                        .foregroundColor(isDisabled ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
+                        .font(.system(size: 13.0, weight: .semibold))
+                        .lineLimit(2)
+                        .frame(minHeight: 30)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             .padding(8)
         }

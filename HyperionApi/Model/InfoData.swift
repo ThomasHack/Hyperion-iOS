@@ -27,7 +27,15 @@ public struct InfoData: Equatable, Decodable {
         case hdrToneMapping = "videomodehdr"
     }
 
-    public init(adjustments: [Adjustment], instances: [Instance], hostname: String, effects: [LightEffect], components: [Component], priorities: [Priority], hdrToneMapping: Int) {
+    public init(
+        adjustments: [Adjustment],
+        instances: [Instance],
+        hostname: String,
+        effects: [LightEffect],
+        components: [Component],
+        priorities: [Priority],
+        hdrToneMapping: Int
+    ) {
         self.adjustments = adjustments
         self.instances = instances
         self.hostname = hostname
