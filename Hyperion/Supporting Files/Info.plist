@@ -41,8 +41,6 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>192.168.0.7</key>
-			<string></string>
 			<key>hyperhdr</key>
 			<string></string>
 		</dict>
