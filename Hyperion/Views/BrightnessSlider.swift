@@ -56,7 +56,7 @@ struct BrightnessSlider: View {
                 }
                 .offset(x: verticalPadding, y: 0)
                 .frame(width: barWidth, height: barHeight)
-                .animation(.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 0))
+                .animation(.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 0), value: 0)
 
                 // Label
                 HStack(alignment: .bottom, spacing: 2) {

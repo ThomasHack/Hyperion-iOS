@@ -26,8 +26,8 @@ struct CardButtonStyle: ButtonStyle {
             .foregroundColor(foreground)
             .background(background)
             .cornerRadius(15)
-            .animation(.easeInOut)
+            .animation(.easeInOut, value: 0)
             .scaleEffect(size, anchor: .center)
-            .animation(.spring(response: 0.1, dampingFraction: 0.55, blendDuration: 0))
+            .animation(.spring(response: 0.1, dampingFraction: 0.55, blendDuration: 0), value: 0)
     }
 }

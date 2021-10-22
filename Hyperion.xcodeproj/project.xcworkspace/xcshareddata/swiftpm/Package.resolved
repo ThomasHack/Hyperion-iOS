@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "HyperionApi",
+        "repositoryURL": "https://github.com/ThomasHack/Hyperion-Api",
+        "state": {
+          "branch": "main",
+          "revision": "079e566944d580b9ea575fcb58cead0fa062f473",
+          "version": null
+        }
+      },
+      {
         "package": "NWWebSocket",
         "repositoryURL": "https://github.com/pusher/NWWebSocket.git",
         "state": {
