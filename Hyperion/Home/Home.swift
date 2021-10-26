@@ -47,8 +47,9 @@ enum Home {
                     return Effect(value: Action.api(.disconnect))
 
                 case .disconnected:
-                    guard let host = state.host, let url = URL(string: host) else { return .none }
-                    return Effect(value: Action.api(.connect(url)))
+                    guard let host = state.host,
+                            let websocketUrl = URL(string: "ws://\(host)") else { return .none }
+                    return Effect(value: Action.api(.connect(websocketUrl)))
                 }
 
             case .settingsButtonTapped:

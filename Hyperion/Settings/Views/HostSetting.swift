@@ -17,14 +17,18 @@ struct HostSetting: View {
             Section(header: Text("Host")) {
                 VStack(alignment: .leading) {
                     SectionHeader(text: "Host")
-                    TextField("https://hyperion.home:8090",
-                              text: viewStore.binding(
-                                get: { $0.hostInput },
-                                send: Settings.Action.hostInputTextChanged)
-                    )
-                        .keyboardType(.URL)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
+                    HStack(spacing: 0) {
+                        Text("ws://")
+                            .foregroundColor(Color(.quaternaryLabel))
+                        TextField("hyperhdr:8090",
+                                  text: viewStore.binding(
+                                    get: { $0.hostInput },
+                                    send: Settings.Action.hostInputTextChanged)
+                        )
+                            .keyboardType(.URL)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                    }
                 }
                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             }

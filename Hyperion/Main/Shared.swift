@@ -46,6 +46,7 @@ enum Shared {
                 userDefaults?.set(backgroundImage, forKey: backgroundImageDefaultsKeyName)
             }
         }
+
         var showSettingsModal = false
     }
 

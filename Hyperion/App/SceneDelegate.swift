@@ -49,8 +49,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func connect() {
         let viewStore = ViewStore(store)
-        guard let host = viewStore.state.shared.host, let url = URL(string: host) else { return }
-        viewStore.send(.api(.connect(url)))
+        guard let host = viewStore.state.shared.host, !host.isEmpty,
+              let websocketUrl = URL(string: "ws://\(host)") else { return }
+        viewStore.send(.api(.connect(websocketUrl)))
     }
 
     private func disconnect() {

@@ -47,7 +47,7 @@ struct Provider: IntentTimelineProvider {
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
             case .failure(let error):
-                print("error: \(error)")
+                assertionFailure(error.localizedDescription)
             }
         }
     }

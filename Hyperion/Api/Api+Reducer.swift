@@ -101,7 +101,7 @@ extension Api {
             state.components = []
 
         case .didReceiveWebSocketEvent(let event):
-            print("event")
+            break
 
         case .didUpdateBrightness(let brightness):
             state.brightness = Double(brightness)

@@ -75,7 +75,7 @@ enum Settings {
                     return Effect(value: Action.api(.disconnect))
 
                 case .disconnected:
-                    guard let url = URL(string: state.hostInput) else { return .none }
+                    guard let url = URL(string: "ws://\(state.hostInput)") else { return .none }
                     return Effect(value: Action.api(.connect(url)))
                 }
 
@@ -119,8 +119,8 @@ enum Settings {
     )
 
     static let initialState = State(
-        hostInput: UserDefaults.standard.string(forKey: Shared.hostDefaultsKeyName) ?? "",
-        backgroundImage: UserDefaults.standard.string(forKey: Shared.backgroundDefaultsKeyName) ?? "",
+        hostInput: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.hostDefaultsKeyName) ?? "",
+        backgroundImage: UserDefaults(suiteName: Shared.appGroupName)?.string(forKey: Shared.backgroundDefaultsKeyName) ?? "",
         selection: nil
     )
 }
