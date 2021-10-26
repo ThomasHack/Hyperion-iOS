@@ -37,6 +37,7 @@ struct IconSelectInput: View {
                     if let image = viewStore.icons[instance.id] {
                         Image(image)
                             .resizable()
+                            .aspectRatio(CGSize(width: 40, height: 40), contentMode: .fit)
                             .padding(2)
                             .clipped()
                             .cornerRadius(6)

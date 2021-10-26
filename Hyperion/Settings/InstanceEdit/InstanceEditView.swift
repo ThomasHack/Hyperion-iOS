@@ -37,12 +37,11 @@ struct InstanceEditView: View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                 VStack(alignment: .leading) {
-
                     VStack(alignment: .leading) {
                         Text("Instance Name")
                             .font(.system(size: 16, weight: .bold, design: .default))
 
-                        TextField("Instance Name",
+                        TextField(viewStore.instance.friendlyName,
                                   text: viewStore.binding(
                                     get: { $0.instanceName },
                                     send: InstanceEdit.Action.instanceNameChanged
@@ -86,8 +85,7 @@ struct InstanceEditView: View {
 
                     Spacer()
                 }
-                .navigationBarTitle(Text("Settings"), displayMode: .inline)
-
+                .navigationBarTitle("Settings")
                 .padding()
             }
             .navigationViewStyle(.stack)
