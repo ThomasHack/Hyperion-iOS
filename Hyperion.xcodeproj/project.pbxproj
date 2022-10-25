@@ -30,7 +30,7 @@
 		525F0D3D25DAADAC00A9D603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525F0D3C25DAADAC00A9D603 /* Assets.xcassets */; };
 		525F0D3F25DAADAC00A9D603 /* ControlWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 525F0D3B25DAADA900A9D603 /* ControlWidget.intentdefinition */; };
 		525F0D4025DAADAC00A9D603 /* ControlWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 525F0D3B25DAADA900A9D603 /* ControlWidget.intentdefinition */; };
-		525F0D4325DAADAC00A9D603 /* ControlWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 525F0D3525DAADA900A9D603 /* ControlWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		525F0D4325DAADAC00A9D603 /* ControlWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 525F0D3525DAADA900A9D603 /* ControlWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5270662225DFC68B008D2CF4 /* InstanceLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5270662125DFC68B008D2CF4 /* InstanceLinkView.swift */; };
 		52739D1324E31B7C00A69B0C /* CardButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52739D1224E31B7C00A69B0C /* CardButtonStyle.swift */; };
 		5283E27824EAE82D00713525 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283E27724EAE82D00713525 /* Helpers.swift */; };
@@ -114,15 +114,15 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52CE4E6825431CF7000ADCD6 /* Embed App Extensions */ = {
+		52CE4E6825431CF7000ADCD6 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				525F0D4325DAADAC00A9D603 /* ControlWidgetExtension.appex in Embed App Extensions */,
+				525F0D4325DAADAC00A9D603 /* ControlWidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -464,7 +464,7 @@
 				52F16BA22494E51600A69D01 /* Sources */,
 				52F16BA32494E51600A69D01 /* Frameworks */,
 				52F16BA42494E51600A69D01 /* Resources */,
-				52CE4E6825431CF7000ADCD6 /* Embed App Extensions */,
+				52CE4E6825431CF7000ADCD6 /* Embed Foundation Extensions */,
 				525F0CBE25DA9C2100A9D603 /* Embed Frameworks */,
 				5295F31325E033EF000FD4D3 /* Embed Watch Content */,
 			);
@@ -490,7 +490,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Hack, Thomas";
 				TargetAttributes = {
 					525F0D3425DAADA900A9D603 = {
@@ -841,7 +841,6 @@
 				CURRENT_PROJECT_VERSION = 20211015;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
-				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Hyperion/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -869,7 +868,6 @@
 				CURRENT_PROJECT_VERSION = 20211015;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N9C9UAVR87;
-				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Hyperion/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
